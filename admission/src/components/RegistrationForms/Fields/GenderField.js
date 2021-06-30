@@ -2,8 +2,11 @@ import React from "react"
 import Form from "react-bootstrap/Form"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
+import { useState } from "react"
 
-export default function GenderField() {
+export default function GenderField({ controlId }) {
+  const [studentGender, setStudentGender] = useState("")
+
   return (
     <div>
       <Form.Group>
@@ -17,13 +20,15 @@ export default function GenderField() {
                 type="radio"
                 label="Male"
                 name="genderRadio"
-                id="formHorizontalRadios1"
+                value="Male"
+                onChange={(e) => handleChange(e, controlId)}
               />
               <Form.Check
                 type="radio"
                 label="Female"
                 name="genderRadio"
-                id="formHorizontalRadios2"
+                value="Female"
+                onChange={(e) => handleChange(e, controlId)}
               />
             </Col>
           </Form.Group>
@@ -31,4 +36,15 @@ export default function GenderField() {
       </Form.Group>
     </div>
   )
+
+  function handleChange(e, controlId) {
+    switch (controlId) {
+      case "studentGender":
+        setStudentGender(e.target.value)
+        console.log(studentGender)
+        break
+      default:
+        console.log("No Match in Gender")
+    }
+  }
 }

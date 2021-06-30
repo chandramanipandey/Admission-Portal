@@ -7,27 +7,38 @@ import DateField from "./Fields/DateField"
 import TextFieldInline from "./Fields/TextFieldInline"
 import YesNo from "./Fields/YesNo"
 import Category from "./Fields/Category"
-import EmailFieldInline from "./Fields/EmailField"
+import EmailFieldInline from "./Fields/EmailFieldInline"
 import YearField from "./Fields/YearField"
+import StudentUndertaking from "./StudentUndertaking"
+import { useState } from "react"
 
 export default function FEForm() {
   return (
     <div>
       <h1 className="jumbotron">FE Registration Form</h1>
       <Form>
-        <TextField title="Candidate Name" placeholder="Enter Full Name" />
-        <TextField title="Mother's Name" placeholder="Enter Full Name" />
+        <TextField
+          title="Candidate Name"
+          placeholder="Enter Full Name"
+          controlId="candidateName"
+        />
+        <TextField
+          title="Mother's Name"
+          placeholder="Enter Full Name"
+          controlId="motherName"
+        />
         <NumField
           title="Enter CET Merit number"
           maxlength="12"
-          controlId="CETmeritno"
+          controlId="cetMeritno"
           placeholder="CET Merit Number (12 digit)"
         />
-        <GenderField />
-        <DateField title="DOB" name="dob" />
+        <GenderField controlId="studentGender" />
+        <DateField title="DOB" controlId="dob" />
         <TextFieldInline
           title="Place of Birth"
           placeholder="Enter Place of Birth"
+          controlId="placeOfBirth"
         />
         <NumField
           title="Parents Annual Income(Rs)"
@@ -35,7 +46,11 @@ export default function FEForm() {
           placeholder="Enter in Rs"
           maxlength="15"
         />
-        <YesNo title="Phy. Handicapped" name="handicappedRadio" />
+        <YesNo
+          title="Phy. Handicapped"
+          name="handicappedRadio"
+          controlId="phyHandicapped"
+        />
         <Category />
         <TextFieldInline
           title="Religion"
@@ -47,7 +62,11 @@ export default function FEForm() {
           placeholder="Enter caste"
           controlId="casteName"
         />
-        <YesNo title="Pass from Maharashtra" name="maharashtrapass" />
+        <YesNo
+          title="Pass from Maharashtra"
+          name="maharashtraPass"
+          controlId="maharashtraPass"
+        />
         <TextFieldInline
           title="Nationality"
           placeholder="Enter Nationality"
@@ -157,10 +176,16 @@ export default function FEForm() {
           placeholder="Enter last institute address"
           controlId="lastInstituteAddressFE"
         />
-        <TextFieldInline title="Last Class Studied" placeholder="Last Class" />
+        <TextFieldInline
+          title="Last Class Studied"
+          placeholder="Last Class"
+          controlId="lastclassFE"
+        />
         <YearField title="Year of Leaving" controlId="yearofLeavingFE" />
 
         {/* Detailed Marks */}
+
+        <StudentUndertaking />
       </Form>
     </div>
   )
