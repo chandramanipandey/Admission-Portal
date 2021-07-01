@@ -53,9 +53,15 @@ export default function Auth() {
     }
    
     return (
-        <div style={{paddingTop:'30px', justifyContent:'center',alignContent:'center'}}>
+        <div style={{justifyContent:'center',alignContent:'center'}}>
         <div style={{display:'flex',justifyContent:'center',alignContent:'center'}}>
         <img src={logo} alt = "" style={{width:'250px',height:'160px'}}/>
+        </div>
+        <div style={{paddingBottom: '10px',display:'flex',justifyContent:'center',alignContent:'center' ,fontFamily:"Times New Roman,sans-serif",color:"navy"}}>
+        <h1>Bharati Vidyapeeth's College Of Engineering</h1>
+        </div>
+        <div style={{paddingBottom: '30px',display:'flex',justifyContent:'center',alignContent:'center' ,fontFamily:"Times New Roman,sans-serif",color:"dodgerblue"}}>
+        <h2>Admission-Portal</h2>
         </div>
     <CardGroup >
       
