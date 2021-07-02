@@ -4,7 +4,6 @@ import Auth from "./components/Authentication/Authenticate"
 import { Container } from "react-bootstrap"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Dashboard from "./components/Dashboard/Dashboard"
-import Register from "./Registration/Register"
 import FEForm from "./components/RegistrationForms/FEForm"
 
 function App() {
@@ -14,7 +13,6 @@ function App() {
         <Switch>
           <Route exact path="/" component={Auth} />
           <Route path="/Dashboard" component={Dashboard} />
-          <Route path="/Register" component={Register} />
           <Route path="/feform" component={FEForm} />
         </Switch>
       </Router>
