@@ -1,11 +1,14 @@
 import React from "react"
 import Form from "react-bootstrap/Form"
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { FieldsContext } from "../FEForm"
 
 export default function TextField({ title, placeholder, controlId }) {
-  const [studentName, setStudentName] = useState("")
-  const [motherName, setMotherName] = useState("")
-  const [cetMeritNo, setCetMeritNo] = useState("")
+  // const [motherName, setMotherName] = useState("")
+  // const [studentName, setStudentName] = useState("")
+  const { motherName, studentName } = useContext(FieldsContext)
+  const [motherNameState, setMotherName] = motherName
+  const [studentNameState, setStudentName] = studentName
 
   return (
     <div>

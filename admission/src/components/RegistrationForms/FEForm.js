@@ -10,23 +10,42 @@ import Category from "./Fields/Category"
 import EmailFieldInline from "./Fields/EmailFieldInline"
 import YearField from "./Fields/YearField"
 import StudentUndertaking from "./StudentUndertaking"
-import { useState } from "react"
 
+import { createContext, useState } from "react"
+
+export const FieldsContext = createContext()
 export default function FEForm() {
+  const FieldsProvider = (props) => {
+    const [motherName, setMotherName] = useState("")
+    const [studentName, setStudentName] = useState("")
+    return (
+      <FieldsContext.Provider
+        value={{
+          motherName: [motherName, setMotherName],
+          studentName: [studentName, setStudentName],
+        }}
+      >
+        {props.children}
+      </FieldsContext.Provider>
+    )
+  }
+
   return (
     <div>
       <h1 className="jumbotron">FE Registration Form</h1>
       <Form>
-        <TextField
-          title="Candidate Name"
-          placeholder="Enter Full Name"
-          controlId="candidateName"
-        />
-        <TextField
-          title="Mother's Name"
-          placeholder="Enter Full Name"
-          controlId="motherName"
-        />
+        <FieldsProvider>
+          <TextField
+            title="Candidate Name"
+            placeholder="Enter Full Name"
+            controlId="candidateName"
+          />
+          <TextField
+            title="Mother's Name"
+            placeholder="Enter Full Name"
+            controlId="motherName"
+          />
+        </FieldsProvider>
         <NumField
           title="Enter CET Merit number"
           maxlength="12"
@@ -122,7 +141,6 @@ export default function FEForm() {
           placeholder="Enter Address here"
           controlId="guardianAddress"
         />
-
         <Row>
           <Col>
             <TextFieldInline
