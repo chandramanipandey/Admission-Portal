@@ -246,6 +246,9 @@ export default function FEForm() {
         {/* Detailed Marks */}
 
         <StudentUndertaking />
+        <button className="btn-primary" type="submit">Submit</button>
+        <br></br>
+        <br></br>
       </Form>
     </div>
   )
