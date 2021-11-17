@@ -7,11 +7,7 @@ export default function NumField({ title, maxlength, controlId, placeholder }) {
   const [cetMeritNo, setCetMeritNo] = useState("")
   const [parentsAnnualIncome, setParentsAnnualIncome] = useState("")
   const [aadharNo, setAadharNo] = useState("")
-  const [permanentPin, setPermanentPin] = useState("")
-  const [guardianPin, setGuardianPin] = useState("")
-  const [studentMobile, setStudentMobile] = useState("")
-  const [parentMobile, setParentMobile] = useState("")
-
+  
   return (
     <div>
       <Form.Group>
@@ -42,18 +38,7 @@ export default function NumField({ title, maxlength, controlId, placeholder }) {
       case "aadharNo":
         setAadharNo(e.target.value)
         break
-      case "permanentPin":
-        setPermanentPin(e.target.value)
-        break
-      case "guardianPin":
-        setGuardianPin(e.target.value)
-        break
-      case "studentMobile":
-        setStudentMobile(e.target.value)
-        break
-      case "parentMobile":
-        setParentMobile(e.target.value)
-        break
+      
       default:
         console.log("Does not match any case")
     }

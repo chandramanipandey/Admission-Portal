@@ -8,10 +8,10 @@ export default function DateField({ title, controlId }) {
     <div>
       <Form.Group>
         <Form.Row>
-          <Form.Label column sm={2}>
+          <Form.Label column md={4}>
             {title}
           </Form.Label>
-          <Col sm={10}>
+          <Col sm={8}>
             <Form.Control
               type="date"
               onChange={(e) => handleChange(e, controlId)}
