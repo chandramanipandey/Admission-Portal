@@ -8,15 +8,17 @@ import DateField from "./Fields/DateField"
 import TextFieldInline from "./Fields/TextFieldInline"
 import TextFieldCol from "./Fields/TextFieldCol"
 import YesNo from "./Fields/YesNo"
-// import YesNoInline from "./Fields/YesNoCol"
 import YesNoCol from "./Fields/YesNoCol"
 import Category from "./Fields/Category"
 import EmailFieldInline from "./Fields/EmailFieldInline"
 import EmailFieldCol from "./Fields/EmailFieldCol"
 import YearField from "./Fields/YearField"
 import StudentUndertaking from "./StudentUndertaking"
+import StudentTerms from "./StudentTerms"
 
 import { createContext, useState } from "react"
+
+import "../CSS/FEForm.css"
 
 export const FieldsContext = createContext()
 export default function FEForm() {
@@ -39,7 +41,11 @@ export default function FEForm() {
 
   return (
     <div>
-      <h1 className="jumbotron">FE Registration Form</h1>
+      <div className="headingBox">
+        <h1 style={{textAlign: "center"}}>FE Registration Form</h1>
+      </div>
+      <hr />
+
       <Form>
         <FieldsProvider>
           <TextField
@@ -54,13 +60,31 @@ export default function FEForm() {
           />
         </FieldsProvider>
 
-        <GenderField controlId="studentGender" />
+        <TextFieldInline
+          title="Father's Name"
+          placeholder="Enter Full Name"
+          controlId="fatherName"
+        />
+
+        <Row>
+          <Col md>
+            <GenderField controlId="studentGender" />
+          </Col>
+          <Col md>
+            <NumFieldCol
+              title="Age"
+              maxlength="3"
+              controlId="age"
+              placeholder="Enter your Age"
+            />
+          </Col>
+        </Row>
         
         <Row>
-          <Col>
+          <Col md>
             <DateField title="DOB" controlId="dob" />
           </Col>
-          <Col>
+          <Col md>
             <TextFieldCol
               title="Place of Birth"
               placeholder="Enter Place of Birth"
@@ -78,14 +102,14 @@ export default function FEForm() {
         <Category />
 
         <Row>
-          <Col>
+          <Col md>
             <TextFieldCol
               title="Religion"
               placeholder="Enter your Religion"
               controlId="religion"
             />
           </Col>
-          <Col>
+          <Col md>
             <TextFieldCol
               title="Caste"
               placeholder="Enter caste"
@@ -95,14 +119,14 @@ export default function FEForm() {
         </Row>
 
         <Row>
-          <Col>
+          <Col md>
             <YesNoCol
               title="Pass from Maharashtra"
               name="maharashtraPass"
               controlId="maharashtraPass"
             />
           </Col>
-          <Col>
+          <Col md>
             <TextFieldCol
               title="Nationality"
               placeholder="Enter Nationality"
@@ -123,6 +147,12 @@ export default function FEForm() {
           controlId="aadharNo"
           placeholder="Enter 12 digit Aadhar No"
           maxlength="12"
+        />
+
+        <YesNo
+          title="Do you have PAN Card?"
+          name="hasPAN"
+          controlId="hasPAN"
         />
 
         <NumField
@@ -207,21 +237,28 @@ export default function FEForm() {
           </Col>
         </Row>
 
+        <NumField
+          title="Student's Mobile No"
+          placeholder="Enter 10 digit Mobile No"
+          maxlength="10"
+          controlId="studentMobile"
+        />
+
         <Row>
           <Col>
             <NumFieldCol
-              title="Student's Mobile No"
+              title="Mother's Mobile No"
               placeholder="Enter 10 digit Mobile No"
               maxlength="10"
-              controlId="studentMobile"
+              controlId="motherMobile"
             />
           </Col>
           <Col>
-            <NumFieldCol
-              title="Parent's Mobile No"
+          <NumFieldCol
+              title="Father's Mobile No"
               placeholder="Enter 10 digit Mobile No"
               maxlength="10"
-              controlId="parentMobile"
+              controlId="fatherMobile"
             />
           </Col>
         </Row>
@@ -245,8 +282,13 @@ export default function FEForm() {
 
         {/* Detailed Marks */}
 
+        <StudentTerms />
+        <div style={{padding: "20px 0"}}>
+          <Button variant="primary">Submit</Button>{' '}
+        </div>
+
         <StudentUndertaking />
-        <button className="btn-primary" type="submit">Submit</button>
+        <Button variant="primary">Submit</Button>{' '}
         <br></br>
         <br></br>
       </Form>

@@ -10,7 +10,9 @@ export default function NumField({ title, maxlength, controlId, placeholder }) {
   const [permanentPin, setPermanentPin] = useState("")
   const [guardianPin, setGuardianPin] = useState("")
   const [studentMobile, setStudentMobile] = useState("")
-  const [parentMobile, setParentMobile] = useState("")
+  const [motherMobile, setMotherMobile] = useState("")
+  const [fatherMobile, setFatherMobile] = useState("")
+
 
   return (
     <div>
@@ -42,6 +44,12 @@ export default function NumField({ title, maxlength, controlId, placeholder }) {
     //   case "aadharNo":
     //     setAadharNo(e.target.value)
     //     break
+      case "motherMobile":
+        setMotherMobile(e.target.value)
+        break
+      case "fatherMobile":
+        setFatherMobile(e.target.value)
+        break
       case "permanentPin":
         setPermanentPin(e.target.value)
         break
@@ -50,9 +58,6 @@ export default function NumField({ title, maxlength, controlId, placeholder }) {
         break
       case "studentMobile":
         setStudentMobile(e.target.value)
-        break
-      case "parentMobile":
-        setParentMobile(e.target.value)
         break
       default:
         console.log("Does not match any case")

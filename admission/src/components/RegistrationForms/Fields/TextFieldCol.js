@@ -17,6 +17,7 @@ export default function TextFieldCol({ title, placeholder, controlId }) {
     const [lastInstituteNameFE, setLastInstituteNameFE] = useState("")
     const [lastInstituteAddressFE, setLastInstituteAddressFE] = useState("")
     const [lastClassFE, setLastClassFE] = useState("")
+    const [PANNo, setPANNo] = useState("")
   
     return (
       <div>
@@ -38,6 +39,9 @@ export default function TextFieldCol({ title, placeholder, controlId }) {
   
     function handleChange(e, controlId) {
       switch (controlId) {
+        case "PANNo":
+          setPANNo(e.target.value)
+          break
         case "placeOfBirth":
           setPlaceOfBirth(e.target.value)
           break

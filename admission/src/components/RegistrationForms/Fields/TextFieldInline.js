@@ -9,6 +9,7 @@ export default function TextFieldInline({ title, placeholder, controlId }) {
   const [lastInstituteNameFE, setLastInstituteNameFE] = useState("")
   const [lastInstituteAddressFE, setLastInstituteAddressFE] = useState("")
   const [lastClassFE, setLastClassFE] = useState("")
+  const [fatherName, setFatherName] = useState("")
 
   return (
     <div>
@@ -30,6 +31,9 @@ export default function TextFieldInline({ title, placeholder, controlId }) {
 
   function handleChange(e, controlId) {
     switch (controlId) {
+      case "fatherName":
+        setFatherName(e.target.value)
+        break
       case "permanentAddress":
         setPermanentAddress(e.target.value)
         break

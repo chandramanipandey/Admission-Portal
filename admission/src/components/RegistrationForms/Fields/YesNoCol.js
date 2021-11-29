@@ -3,7 +3,7 @@ import { Form, Row, Col } from "react-bootstrap"
 import { useState } from "react"
 
 export default function YesNo({ title, name, controlId }) {
-  const [maharashtraPass, setMaharashtraPass] = useState("")
+  const [maharashtraPass, setMaharashtraPass] = useState(false)
 
   return (
     <div>
@@ -15,8 +15,8 @@ export default function YesNo({ title, name, controlId }) {
             </Form.Label>
             
             <Col sm={8} onChange={(e) => handleChange(e, controlId)}>
-              <Form.Check type="radio" label="Yes" name={name} value="Yes" />
-              <Form.Check type="radio" label="No" name={name} value="No" />
+              <Form.Check type="radio" label="Yes" name={name} value={true} />
+              <Form.Check type="radio" label="No" name={name} value={false} />
             </Col>
           </Form.Group>
         </fieldset>

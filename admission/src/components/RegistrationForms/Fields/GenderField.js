@@ -12,10 +12,10 @@ export default function GenderField({ controlId }) {
       <Form.Group>
         <fieldset>
           <Form.Group as={Row}>
-            <Form.Label as="legend" column sm={2}>
+            <Form.Label as="legend" column sm={4}>
               Gender
             </Form.Label>
-            <Col sm={10}>
+            <Col sm={8}>
               <Form.Check
                 type="radio"
                 label="Male"

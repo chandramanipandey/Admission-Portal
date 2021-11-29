@@ -3,22 +3,13 @@ import React from "react"
 export default function StudentUndertaking() {
   return (
     <div>
-      <h2>UNDERTAKING OF THE STUDENT </h2>
-      <ol>
-        <li>
-          I have not been debarred from appearing at any examination held by any
-          government constituted or statutory examination authority of India.
-        </li>
-        <li>
-          1 am not Involved in any criminal case/police investigation and do not
-          have any connection with any anti-national organization.{" "}
-        </li>
-        <li>
-          Information given above is true to the best of my knowledge and
-          belief.{" "}
-        </li>
-      </ol>
-      <h3>I hereby undertake that </h3>
+      <div className="headingBox jumbotron">
+        <h2 style={{textAlign: "center"}}>UNDERTAKING OF THE STUDENT </h2>
+      </div>
+      
+      <div className="headingBox">
+        <h3 style={{textAlign: "center"}}>I hereby undertake that </h3>
+      </div>
       <ol>
         <li>
           If admitted I will be governed by rules and regulations, in force, of
