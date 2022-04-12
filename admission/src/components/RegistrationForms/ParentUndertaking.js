@@ -3,10 +3,12 @@ import React from "react"
 export default function ParentUndertaking() {
   return (
     <div>
-      <h2>UNDERTAKING OF THE PARENT/GUARDIAN</h2>
+      <div className="headingBox jumbotron">
+        <h2 style={{textAlign: "center"}}>UNDERTAKING OF THE PARENT/GUARDIAN </h2>
+      </div>
       <span>
         My son/daughter/ward studying in BVCOE, Lavale has so far not been
-        associated with any anti- social and antinational activity in whatever
+        associated with any anti- social and antinational activity in whatever
         manner.
       </span>
       <ol>

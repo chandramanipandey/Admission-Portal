@@ -13,8 +13,11 @@ import Category from "./Fields/Category"
 import EmailFieldInline from "./Fields/EmailFieldInline"
 import EmailFieldCol from "./Fields/EmailFieldCol"
 import YearField from "./Fields/YearField"
-import StudentUndertaking from "./StudentUndertaking"
 import StudentTerms from "./StudentTerms"
+import RadioField from "./Fields/RadioField"
+
+import StudentUndertaking from "./StudentUndertaking"
+import ParentUndertaking from "./ParentUndertaking"
 
 import { createContext, useState } from "react"
 
@@ -42,11 +45,18 @@ export default function FEForm() {
   return (
     <div>
       <div className="headingBox">
-        <h1 style={{textAlign: "center"}}>FE Registration Form</h1>
+        <h1 style={{textAlign: "center"}}>FE/DSE Registration Form</h1>
       </div>
       <hr />
 
       <Form>
+        <RadioField title="Cadidate Admission" 
+          option1="First Year(F.E)" 
+          option2="Direct Second Year(D.S.E)" 
+          name="candidateAdmission" 
+          controlId="candidateAdmission" 
+        />
+
         <FieldsProvider>
           <TextField
             title="Candidate Name"
@@ -118,6 +128,7 @@ export default function FEForm() {
           </Col>
         </Row>
 
+
         <Row>
           <Col md>
             <YesNoCol
@@ -135,6 +146,18 @@ export default function FEForm() {
           </Col>
         </Row>
 
+        <YesNo 
+          title="Do you have MHTCET Score?"
+          name="mhtcet"
+          controlId="mhtcet"
+        />
+
+        <YesNo 
+          title="Do you have JEE Mains Score?"
+          name="jeeMains"
+          controlId="jeeMains"
+        />
+        
         <NumField
           title="Enter CET Merit number"
           maxlength="12"
@@ -238,6 +261,13 @@ export default function FEForm() {
         </Row>
 
         <NumField
+          title="Guardian's Mobile No"
+          placeholder="Enter 10 digit Mobile No"
+          maxlength="10"
+          controlId="guardianMobile"
+        />
+
+        <NumField
           title="Student's Mobile No"
           placeholder="Enter 10 digit Mobile No"
           maxlength="10"
@@ -288,6 +318,7 @@ export default function FEForm() {
         </div>
 
         <StudentUndertaking />
+        <ParentUndertaking />
         <Button variant="primary">Submit</Button>{' '}
         <br></br>
         <br></br>
