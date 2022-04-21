@@ -1,7 +1,7 @@
 import React from "react"
 import { Col, Form, Row } from "react-bootstrap"
 import { useState } from "react"
-import YearPicker from "react-year-picker"
+import DatePicker from "react-datepicker"
 
 export default function YearField({ title, controlId }) {
   const [yearOfLeaving, setYearOfLeaving] = useState(new Date())
@@ -13,7 +13,12 @@ export default function YearField({ title, controlId }) {
           {title}
         </Form.Label>
         <Col sm={10}>
-          <YearPicker onChange={(e) => setYearOfLeaving(e)} />
+          <DatePicker
+      selected={yearOfLeaving}
+      onChange={(date) => setYearOfLeaving(date)}
+      showYearPicker
+      dateFormat="yyyy"
+    />
         </Col>
       </Form.Group>
     </div>
