@@ -3,6 +3,7 @@ import {Form, Button,Card,CardGroup,Alert} from 'react-bootstrap';
 import Firebaseauth from '../Firebase/firebase';
 import logo from '../Assets/logo1.jpg';
 import {Link,useHistory} from 'react-router-dom';
+import { verifyEmail } from '../Firebase/verifyemailaddress';
 export default function Auth() {
     const emailRef=useRef();
     const passwordRef=useRef();
@@ -28,7 +29,14 @@ export default function Auth() {
         try{
             setError('');
             setLoading(true);
+            const emailcheck = emailRef.current.value;
+            const checkemailbvpedu = emailcheck.split("-");
+            if(checkemailbvpedu[1] !== "bvcoel@bvp.edu.in"){
+                 console.log(checkemailbvpedu[1],emailcheck);
+                 throw "Please Register on Portal using official Email ID only i.e example-bvcoel@bvp.edu.in ";
+             }
             await Firebaseauth.auth().createUserWithEmailAndPassword(emailRef.current.value, passwordRef.current.value);
+            verifyEmail();
             setSubmitsuccess(true);
             document.getElementById("signup-form").reset();
            }catch(e){
@@ -42,14 +50,23 @@ export default function Auth() {
         try{
             setLoginError('');
             setLoading(true);
+            const emailcheck = loginemailRef.current.value;
+            const checkemailbvpedu = emailcheck.split("-");
+            if(checkemailbvpedu[1] !== "bvcoel@bvp.edu.in"){
+            throw "Since you are not using official college email id for example: example-bvcoel@bvp.edu.in ";
+            }
+            
             await Firebaseauth.auth().signInWithEmailAndPassword(loginemailRef.current.value, loginpasswordRef.current.value);
-            setLoginsuccess(true);
+            if(!Firebaseauth.auth().currentUser.emailVerified){
+                throw "Please verify your email to log in to portal, Check Junk/Spam emails if you have trouble finding email verification link";
+            }
+            await history.push("/Dashboard") 
+            setLoginsuccess(true);  
             document.getElementById("signin-form").reset();
            }catch(e){
                setLoginError('Login Failed'+"  "+e);
            }
-           setLoading(false);
-           await history.push("/Dashboard");
+           setLoading(false);        
     }
    
     return (
@@ -70,7 +87,7 @@ export default function Auth() {
         <Card.Body>
             <h1 className="text-center mb-4 " style={{fontFamily:"Times New Roman,sans-serif",color:"mediumseagreen"}}>Sign Up </h1>
             {error && <Alert variant="danger">{error}</Alert>}
-                {submitsuccess && <Alert variant="success" style={{margin:'50px',width:'max-content'}}>You are Successfully registered on Admission-Portal</Alert>}
+                {submitsuccess && <Alert variant="success" style={{width:'100%'}}>You are Successfully registered on Admission-Portal, An Email has been sent to you to verify your email on your official email id, Please verify your Email in order to login to Portal </Alert>}
             {user && JSON.stringify(user.email)}
             <Form onSubmit={signUp} id="signup-form">
                 <Form.Group className="mb-3" id="email">
@@ -106,7 +123,7 @@ export default function Auth() {
             <Card.Body>
                 <h1 className="text-center mb-4" style={{fontFamily:"Times New Roman,sans-serif",color:"mediumslateblue"}}>Sign In </h1>
                 {loginerror && <Alert variant="danger">{loginerror}</Alert>}
-                {loginsuccess && <Alert variant="success" style={{margin:'50px',width:'max-content'}}>You are Successfully Logged In on Admission-Portal</Alert>}
+                {loginsuccess && <Alert variant="success" style={{width:'100%'}}>You are Successfully Logged In on Admission-Portal</Alert>}
                 <Form onSubmit={signIn} id="signin-form">
                     <Form.Group className="mb-3" id="email">
                     <Form.Label>Email address</Form.Label>
