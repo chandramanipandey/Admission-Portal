@@ -2,8 +2,16 @@ import React from "react"
 import {Navbar, Container, Nav, NavDropdown} from "react-bootstrap"
 import userImage from "./Sample_User_Icon.png"
 import "../CSS/Navbar.css"
+import { logout } from "../Firebase/logoutuser"
+import { useHistory } from "react-router-dom"
+import Firebaseauth from "../Firebase/firebase"
 
 export default function NavigationBar({userType, userName}) {
+    const history = useHistory();
+    async function Click(){
+        logout();
+       await history.push("/");
+    }
     return (
         <div>
             <Navbar expand="lg" className="Navbar-Box" >
@@ -17,8 +25,8 @@ export default function NavigationBar({userType, userName}) {
                     <Nav.Link href="#link">Link</Nav.Link>
                     
                     <Nav.Link><img src={userImage} width="30px" height="30px" /></Nav.Link>
-                    <NavDropdown title={userName} id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Log Out</NavDropdown.Item>
+                    <NavDropdown title={Firebaseauth.auth().currentUser.email} id="basic-nav-dropdown">
+                        <NavDropdown.Item  onClick={Click}>Log Out</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 </Navbar.Collapse>
