@@ -1,20 +1,31 @@
 import React from "react"
 import { Form, Row, Col } from "react-bootstrap"
-import { useState } from "react"
-
-import TextFieldInline from "./TextFieldInline"
+import { useState, useContext } from "react"
 import TextFieldCol from "./TextFieldCol"
+import { FieldsContext } from "../FEDSEForm"
 
 export default function YesNo({ title, name, controlId }) {
-  const [phyHandicapped, setPhyHandicapped] = useState(false)
-  const [maharashtraPass, setMaharashtraPass] = useState(false)
-  const [hasPAN, setHasPAN] = useState(false);
-  const [hasGivenMHTCET, setHasGivenMHTCET] = useState(false);
-  const [CETScore, setCETScore] = useState("");
-  const [hasGivenJEEMains, setHasGivenJEEMains] = useState(false);
-  const [JEEMainsScore, setJEEMainsScore] = useState("");
-  const [hasGivenJEEAdvanced, setHasGivenJEEAdvanced] = useState(false);
-  const [JEEAdvancedScore, setJEEAdvancedScore] = useState("");
+  // const [phyHandicapped, setPhyHandicapped] = useState(false)
+  // const [maharashtraPass, setMaharashtraPass] = useState(false)
+  // const [hasPAN, setHasPAN] = useState(false);
+  // const [hasGivenMHTCET, setHasGivenMHTCET] = useState(false);
+  // const [CETScore, setCETScore] = useState("");
+  // const [hasGivenJEEMains, setHasGivenJEEMains] = useState(false);
+  // const [JEEMainsScore, setJEEMainsScore] = useState("");
+  // const [hasGivenJEEAdvanced, setHasGivenJEEAdvanced] = useState(false);
+  // const [JEEAdvancedScore, setJEEAdvancedScore] = useState("");
+
+  const { phyHandicappedState, maharashtraPassState, hasPANState, hasGivenMHTCETState, CETScoreState, hasGivenJEEMainsState, JEEMainsScoreState, hasGivenJEEAdvancedState, JEEAdvancedScoreState } = useContext(FieldsContext)
+
+  const [phyHandicapped, setPhyHandicapped] = phyHandicappedState
+  const [maharashtraPass, setMaharashtraPass] = maharashtraPassState
+  const [hasPAN, setHasPAN] = hasPANState
+  const [hasGivenMHTCET, setHasGivenMHTCET] = hasGivenMHTCETState
+  const [CETScore, setCETScore] = CETScoreState
+  const [hasGivenJEEMains, setHasGivenJEEMains] = hasGivenJEEMainsState
+  const [JEEMainsScore, setJEEMainsScore] = JEEMainsScoreState
+  const [hasGivenJEEAdvanced, setHasGivenJEEAdvanced] = hasGivenJEEAdvancedState
+  const [JEEAdvancedScore, setJEEAdvancedScore] = JEEAdvancedScoreState
 
   return (
     <div>

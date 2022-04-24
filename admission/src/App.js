@@ -5,8 +5,7 @@ import Auth from "./components/Authentication/Authenticate"
 import { Container } from "react-bootstrap"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Dashboard from "./components/Dashboard/Dashboard"
-import FEForm from "./components/RegistrationForms/FEForm"
-import DSEForm from "./components/RegistrationForms/DSEForm"
+import FEDSEForm from "./components/RegistrationForms/FEDSEForm"
 
 function App() {
   return (
@@ -15,8 +14,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Auth} />
           <Route path="/Dashboard" component={Dashboard} />
-          <Route path="/feform" component={FEForm} />
-          <Route path="/dseform" component={DSEForm} />
+          <Route path="/fedseform" component={FEDSEForm} />
         </Switch>
       </Router>
     </Container>

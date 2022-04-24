@@ -2,10 +2,15 @@ import React from "react"
 import Form from "react-bootstrap/Form"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { FieldsContext } from "../FEDSEForm"
 
 export default function GenderField({ controlId }) {
-  const [studentGender, setStudentGender] = useState("")
+  // const [studentGender, setStudentGender] = useState("")
+
+  const { studentGenderState } = useContext(FieldsContext)
+  
+  const [studentGender, setStudentGender] = studentGenderState
 
   return (
     <div>

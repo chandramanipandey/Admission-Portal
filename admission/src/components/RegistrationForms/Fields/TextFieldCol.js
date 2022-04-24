@@ -1,24 +1,21 @@
 import React from "react"
 import { Row, Col, Form } from "react-bootstrap"
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { FieldsContext } from "../FEDSEForm"
 
 export default function TextFieldCol({ title, placeholder, controlId }) {
-    const [placeOfBirth, setPlaceOfBirth] = useState("")
-    const [religion, setReligion] = useState("")
-    const [casteName, setCasteName] = useState("")
-    const [nationality, setNationality] = useState("")
-    const [permanentAddress, setPermanentAddress] = useState("") //Used in TextField
-    const [city, setCity] = useState("")
-    const [district, setDistrict] = useState("")
-    const [guardianName, setGuardianName] = useState("")
-    const [guardianAddress, setGuardianAddress] = useState("")
-    const [guardianCity, setGuardianCity] = useState("")
-    const [guardianDistrict, setGuardianDistrict] = useState("")
-    const [lastInstituteNameFE, setLastInstituteNameFE] = useState("")
-    const [lastInstituteAddressFE, setLastInstituteAddressFE] = useState("")
-    const [lastClassFE, setLastClassFE] = useState("")
-    const [PANNo, setPANNo] = useState("")
-  
+
+    const { placeOfBirthState, religionState, casteNameState, nationalityState, cityState, districtState, guardianCityState, guardianDistrictState } = useContext(FieldsContext)
+
+    const [ placeOfBirth, setPlaceOfBirth] = placeOfBirthState
+    const [ religion, setReligion] = religionState
+    const [ casteName, setCasteName ] = casteNameState
+    const [ nationality, setNationality] = nationalityState
+    const [ city, setCity ] = cityState
+    const [ district, setDistrict ] = districtState 
+    const [ guardianCity, setGuardianCity ] = guardianCityState
+    const [ guardianDistrict, setGuardianDistrict ] = guardianDistrictState
+
     return (
       <div>
         <Form.Group controlId={controlId}>
@@ -39,9 +36,9 @@ export default function TextFieldCol({ title, placeholder, controlId }) {
   
     function handleChange(e, controlId) {
       switch (controlId) {
-        case "PANNo":
-          setPANNo(e.target.value)
-          break
+        // case "PANNo":
+        //   setPANNo(e.target.value)
+        //   break
         case "placeOfBirth":
           setPlaceOfBirth(e.target.value)
           break
@@ -54,37 +51,37 @@ export default function TextFieldCol({ title, placeholder, controlId }) {
         case "Nationality":
           setNationality(e.target.value)
           break
-        case "permanentAddress":
-          setPermanentAddress(e.target.value)
-          break
+        // // case "permanentAddress":
+        // //   setPermanentAddress(e.target.value)
+        // //   break
         case "city":
           setCity(e.target.value)
-          console.log(city)
+          // console.log(city)
           break
         case "district":
           setDistrict(e.target.value)
           break
-        case "guardianName":
-          setGuardianName(e.target.value)
-          break
-        case "guardianAddress":
-          setGuardianAddress(e.target.value)
-          break
+        // // case "guardianName":
+        // //   setGuardianName(e.target.value)
+        // //   break
+        // // case "guardianAddress":
+        // //   setGuardianAddress(e.target.value)
+        // //   break
         case "guardianCity":
           setGuardianCity(e.target.value)
           break
         case "guardianDistrict":
           setGuardianDistrict(e.target.value)
           break
-        case "lastInstituteNameFE":
-          setLastInstituteNameFE(e.target.value)
-          break
-        case "lastInstituteAddressFE":
-          setLastInstituteAddressFE(e.target.value)
-          break
-        case "lastClassFE":
-          setLastClassFE(e.target.value)
-          break
+        // case "lastInstituteNameFE":
+        //   setLastInstituteNameFE(e.target.value)
+        //   break
+        // case "lastInstituteAddressFE":
+        //   setLastInstituteAddressFE(e.target.value)
+        //   break
+        // case "lastClassFE":
+        //   setLastClassFE(e.target.value)
+        //   break
         default:
           console.log("No Match for TextFieldInline")
       }

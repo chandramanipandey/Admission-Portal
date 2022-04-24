@@ -24,22 +24,108 @@ import { createContext, useState } from "react"
 import "../CSS/FEForm.css"
 
 export const FieldsContext = createContext()
-export default function FEForm() {
+export default function FEDSEForm() {
 
+  // FieldsProvider Function for FieldsContext
   const FieldsProvider = (props) => {
     const [motherName, setMotherName] = useState("")
     const [studentName, setStudentName] = useState("")
+    const [candidateAdmission, setCandidateAdmission] = useState("")
+
+    const [permanentAddress, setPermanentAddress] = useState("")
+    const [guardianName, setGuardianName] = useState("")
+    const [guardianAddress, setGuardianAddress] = useState("")
+    const [lastInstituteNameFE, setLastInstituteNameFE] = useState("")
+    const [lastInstituteAddressFE, setLastInstituteAddressFE] = useState("")
+    const [lastClassFE, setLastClassFE] = useState("")
+    const [fatherName, setFatherName] = useState("")
+
+    const [studentGender, setStudentGender] = useState("")
+
+    const [permanentPin, setPermanentPin] = useState("")
+    const [guardianPin, setGuardianPin] = useState("")
+    const [studentMobile, setStudentMobile] = useState("")
+    const [motherMobile, setMotherMobile] = useState("")
+    const [fatherMobile, setFatherMobile] = useState("")
+
+    const [dob, setDob] = useState("")
+// Working fine till here
+
+    const [placeOfBirth, setPlaceOfBirth] = useState("")
+    const [religion, setReligion] = useState("")
+    const [casteName, setCasteName] = useState("")
+    const [nationality, setNationality] = useState("")
+    const [city, setCity] = useState("")
+    const [district, setDistrict] = useState("")
+    const [guardianCity, setGuardianCity] = useState("")
+    const [guardianDistrict, setGuardianDistrict] = useState("")
+
+    const [phyHandicapped, setPhyHandicapped] = useState(false)
+    const [maharashtraPass, setMaharashtraPass] = useState(false)
+    const [hasPAN, setHasPAN] = useState(false)
+    const [hasGivenMHTCET, setHasGivenMHTCET] = useState(false)
+    const [CETScore, setCETScore] = useState("")
+    const [hasGivenJEEMains, setHasGivenJEEMains] = useState(false)
+    const [JEEMainsScore, setJEEMainsScore] = useState("")
+    const [hasGivenJEEAdvanced, setHasGivenJEEAdvanced] = useState(false)
+    const [JEEAdvancedScore, setJEEAdvancedScore] = useState("")
 
     return (
       <FieldsContext.Provider
         value={{
-          motherName: [motherName, setMotherName],
-          studentName: [studentName, setStudentName],
+          
+
+          motherNameState: [motherName, setMotherName],
+          studentNameState: [studentName, setStudentName],
+
+          candidateAdmissionState: [candidateAdmission, setCandidateAdmission],
+          permanentAddressState: [permanentAddress, setPermanentAddress],
+          guardianNameState: [guardianName, setGuardianName],
+          guardianAddressState: [guardianAddress, setGuardianAddress],
+          lastInstituteNameFEState: [lastInstituteNameFE, setLastInstituteNameFE],
+          lastInstituteAddressFEState: [lastInstituteAddressFE, setLastInstituteAddressFE],
+          lastClassFEState: [lastClassFE, setLastClassFE],
+          fatherNameState: [fatherName, setFatherName],
+
+          studentGenderState: [studentGender, setStudentGender],
+
+          permanentPinState: [permanentPin, setPermanentPin],
+          guardianPinState: [guardianPin, setGuardianPin],
+          studentMobileState: [studentMobile, setStudentMobile],
+          motherMobileState: [motherMobile, setMotherMobile],
+          fatherMobileState: [fatherMobile, setFatherMobile],
+
+          dobState: [dob, setDob],
+
+          placeOfBirthState: [placeOfBirth, setPlaceOfBirth],
+          religionState: [religion, setReligion],
+          casteNameState: [casteName, setCasteName],
+          nationalityState: [nationality, setNationality],
+          cityState: [city, setCity],
+          districtState: [district, setDistrict],
+          guardianCityState: [guardianCity, setGuardianCity],
+          guardianDistrictState: [guardianDistrict, setGuardianDistrict],
+
+          phyHandicappedState: [phyHandicapped, setPhyHandicapped],
+          maharashtraPassState: [maharashtraPass, setMaharashtraPass],
+          hasPANState: [hasPAN, setHasPAN],
+          hasGivenMHTCETState: [hasGivenMHTCET, setHasGivenMHTCET] ,
+          CETScoreState: [CETScore, setCETScore],
+          hasGivenJEEMainsState: [hasGivenJEEMains, setHasGivenJEEMains],
+          JEEMainsScoreState: [JEEMainsScore, setJEEMainsScore] ,
+          hasGivenJEEAdvancedState: [hasGivenJEEAdvanced, setHasGivenJEEAdvanced] ,
+          JEEAdvancedScoreState: [JEEAdvancedScore, setJEEAdvancedScore],
+
         }}
       >
         {props.children}
       </FieldsContext.Provider>
     )
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
   }
 
   return (
@@ -49,15 +135,17 @@ export default function FEForm() {
       </div>
       <hr />
 
-      <Form>
-        <RadioField title="Cadidate Admission" 
-          option1="First Year(F.E)" 
-          option2="Direct Second Year(D.S.E)" 
-          name="candidateAdmission" 
-          controlId="candidateAdmission" 
-        />
+      <Form onSubmit={handleSubmit}>
 
         <FieldsProvider>
+
+          <RadioField title="Cadidate Admission" 
+            option1="First Year(F.E)" 
+            option2="Direct Second Year(D.S.E)" 
+            name="candidateAdmission" 
+            controlId="candidateAdmission" 
+          />
+
           <TextField
             title="Candidate Name"
             placeholder="Enter Full Name"
@@ -68,28 +156,14 @@ export default function FEForm() {
             placeholder="Enter Full Name"
             controlId="motherName"
           />
-        </FieldsProvider>
-
-        <TextFieldInline
+          <TextFieldInline
           title="Father's Name"
           placeholder="Enter Full Name"
           controlId="fatherName"
         />
 
-        <Row>
-          <Col md>
-            <GenderField controlId="studentGender" />
-          </Col>
-          <Col md>
-            <NumFieldCol
-              title="Age"
-              maxlength="3"
-              controlId="age"
-              placeholder="Enter your Age"
-            />
-          </Col>
-        </Row>
         
+
         <Row>
           <Col md>
             <DateField title="DOB" controlId="dob" />
@@ -103,11 +177,18 @@ export default function FEForm() {
           </Col>
         </Row>
         
-        <YesNo
-          title="Phy. Handicapped"
-          name="handicappedRadio"
-          controlId="phyHandicapped"
-        />
+        <Row>
+          <Col md>
+            <GenderField controlId="studentGender" />
+          </Col>
+          <Col md>
+            <YesNo
+            title="Phy. Handicapped"
+            name="handicappedRadio"
+            controlId="phyHandicapped"
+            />
+          </Col>
+        </Row>
 
         <Category />
 
@@ -302,24 +383,27 @@ export default function FEForm() {
           title="Institute Address"
           placeholder="Enter last institute address"
           controlId="lastInstituteAddressFE"
-        />
-        <TextFieldInline
+        /> 
+         <TextFieldInline
           title="Last Class Studied"
           placeholder="Last Class"
           controlId="lastclassFE"
         />
+        
         <YearField title="Year of Leaving" controlId="yearofLeavingFE" />
+        
+        </FieldsProvider>
+
 
         {/* Detailed Marks */}
 
         <StudentTerms />
-        <div style={{padding: "20px 0"}}>
-          <Button variant="primary">Submit</Button>{' '}
-        </div>
 
         <StudentUndertaking />
+
         <ParentUndertaking />
-        <Button variant="primary">Submit</Button>{' '}
+        
+        <Button variant="primary" type="submit" >Submit</Button>{' '}
         <br></br>
         <br></br>
       </Form>
