@@ -1,9 +1,15 @@
 import React from "react"
 import { Col, Form } from "react-bootstrap"
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { FieldsContext } from "../FEDSEForm"
 
 export default function DateField({ title, controlId }) {
-  const [dob, setDob] = useState("")
+  // const [dob, setDob] = useState("")
+
+  const {dobState} = useContext(FieldsContext)
+
+  const [dob, setDob] = dobState
+
   return (
     <div>
       <Form.Group>

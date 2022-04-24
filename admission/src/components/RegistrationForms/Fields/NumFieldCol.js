@@ -1,18 +1,18 @@
 import React from "react"
 import { Col } from "react-bootstrap"
 import Form from "react-bootstrap/Form"
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { FieldsContext } from "../FEDSEForm"
 
 export default function NumField({ title, maxlength, controlId, placeholder }) {
-//   const [cetMeritNo, setCetMeritNo] = useState("")
-//   const [parentsAnnualIncome, setParentsAnnualIncome] = useState("")
-//   const [aadharNo, setAadharNo] = useState("")
-  const [permanentPin, setPermanentPin] = useState("")
-  const [guardianPin, setGuardianPin] = useState("")
-  const [studentMobile, setStudentMobile] = useState("")
-  const [motherMobile, setMotherMobile] = useState("")
-  const [fatherMobile, setFatherMobile] = useState("")
 
+  const { permanentPinState, guardianPinState, studentMobileState, motherMobileState, fatherMobileState} = useContext(FieldsContext)
+
+  const [permanentPin, setPermanentPin] = permanentPinState
+  const [guardianPin, setGuardianPin] = guardianPinState
+  const [studentMobile, setStudentMobile] = studentMobileState
+  const [motherMobile, setMotherMobile] = motherMobileState
+  const [fatherMobile, setFatherMobile] = fatherMobileState
 
   return (
     <div>
@@ -35,15 +35,6 @@ export default function NumField({ title, maxlength, controlId, placeholder }) {
 
   function handleChange(e, controlId) {
     switch (controlId) {
-    //   case "cetmeritNo":
-    //     setCetMeritNo(e.target.value)
-    //     break
-    //   case "parentsAnnualIncome":
-    //     setParentsAnnualIncome(e.target.value)
-    //     break
-    //   case "aadharNo":
-    //     setAadharNo(e.target.value)
-    //     break
       case "motherMobile":
         setMotherMobile(e.target.value)
         break

@@ -1,15 +1,26 @@
 import React from "react"
 import { Col, Form } from "react-bootstrap"
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { FieldsContext } from "../FEDSEForm"
 
 export default function TextFieldInline({ title, placeholder, controlId }) {
-  const [permanentAddress, setPermanentAddress] = useState("")
-  const [guardianName, setGuardianName] = useState("")
-  const [guardianAddress, setGuardianAddress] = useState("")
-  const [lastInstituteNameFE, setLastInstituteNameFE] = useState("")
-  const [lastInstituteAddressFE, setLastInstituteAddressFE] = useState("")
-  const [lastClassFE, setLastClassFE] = useState("")
-  const [fatherName, setFatherName] = useState("")
+  // const [permanentAddress, setPermanentAddress] = useState("")
+  // const [guardianName, setGuardianName] = useState("")
+  // const [guardianAddress, setGuardianAddress] = useState("")
+  // const [lastInstituteNameFE, setLastInstituteNameFE] = useState("")
+  // const [lastInstituteAddressFE, setLastInstituteAddressFE] = useState("")
+  // const [lastClassFE, setLastClassFE] = useState("")
+  // const [fatherName, setFatherName] = useState("")
+
+  const {permanentAddressState,guardianNameState,guardianAddressState, lastInstituteNameFEState, lastInstituteAddressFEState, lastClassFEState, fatherNameState } = useContext(FieldsContext)
+  
+  const [permanentAddress, setPermanentAddress] = permanentAddressState
+  const [guardianAddress, setGuardianAddress] = guardianAddressState
+  const [guardianName, setGuardianName] = guardianNameState
+  const [lastInstituteNameFE, setLastInstituteNameFE] = lastInstituteNameFEState
+  const [lastInstituteAddressFE, setLastInstituteAddressFE] = lastInstituteAddressFEState
+  const [lastClassFE, setLastClassFE] = lastClassFEState
+  const [fatherName, setFatherName] = fatherNameState
 
   return (
     <div>
@@ -33,6 +44,7 @@ export default function TextFieldInline({ title, placeholder, controlId }) {
     switch (controlId) {
       case "fatherName":
         setFatherName(e.target.value)
+        console.log({fatherName})
         break
       case "permanentAddress":
         setPermanentAddress(e.target.value)

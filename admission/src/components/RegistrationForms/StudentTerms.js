@@ -21,7 +21,7 @@ export default function StudentTerms() {
         </li>
       </ol>
       <input type="checkbox" name="studentTermsCheck" onClick={() => setTermsCheck(!termsCheck)}/> I Agree to the above terms
-      {console.log(termsCheck)}
+      {/* {console.log(termsCheck)} */}
 		</div>
 	)
 }
