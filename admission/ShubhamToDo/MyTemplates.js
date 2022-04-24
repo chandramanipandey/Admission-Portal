@@ -1,4 +1,0 @@
-<Row>
-	<Col>
-	</Col>
-</Row>
