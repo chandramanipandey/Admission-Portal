@@ -1,9 +1,13 @@
 import React from "react"
 import { Form, Row, Col } from "react-bootstrap"
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { FieldsContext } from "../FEDSEForm"
 
 export default function YesNo({ title, name, controlId }) {
-  const [maharashtraPass, setMaharashtraPass] = useState(false)
+  // const [maharashtraPass, setMaharashtraPass] = useState(false)
+
+  const { maharashtraPassState } = useContext(FieldsContext)
+  const [mahrashtraPass, setMaharashtraPass] = maharashtraPassState
 
   return (
     <div>

@@ -1,12 +1,16 @@
 import React from "react"
 import { Col } from "react-bootstrap"
 import Form from "react-bootstrap/Form"
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { FieldsContext } from "../FEDSEForm"
 
 export default function NumField({ title, maxlength, controlId, placeholder }) {
-  const [cetMeritNo, setCetMeritNo] = useState("")
-  const [parentsAnnualIncome, setParentsAnnualIncome] = useState("")
-  const [aadharNo, setAadharNo] = useState("")
+  
+  const { cetMeritNoState, parentsAnnualIncomeState, aadharNoState } = useContext(FieldsContext)
+
+  const [ cetMeritNo, setCetMeritNo ] = cetMeritNoState
+  const [ parentsAnnualIncome, setParentsAnnualIncome ] = parentsAnnualIncomeState
+  const [ aadharNo, setAadharNo ] = aadharNoState
   
   return (
     <div>

@@ -5,15 +5,6 @@ import TextFieldCol from "./TextFieldCol"
 import { FieldsContext } from "../FEDSEForm"
 
 export default function YesNo({ title, name, controlId }) {
-  // const [phyHandicapped, setPhyHandicapped] = useState(false)
-  // const [maharashtraPass, setMaharashtraPass] = useState(false)
-  // const [hasPAN, setHasPAN] = useState(false);
-  // const [hasGivenMHTCET, setHasGivenMHTCET] = useState(false);
-  // const [CETScore, setCETScore] = useState("");
-  // const [hasGivenJEEMains, setHasGivenJEEMains] = useState(false);
-  // const [JEEMainsScore, setJEEMainsScore] = useState("");
-  // const [hasGivenJEEAdvanced, setHasGivenJEEAdvanced] = useState(false);
-  // const [JEEAdvancedScore, setJEEAdvancedScore] = useState("");
 
   const { phyHandicappedState, maharashtraPassState, hasPANState, hasGivenMHTCETState, CETScoreState, hasGivenJEEMainsState, JEEMainsScoreState, hasGivenJEEAdvancedState, JEEAdvancedScoreState } = useContext(FieldsContext)
 
