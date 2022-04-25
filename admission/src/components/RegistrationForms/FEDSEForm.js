@@ -49,7 +49,6 @@ export default function FEDSEForm() {
     const [fatherMobile, setFatherMobile] = useState("")
 
     const [dob, setDob] = useState("")
-// Working fine till here
 
     const [placeOfBirth, setPlaceOfBirth] = useState("")
     const [religion, setReligion] = useState("")
@@ -61,7 +60,6 @@ export default function FEDSEForm() {
     const [guardianDistrict, setGuardianDistrict] = useState("")
 
     const [phyHandicapped, setPhyHandicapped] = useState(false)
-    const [maharashtraPass, setMaharashtraPass] = useState(false)
     const [hasPAN, setHasPAN] = useState(false)
     const [hasGivenMHTCET, setHasGivenMHTCET] = useState(false)
     const [CETScore, setCETScore] = useState("")
@@ -69,6 +67,15 @@ export default function FEDSEForm() {
     const [JEEMainsScore, setJEEMainsScore] = useState("")
     const [hasGivenJEEAdvanced, setHasGivenJEEAdvanced] = useState(false)
     const [JEEAdvancedScore, setJEEAdvancedScore] = useState("")
+    
+    const [maharashtraPass, setMaharashtraPass] = useState(false)
+
+    const [cetMeritNo, setCetMeritNo] = useState("")
+    const [parentsAnnualIncome, setParentsAnnualIncome] = useState("")
+    const [aadharNo, setAadharNo] = useState("")
+
+    const [permanentEmail, setPermanentEmail] = useState("")
+    const [guardianEmail, setGuardianEmail] = useState("")
 
     return (
       <FieldsContext.Provider
@@ -116,6 +123,16 @@ export default function FEDSEForm() {
           hasGivenJEEAdvancedState: [hasGivenJEEAdvanced, setHasGivenJEEAdvanced] ,
           JEEAdvancedScoreState: [JEEAdvancedScore, setJEEAdvancedScore],
 
+          maharashtraPassState: [maharashtraPass, setMaharashtraPass],
+
+          cetMeritNoState: [cetMeritNo, setCetMeritNo],
+          parentsAnnualIncomeState: [parentsAnnualIncome, setParentsAnnualIncome],
+          aadharNoState: [aadharNo, setAadharNo],
+
+          permanentEmailState: [permanentEmail, setPermanentEmail],
+          guardianEmailState: [guardianEmail, setGuardianEmail],
+
+          
         }}
       >
         {props.children}

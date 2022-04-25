@@ -4,13 +4,6 @@ import { useState, useContext } from "react"
 import { FieldsContext } from "../FEDSEForm"
 
 export default function TextFieldInline({ title, placeholder, controlId }) {
-  // const [permanentAddress, setPermanentAddress] = useState("")
-  // const [guardianName, setGuardianName] = useState("")
-  // const [guardianAddress, setGuardianAddress] = useState("")
-  // const [lastInstituteNameFE, setLastInstituteNameFE] = useState("")
-  // const [lastInstituteAddressFE, setLastInstituteAddressFE] = useState("")
-  // const [lastClassFE, setLastClassFE] = useState("")
-  // const [fatherName, setFatherName] = useState("")
 
   const {permanentAddressState,guardianNameState,guardianAddressState, lastInstituteNameFEState, lastInstituteAddressFEState, lastClassFEState, fatherNameState } = useContext(FieldsContext)
   
