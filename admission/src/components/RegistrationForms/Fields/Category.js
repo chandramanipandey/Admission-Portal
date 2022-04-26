@@ -1,9 +1,14 @@
 import React from "react"
 import { Col, Form } from "react-bootstrap"
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { FieldsContext } from "../../States/FieldStates"
 
 export default function Category() {
-  const [category, setCategory] = useState("Open")
+  // const [category, setCategory] = useState("Open")
+
+  const { categoryState } = useContext(FieldsContext)
+
+  const [ category, setCategory ] = categoryState
 
   return (
     <div>

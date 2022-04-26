@@ -1,7 +1,7 @@
 import React from "react"
 import { Row, Col, Form } from "react-bootstrap"
 import { useState, useContext } from "react"
-import { FieldsContext } from "../FEDSEForm"
+import { FieldsContext } from "../../States/FieldStates"
 
 export default function TextFieldCol({ title, placeholder, controlId }) {
 

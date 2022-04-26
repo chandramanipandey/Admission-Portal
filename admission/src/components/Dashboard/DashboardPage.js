@@ -2,8 +2,10 @@ import React from "react"
 import { Card, Row, Col } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../CSS/DashboardPage.css"
+import { useHistory } from "react-router-dom";
 
 export function AdminDashboardPage() {
+    
     return (
         <div>
             <Row>
@@ -28,6 +30,10 @@ export function AdminDashboardPage() {
 }
 
 export function StudentDashboardPage() {
+    const history = useHistory();
+    async function e(){
+        history.push('/fedseform');
+    }
     return (
         <div>
             <Row>
@@ -36,7 +42,7 @@ export function StudentDashboardPage() {
                         <h1>Register Yourself</h1>
                         <br></br>
                         <br></br>
-                        <a href="#">Registration Form Link &gt;</a>
+                        <a onClick={e}>Registration Form Link &gt;</a>
                     </Card>
                 </Col>
                 <Col>

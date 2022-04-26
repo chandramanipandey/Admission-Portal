@@ -2,7 +2,7 @@ import React from "react"
 import { Col } from "react-bootstrap"
 import Form from "react-bootstrap/Form"
 import { useState, useContext } from "react"
-import { FieldsContext } from "../FEDSEForm"
+import { FieldsContext } from "../../States/FieldStates"
 
 export default function NumField({ title, maxlength, controlId, placeholder }) {
 

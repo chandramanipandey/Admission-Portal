@@ -4,7 +4,6 @@ import {AdminDashboardPage, StudentDashboardPage} from "./DashboardPage"
 
 export default function Dashboard() {
     return (
-        // <FEForm/>
         <div>
             <NavigationBar userType="Admin" userName="User Name"/>
 
@@ -13,6 +12,7 @@ export default function Dashboard() {
 
             Student Dashboard
             <StudentDashboardPage />
+
         </div>
     )
 }
