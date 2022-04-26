@@ -15,134 +15,72 @@ import EmailFieldCol from "./Fields/EmailFieldCol"
 import YearField from "./Fields/YearField"
 import StudentTerms from "./StudentTerms"
 import RadioField from "./Fields/RadioField"
-
 import StudentUndertaking from "./StudentUndertaking"
 import ParentUndertaking from "./ParentUndertaking"
 
-import { createContext, useState } from "react"
-
+import { createContext, useState, useContext } from "react"
+import { FieldsProvider, FieldsContext } from "../States/FieldStates"
 import "../CSS/FEForm.css"
 
-export const FieldsContext = createContext()
 export default function FEDSEForm() {
+  const { motherNameState, studentNameState, candidateAdmissionState, permanentAddressState, guardianNameState,  guardianAddressState,  lastInstituteNameFEState,  lastInstituteAddressFEState, lastClassFEState, fatherNameState, studentGenderState, permanentPinState, guardianPinState, studentMobileState, motherMobileState, fatherMobileState, dobState, placeOfBirthState, religionState, casteNameState, nationalityState, cityState, districtState, guardianCityState, guardianDistrictState, phyHandicappedState, hasPANState, hasGivenMHTCETState, CETScoreState, hasGivenJEEMainsState,JEEMainsScoreState, hasGivenJEEAdvancedState, JEEAdvancedScoreState, maharashtraPassState, cetMeritNoState, parentsAnnualIncomeState, aadharNoState, permanentEmailState, guardianEmailState, categoryState, yearOfLeavingState } = useContext(FieldsContext)
 
-  // FieldsProvider Function for FieldsContext
-  const FieldsProvider = (props) => {
-    const [motherName, setMotherName] = useState("")
-    const [studentName, setStudentName] = useState("")
-    const [candidateAdmission, setCandidateAdmission] = useState("")
+  const [ placeOfBirth, setPlaceOfBirth] = placeOfBirthState
+    const [ religion, setReligion] = religionState
+    const [ casteName, setCasteName ] = casteNameState
+    const [ nationality, setNationality] = nationalityState
+    const [ city, setCity ] = cityState
+    const [ district, setDistrict ] = districtState 
+    const [ guardianCity, setGuardianCity ] = guardianCityState
+    const [ guardianDistrict, setGuardianDistrict ] = guardianDistrictState
 
-    const [permanentAddress, setPermanentAddress] = useState("")
-    const [guardianName, setGuardianName] = useState("")
-    const [guardianAddress, setGuardianAddress] = useState("")
-    const [lastInstituteNameFE, setLastInstituteNameFE] = useState("")
-    const [lastInstituteAddressFE, setLastInstituteAddressFE] = useState("")
-    const [lastClassFE, setLastClassFE] = useState("")
-    const [fatherName, setFatherName] = useState("")
+    const [ category, setCategory ] = categoryState
 
-    const [studentGender, setStudentGender] = useState("")
+    const [dob, setDob] = dobState
 
-    const [permanentPin, setPermanentPin] = useState("")
-    const [guardianPin, setGuardianPin] = useState("")
-    const [studentMobile, setStudentMobile] = useState("")
-    const [motherMobile, setMotherMobile] = useState("")
-    const [fatherMobile, setFatherMobile] = useState("")
+    const [ permanentEmail, setPermanentEmail ] = permanentEmailState
+  const [ guardianEmail, setGuardianEmail ] = guardianEmailState
 
-    const [dob, setDob] = useState("")
+  const [studentGender, setStudentGender] = studentGenderState
 
-    const [placeOfBirth, setPlaceOfBirth] = useState("")
-    const [religion, setReligion] = useState("")
-    const [casteName, setCasteName] = useState("")
-    const [nationality, setNationality] = useState("")
-    const [city, setCity] = useState("")
-    const [district, setDistrict] = useState("")
-    const [guardianCity, setGuardianCity] = useState("")
-    const [guardianDistrict, setGuardianDistrict] = useState("")
+  const [ cetMeritNo, setCetMeritNo ] = cetMeritNoState
+  const [ parentsAnnualIncome, setParentsAnnualIncome ] = parentsAnnualIncomeState
+  const [ aadharNo, setAadharNo ] = aadharNoState
 
-    const [phyHandicapped, setPhyHandicapped] = useState(false)
-    const [hasPAN, setHasPAN] = useState(false)
-    const [hasGivenMHTCET, setHasGivenMHTCET] = useState(false)
-    const [CETScore, setCETScore] = useState("")
-    const [hasGivenJEEMains, setHasGivenJEEMains] = useState(false)
-    const [JEEMainsScore, setJEEMainsScore] = useState("")
-    const [hasGivenJEEAdvanced, setHasGivenJEEAdvanced] = useState(false)
-    const [JEEAdvancedScore, setJEEAdvancedScore] = useState("")
-    
-    const [maharashtraPass, setMaharashtraPass] = useState(false)
+  const [permanentPin, setPermanentPin] = permanentPinState
+  const [guardianPin, setGuardianPin] = guardianPinState
+  const [studentMobile, setStudentMobile] = studentMobileState
+  const [motherMobile, setMotherMobile] = motherMobileState
+  const [fatherMobile, setFatherMobile] = fatherMobileState
 
-    const [cetMeritNo, setCetMeritNo] = useState("")
-    const [parentsAnnualIncome, setParentsAnnualIncome] = useState("")
-    const [aadharNo, setAadharNo] = useState("")
+  const [ candidateAdmission, setCandidateAdmission ] = candidateAdmissionState
 
-    const [permanentEmail, setPermanentEmail] = useState("")
-    const [guardianEmail, setGuardianEmail] = useState("")
+  const [motherName, setMotherName] = motherNameState
+  const [studentName, setStudentName] = studentNameState
 
-    return (
-      <FieldsContext.Provider
-        value={{
-          
+  const [permanentAddress, setPermanentAddress] = permanentAddressState
+  const [guardianAddress, setGuardianAddress] = guardianAddressState
+  const [guardianName, setGuardianName] = guardianNameState
+  const [lastInstituteNameFE, setLastInstituteNameFE] = lastInstituteNameFEState
+  const [lastInstituteAddressFE, setLastInstituteAddressFE] = lastInstituteAddressFEState
+  const [lastClassFE, setLastClassFE] = lastClassFEState
+  const [fatherName, setFatherName] = fatherNameState
 
-          motherNameState: [motherName, setMotherName],
-          studentNameState: [studentName, setStudentName],
+  const [ yearOfLeaving, setYearOfLeaving ] = yearOfLeavingState
 
-          candidateAdmissionState: [candidateAdmission, setCandidateAdmission],
-          permanentAddressState: [permanentAddress, setPermanentAddress],
-          guardianNameState: [guardianName, setGuardianName],
-          guardianAddressState: [guardianAddress, setGuardianAddress],
-          lastInstituteNameFEState: [lastInstituteNameFE, setLastInstituteNameFE],
-          lastInstituteAddressFEState: [lastInstituteAddressFE, setLastInstituteAddressFE],
-          lastClassFEState: [lastClassFE, setLastClassFE],
-          fatherNameState: [fatherName, setFatherName],
-
-          studentGenderState: [studentGender, setStudentGender],
-
-          permanentPinState: [permanentPin, setPermanentPin],
-          guardianPinState: [guardianPin, setGuardianPin],
-          studentMobileState: [studentMobile, setStudentMobile],
-          motherMobileState: [motherMobile, setMotherMobile],
-          fatherMobileState: [fatherMobile, setFatherMobile],
-
-          dobState: [dob, setDob],
-
-          placeOfBirthState: [placeOfBirth, setPlaceOfBirth],
-          religionState: [religion, setReligion],
-          casteNameState: [casteName, setCasteName],
-          nationalityState: [nationality, setNationality],
-          cityState: [city, setCity],
-          districtState: [district, setDistrict],
-          guardianCityState: [guardianCity, setGuardianCity],
-          guardianDistrictState: [guardianDistrict, setGuardianDistrict],
-
-          phyHandicappedState: [phyHandicapped, setPhyHandicapped],
-          maharashtraPassState: [maharashtraPass, setMaharashtraPass],
-          hasPANState: [hasPAN, setHasPAN],
-          hasGivenMHTCETState: [hasGivenMHTCET, setHasGivenMHTCET] ,
-          CETScoreState: [CETScore, setCETScore],
-          hasGivenJEEMainsState: [hasGivenJEEMains, setHasGivenJEEMains],
-          JEEMainsScoreState: [JEEMainsScore, setJEEMainsScore] ,
-          hasGivenJEEAdvancedState: [hasGivenJEEAdvanced, setHasGivenJEEAdvanced] ,
-          JEEAdvancedScoreState: [JEEAdvancedScore, setJEEAdvancedScore],
-
-          maharashtraPassState: [maharashtraPass, setMaharashtraPass],
-
-          cetMeritNoState: [cetMeritNo, setCetMeritNo],
-          parentsAnnualIncomeState: [parentsAnnualIncome, setParentsAnnualIncome],
-          aadharNoState: [aadharNo, setAadharNo],
-
-          permanentEmailState: [permanentEmail, setPermanentEmail],
-          guardianEmailState: [guardianEmail, setGuardianEmail],
-
-          
-        }}
-      >
-        {props.children}
-      </FieldsContext.Provider>
-    )
-  }
-
+  const [phyHandicapped, setPhyHandicapped] = phyHandicappedState
+  const [maharashtraPass, setMaharashtraPass] = maharashtraPassState
+  const [hasPAN, setHasPAN] = hasPANState
+  const [hasGivenMHTCET, setHasGivenMHTCET] = hasGivenMHTCETState
+  const [CETScore, setCETScore] = CETScoreState
+  const [hasGivenJEEMains, setHasGivenJEEMains] = hasGivenJEEMainsState
+  const [JEEMainsScore, setJEEMainsScore] = JEEMainsScoreState
+  const [hasGivenJEEAdvanced, setHasGivenJEEAdvanced] = hasGivenJEEAdvancedState
+  const [JEEAdvancedScore, setJEEAdvancedScore] = JEEAdvancedScoreState
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(studentName)
   }
 
   return (
@@ -154,7 +92,7 @@ export default function FEDSEForm() {
 
       <Form onSubmit={handleSubmit}>
 
-        <FieldsProvider>
+        {/* <FieldsProvider> */}
 
           <RadioField title="Cadidate Admission" 
             option1="First Year(F.E)" 
@@ -409,7 +347,7 @@ export default function FEDSEForm() {
         
         <YearField title="Year of Leaving" controlId="yearofLeavingFE" />
         
-        </FieldsProvider>
+        {/* </FieldsProvider> */}
 
 
         {/* Detailed Marks */}
@@ -429,3 +367,4 @@ export default function FEDSEForm() {
 }
 
 // nice
+// Thanks

@@ -2,7 +2,7 @@ import React from "react"
 import { Form, Row, Col } from "react-bootstrap"
 import { useState, useContext } from "react"
 import TextFieldCol from "./TextFieldCol"
-import { FieldsContext } from "../FEDSEForm"
+import { FieldsContext } from "../../States/FieldStates"
 
 export default function YesNo({ title, name, controlId }) {
 

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { useState } from 'react'
 import { Col, Form } from 'react-bootstrap'
-import { FieldsContext } from '../FEDSEForm'
+import { FieldsContext } from "../../States/FieldStates"
 
 export default function RadioField({title, option1, option2, name, controlId}) {
   // const [candidateAdmission, setCandidateAdmission] = useState("")

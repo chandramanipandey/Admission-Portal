@@ -1,10 +1,15 @@
 import React from "react"
 import { Col, Form, Row } from "react-bootstrap"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import DatePicker from "react-datepicker"
+import { FieldsContext } from "../../States/FieldStates"
 
 export default function YearField({ title, controlId }) {
-  const [yearOfLeaving, setYearOfLeaving] = useState(new Date())
+  // const [yearOfLeaving, setYearOfLeaving] = useState(new Date())
+
+  const { yearOfLeavingState } = useContext( FieldsContext )
+
+  const [ yearOfLeaving, setYearOfLeaving ] = yearOfLeavingState
 
   return (
     <div>

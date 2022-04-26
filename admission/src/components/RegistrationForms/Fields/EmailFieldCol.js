@@ -1,11 +1,9 @@
 import React from "react"
 import { Col, Form, Row } from "react-bootstrap"
 import { useState, useContext } from "react"
-import { FieldsContext } from "../FEDSEForm"
+import { FieldsContext } from "../../States/FieldStates"
 
 export default function EmailFieldInline({ controlId }) {
-  // const [permanentEmail, setPermanentEmail] = useState("")
-  // const [guardianEmail, setGuardianEmail] = useState("")
 
   const { permanentEmailState, guardianEmailState } = useContext( FieldsContext )
 
