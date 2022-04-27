@@ -1,10 +1,15 @@
-import Firebaseauth from "./firebase";
+import { getAuth, signOut } from "firebase/auth";
 import { Alert } from "react-bootstrap";
 export function logout(){
+    
+const auth = getAuth();
     try{
-        const response = Firebaseauth.auth().signOut();
+        signOut(auth);
     }
     catch(e){
         <Alert variant="danger">{e}</Alert>
     }
 }
+
+
+

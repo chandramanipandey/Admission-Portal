@@ -22,9 +22,10 @@ import { createContext, useState, useContext } from "react"
 import { FieldsProvider, FieldsContext } from "../States/FieldStates"
 import "../CSS/FEForm.css"
 import { adduserdata } from "../Firebase/addtofirebase"
-import Firebaseauth from "../Firebase/firebase"
+import { getAuth } from "firebase/auth"
 
 export default function FEDSEForm() {
+  const auth = getAuth();
   const { motherNameState, studentNameState, candidateAdmissionState, permanentAddressState, guardianNameState,  guardianAddressState,  lastInstituteNameFEState,  lastInstituteAddressFEState, lastClassFEState, fatherNameState, studentGenderState, permanentPinState, guardianPinState, studentMobileState, motherMobileState, fatherMobileState, dobState, placeOfBirthState, religionState, casteNameState, nationalityState, cityState, districtState, guardianCityState, guardianDistrictState, phyHandicappedState, hasPANState, hasGivenMHTCETState, CETScoreState, hasGivenJEEMainsState,JEEMainsScoreState, hasGivenJEEAdvancedState, JEEAdvancedScoreState, maharashtraPassState, cetMeritNoState, parentsAnnualIncomeState, aadharNoState, permanentEmailState, guardianEmailState, categoryState, yearOfLeavingState } = useContext(FieldsContext)
 
   const [ placeOfBirth, setPlaceOfBirth] = placeOfBirthState
@@ -123,7 +124,7 @@ export default function FEDSEForm() {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    adduserdata(FeDseFormData,Firebaseauth.auth().currentUser.uid);
+    adduserdata(FeDseFormData,auth.currentUser.uid);
   }
 
   return (

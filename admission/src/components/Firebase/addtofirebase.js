@@ -1,6 +1,13 @@
-import firebase from "../Firebase/firebase";
-import Firebaseauth from "../Firebase/firebase";
+import { getDatabase, ref, set } from "firebase/database";
 export function adduserdata(object,uid){
-    var reference = Firebaseauth.database().ref('/STUDENTS/'+uid+'/').update(object);
-    return reference;
+    try{
+        console.log(object.studentName);
+        console.log(object)
+        const db = getDatabase();
+    set(ref(db,'STUDENTS/'+uid+'/'),object);
+    
+    }
+    catch(e){
+        console.log(e)
+    }
 }

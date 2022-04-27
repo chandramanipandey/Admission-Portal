@@ -1,9 +1,10 @@
 import React,{useRef,useEffect, useState} from 'react';
 import {Form, Button,Card,CardGroup,Alert} from 'react-bootstrap';
-import Firebaseauth from '../Firebase/firebase';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 import logo from '../Assets/logo1.jpg';
 import {Link,useHistory} from 'react-router-dom';
 import { verifyEmail } from '../Firebase/verifyemailaddress';
+import Firebaseauth from '../Firebase/firebase';
 export default function Auth() {
     const emailRef=useRef();
     const passwordRef=useRef();
@@ -21,6 +22,7 @@ export default function Auth() {
     
     }, [])
     async function signUp(e){
+        const auth = getAuth();
         e.preventDefault();
    
         if(passwordRef.current.value !== passwordConfirmRef.current.value){
@@ -35,7 +37,7 @@ export default function Auth() {
                  console.log(checkemailbvpedu[1],emailcheck);
                  throw "Please Register on Portal using official Email ID only i.e example-bvcoel@bvp.edu.in ";
              }
-            await Firebaseauth.auth().createUserWithEmailAndPassword(emailRef.current.value, passwordRef.current.value);
+            await createUserWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value);
             verifyEmail();
             setSubmitsuccess(true);
             document.getElementById("signup-form").reset();
@@ -45,6 +47,7 @@ export default function Auth() {
            setLoading(false);
     }
     async function signIn(e){
+        const auth = getAuth();
         e.preventDefault();
    
         try{
@@ -55,9 +58,9 @@ export default function Auth() {
             if(checkemailbvpedu[1] !== "bvcoel@bvp.edu.in"){
             throw "Since you are not using official college email id for example: example-bvcoel@bvp.edu.in ";
             }
-            
-            await Firebaseauth.auth().signInWithEmailAndPassword(loginemailRef.current.value, loginpasswordRef.current.value);
-            if(!Firebaseauth.auth().currentUser.emailVerified){
+        
+            await signInWithEmailAndPassword(auth,loginemailRef.current.value, loginpasswordRef.current.value);
+            if(!auth.currentUser.emailVerified){
                 throw "Please verify your email to log in to portal, Check Junk/Spam emails if you have trouble finding email verification link";
             }
             await history.push("/Dashboard") 

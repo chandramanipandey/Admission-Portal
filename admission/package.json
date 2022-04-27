@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@firebase/database": "^0.12.8",
     "@fortawesome/fontawesome-free": "^6.1.1",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
@@ -11,7 +12,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^5.0.1",
-    "firebase": "^8.6.8",
+    "firebase": "^9.6.11",
     "fs": "^0.0.1-security",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
