@@ -21,6 +21,8 @@ import ParentUndertaking from "./ParentUndertaking"
 import { createContext, useState, useContext } from "react"
 import { FieldsProvider, FieldsContext } from "../States/FieldStates"
 import "../CSS/FEForm.css"
+import { adduserdata } from "../Firebase/addtofirebase"
+import Firebaseauth from "../Firebase/firebase"
 
 export default function FEDSEForm() {
   const { motherNameState, studentNameState, candidateAdmissionState, permanentAddressState, guardianNameState,  guardianAddressState,  lastInstituteNameFEState,  lastInstituteAddressFEState, lastClassFEState, fatherNameState, studentGenderState, permanentPinState, guardianPinState, studentMobileState, motherMobileState, fatherMobileState, dobState, placeOfBirthState, religionState, casteNameState, nationalityState, cityState, districtState, guardianCityState, guardianDistrictState, phyHandicappedState, hasPANState, hasGivenMHTCETState, CETScoreState, hasGivenJEEMainsState,JEEMainsScoreState, hasGivenJEEAdvancedState, JEEAdvancedScoreState, maharashtraPassState, cetMeritNoState, parentsAnnualIncomeState, aadharNoState, permanentEmailState, guardianEmailState, categoryState, yearOfLeavingState } = useContext(FieldsContext)
@@ -77,10 +79,51 @@ export default function FEDSEForm() {
   const [JEEMainsScore, setJEEMainsScore] = JEEMainsScoreState
   const [hasGivenJEEAdvanced, setHasGivenJEEAdvanced] = hasGivenJEEAdvancedState
   const [JEEAdvancedScore, setJEEAdvancedScore] = JEEAdvancedScoreState
+  const FeDseFormData = {
+    placeOfBirth:placeOfBirth,
+    religion:religion,
+    nationality:nationality,
+    district:district,
+    guardianCity:guardianCity,
+    guardianDistrict:guardianDistrict,
+    category:category,
+    dob:dob,
+    permanentEmail:permanentEmail,
+    guardianEmail:guardianEmail,
+    studentGender:studentGender,
+    cetMeritNo:cetMeritNo,
+    parentsAnnualIncome:parentsAnnualIncome,
+    aadharNo:aadharNo,
+    permanentPin:permanentPin,
+    guardianPin:guardianPin,
+    studentMobile:studentMobile,
+    motherMobile:motherMobile,
+    fatherMobile:fatherMobile,
+    candidateAdmission:candidateAdmission,
+    motherName:motherName,
+    studentName:studentName,
+    permanentAddress:permanentAddress,
+    guardianAddress:guardianAddress,
+    guardianName:guardianName,
+    lastInstituteNameFE:lastInstituteNameFE,
+    lastInstituteAddressFE:lastInstituteAddressFE,
+    lastClassFE:lastClassFE,
+    fatherName:fatherName,
+    yearOfLeaving:yearOfLeaving,
+    phyHandicapped:phyHandicapped,
+    maharashtraPass:maharashtraPass,
+    hasPAN:hasPAN,
+    hasGivenMHTCET:hasGivenMHTCET,
+    CETScore:CETScore,
+    hasGivenJEEMains:hasGivenJEEMains,
+    JEEMainsScore:JEEMainsScore,
+    hasGivenJEEAdvanced:hasGivenJEEAdvanced,
+    JEEAdvancedScore:JEEAdvancedScore
+  }
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(studentName)
+    adduserdata(FeDseFormData,Firebaseauth.auth().currentUser.uid);
   }
 
   return (
