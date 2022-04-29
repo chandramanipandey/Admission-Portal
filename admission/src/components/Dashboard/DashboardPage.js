@@ -34,8 +34,13 @@ export function AdminDashboardPage() {
 export function StudentDashboardPage() {
     const history = useHistory();
     const auth = getAuth();
-    async function e(){
-        history.push('/fedseform');
+    async function handleClick(data) {
+        if (data == "fedseform") {
+            history.push('/fedseform');
+        }
+        if (data == "MyProfile") {
+            history.push('/MyProfile')
+        }
         // const data = await receivefromfirebase(auth.currentUser.uid);
         // console.log(data);
     }
@@ -47,7 +52,7 @@ export function StudentDashboardPage() {
                         <h1>Register Yourself</h1>
                         <br></br>
                         <br></br>
-                        <a onClick={e}>Registration Form Link &gt;</a>
+                        <a onClick={() => handleClick("fedseform")}>Registration Form Link &gt;</a>
                     </Card>
                 </Col>
                 <Col>
@@ -63,7 +68,7 @@ export function StudentDashboardPage() {
                         <h1>My Profile</h1>
                         <br></br>
                         <br></br>
-                        <a href="#">Check Profile &gt;</a>
+                        <a onClick={() => handleClick("MyProfile")}>Check Profile &gt;</a>
                     </Card>
                 </Col>
             </Row>

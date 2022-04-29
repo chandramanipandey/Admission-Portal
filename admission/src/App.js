@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Dashboard from "./components/Dashboard/Dashboard"
 import FEDSEForm from "./components/RegistrationForms/FEDSEForm"
 import {FieldsProvider} from "./components/States/FieldStates"
+import MyProfile from "./components/MyProfile/MyProfile"
 
 function App() {
   return (
@@ -14,10 +15,11 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Auth} />
-          <Route path="/Dashboard" component={Dashboard} />
+          <Route path="/Dashboard" component={ Dashboard } />
 
         {/* Added FieldsProvider so that states can be accessed in FEDSE Form from FieldsContext */}
         <FieldsProvider>
+          <Route path="/MyProfile" component={ MyProfile } />
           <Route path="/fedseform" component={FEDSEForm} />
         </FieldsProvider>
 

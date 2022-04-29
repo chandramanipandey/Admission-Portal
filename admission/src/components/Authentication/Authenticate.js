@@ -5,6 +5,7 @@ import logo from '../Assets/logo1.jpg';
 import {Link,useHistory} from 'react-router-dom';
 import { verifyEmail } from '../Firebase/verifyemailaddress';
 import Firebaseauth from '../Firebase/firebase';
+
 export default function Auth() {
     const emailRef=useRef();
     const passwordRef=useRef();
@@ -34,9 +35,9 @@ export default function Auth() {
             const emailcheck = emailRef.current.value;
             const checkemailbvpedu = emailcheck.split("-");
             if(checkemailbvpedu[1] !== "bvcoel@bvp.edu.in"){
-                 console.log(checkemailbvpedu[1],emailcheck);
-                 throw "Please Register on Portal using official Email ID only i.e example-bvcoel@bvp.edu.in ";
-             }
+                console.log(checkemailbvpedu[1],emailcheck);
+                throw "Please Register on Portal using official Email ID only i.e example-bvcoel@bvp.edu.in ";
+            }
             await createUserWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value);
             verifyEmail();
             setSubmitsuccess(true);
@@ -97,7 +98,7 @@ export default function Auth() {
                 <Form.Label>Email address</Form.Label>
                 <Form.Control type="email" placeholder="Enter email" ref ={emailRef} autoComplete="on" required />
                 <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
+                    We'll never share your email with anyone else.
                 </Form.Text>
                 </Form.Group>
 
