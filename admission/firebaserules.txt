@@ -1,0 +1,4 @@
+firebase variables
+
+now = number which is a timestamp of when request is made
+auth = info of authentication of user and even uid of user is given

@@ -3,6 +3,8 @@ import { Card, Row, Col } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../CSS/DashboardPage.css"
 import { useHistory } from "react-router-dom";
+import { receivefromfirebase } from "../Firebase/receivefromfirebase";
+import { getAuth } from "firebase/auth";
 
 export function AdminDashboardPage() {
     
@@ -31,8 +33,11 @@ export function AdminDashboardPage() {
 
 export function StudentDashboardPage() {
     const history = useHistory();
+    const auth = getAuth();
     async function e(){
         history.push('/fedseform');
+        // const data = await receivefromfirebase(auth.currentUser.uid);
+        // console.log(data);
     }
     return (
         <div>

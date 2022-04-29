@@ -4,10 +4,11 @@ import userImage from "./Sample_User_Icon.png"
 import "../CSS/Navbar.css"
 import { logout } from "../Firebase/logoutuser"
 import { useHistory } from "react-router-dom"
-import Firebaseauth from "../Firebase/firebase"
+import { getAuth } from "firebase/auth"
 
 export default function NavigationBar({userType, userName}) {
     const history = useHistory();
+    const auth = getAuth();
     async function Click(){
         logout();
        await history.push("/");
@@ -25,7 +26,7 @@ export default function NavigationBar({userType, userName}) {
                     <Nav.Link href="#link">Link</Nav.Link>
                     
                     <Nav.Link><img src={userImage} width="30px" height="30px" /></Nav.Link>
-                    <NavDropdown title={Firebaseauth.auth().currentUser.email} id="basic-nav-dropdown">
+                    <NavDropdown title={auth.currentUser.email} id="basic-nav-dropdown">
                         <NavDropdown.Item  onClick={Click}>Log Out</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>

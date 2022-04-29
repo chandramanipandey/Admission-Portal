@@ -1,10 +1,11 @@
 import { Alert } from "react-bootstrap";
-import Firebaseauth from "./firebase";
+import { getAuth, sendEmailVerification } from "firebase/auth";
 
 export function verifyEmail(){
+    
+const auth = getAuth();
     try{
-        const response = Firebaseauth.auth().currentUser.sendEmailVerification();
-        throw"error";
+        const response = sendEmailVerification(auth.currentUser);
     }
     catch(e){
         <Alert variant="danger">{e}</Alert>
