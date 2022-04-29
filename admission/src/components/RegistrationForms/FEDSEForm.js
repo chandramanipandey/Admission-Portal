@@ -80,6 +80,7 @@ export default function FEDSEForm() {
   const [JEEMainsScore, setJEEMainsScore] = JEEMainsScoreState
   const [hasGivenJEEAdvanced, setHasGivenJEEAdvanced] = hasGivenJEEAdvancedState
   const [JEEAdvancedScore, setJEEAdvancedScore] = JEEAdvancedScoreState
+  
   const FeDseFormData = {
     placeOfBirth:placeOfBirth,
     religion:religion,
