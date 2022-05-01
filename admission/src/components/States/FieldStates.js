@@ -5,6 +5,8 @@ export const FieldsContext = createContext()
 // FieldsProvider Function for FieldsContext
 
 export const FieldsProvider = (props) => {
+    
+
     const [motherName, setMotherName] = useState("")
     const [studentName, setStudentName] = useState("")
     const [candidateAdmission, setCandidateAdmission] = useState("")
@@ -58,12 +60,19 @@ export const FieldsProvider = (props) => {
 
     const [yearOfLeaving, setYearOfLeaving] = useState(new Date())
 
-    const [test, setTest ] = useState("")
+    const [transactionId, setTransactionId] = useState("")
+    const [senderAcName, setSenderAcName] = useState("")
+    const [senderAcNo, setSenderAcNo] = useState("")
+    const [transactionDate, setTransactionDate] = useState()
+    const [transactionReceipt, setTransactionReceipt] = useState()
+    
+    const [senderBankName, setSenderBankName] = useState("")
+    const [senderBankIFSC, setSenderBankIFSC] = useState("")
 
      return (
       <FieldsContext.Provider
         value={{
-          testState: [test, setTest],
+          
 
           motherNameState: [motherName, setMotherName],
           studentNameState: [studentName, setStudentName],
@@ -117,6 +126,13 @@ export const FieldsProvider = (props) => {
 
           yearOfLeavingState: [yearOfLeaving, setYearOfLeaving],
 					
+          transactionIdState: [transactionId, setTransactionId],
+          senderAcNameState: [senderAcName, setSenderAcName],
+          senderAcNoState: [senderAcNo, setSenderAcNo],
+          transactionDateState: [transactionDate, setTransactionDate],
+          transactionReceiptState: [transactionReceipt, setTransactionReceipt],
+          senderBankNameState: [senderBankName, setSenderBankName],
+          senderBankIFSCState: [senderBankIFSC, setSenderBankIFSC],
         }}
       >
         {props.children}
