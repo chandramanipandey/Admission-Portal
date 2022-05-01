@@ -23,6 +23,7 @@ import { FieldsProvider, FieldsContext } from "../States/FieldStates"
 import "../CSS/FEForm.css"
 import { adduserdata } from "../Firebase/addtofirebase"
 import { getAuth } from "firebase/auth"
+import NavigationBar from "../Dashboard/NavigationBar"
 
 export default function FEDSEForm() {
   const auth = getAuth();
@@ -129,6 +130,8 @@ export default function FEDSEForm() {
 
   return (
     <div>
+      <NavigationBar />
+
       <div className="headingBox">
         <h1 style={{textAlign: "center"}}>FE/DSE Registration Form</h1>
       </div>

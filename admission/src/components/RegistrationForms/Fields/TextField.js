@@ -6,12 +6,15 @@ import { Col } from "react-bootstrap"
 
 export default function TextField({ title, placeholder, controlId }) {
 
-  const { motherNameState, studentNameState } = useContext(FieldsContext)
+  const { motherNameState, studentNameState, transactionIdState, senderAcNameState, senderBankNameState, senderBankIFSCState } = useContext(FieldsContext)
   
   const [motherName, setMotherName] = motherNameState
   const [studentName, setStudentName] = studentNameState
-
-
+  const [transactionId, setTransactionId] = transactionIdState
+  const [senderAcName, setSenderAcName] = senderAcNameState
+  const [senderBankName, setSenderBankName] = senderBankNameState
+  const [senderBankIFSC, setSenderBankIFSC] = senderBankIFSCState
+  
   return (
     <div>
       <Form.Group controlId={controlId}>
@@ -38,7 +41,18 @@ export default function TextField({ title, placeholder, controlId }) {
       case "motherName":
         setMotherName(e.target.value)
         break
-      
+      case "transactionId":
+        setTransactionId(e.target.value)
+        break
+      case "senderAcName":
+        setSenderAcName(e.target.value)
+        break
+      case "senderBankName":
+        setSenderBankName(e.target.value)
+        break
+      case "senderBankIFSC":
+        setSenderBankIFSC(e.target.value)
+        break
       default:
         console.log("Does not match any TextField Case")
     }
