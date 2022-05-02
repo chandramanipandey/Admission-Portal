@@ -132,11 +132,17 @@ export default function FEDSEForm() {
   return (
     <div>
       <NavigationBar />
+      
+      <div className="row align-items-md-stretch w-100 mt-3">
+			<div className="col-md">
+				<div className="h-100 p-5 text-white bg-dark rounded-3">
+				<h1>FE / DSE Registration Form</h1>
+				<p>Register Yourself</p>
+				</div>
+			</div>
+		</div>
 
-      <div className="headingBox">
-        <h1 style={{textAlign: "center"}}>FE/DSE Registration Form</h1>
-      </div>
-      <hr />
+    <hr />
 
       <Form onSubmit={handleSubmit}>
 
@@ -318,7 +324,7 @@ export default function FEDSEForm() {
           placeholder="Enter Name of the Guardian"
           controlId="guardianName"
         />
-        
+
         <TextFieldInline
           title="Guardian's Address"
           placeholder="Enter Address here"
