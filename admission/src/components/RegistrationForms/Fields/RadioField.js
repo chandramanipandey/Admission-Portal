@@ -19,8 +19,8 @@ export default function RadioField({title, option1, option2, name, controlId}) {
             {title}
           </Form.Label>
           <Col md={10} onChange={(e) => handleChange(e, controlId)} >
-            <Form.Check type="radio" label={option1} disabled name={name} value="feAdmission" />
-            <Form.Check type="radio" label={option2} disabled checked={true} name={name} value="dseAdmission" />
+            <Form.Check type="radio" label={option1} name={name} value="feAdmission" />
+            <Form.Check type="radio" label={option2} name={name} value="dseAdmission" />
           </Col>
         </Form.Row>
 
