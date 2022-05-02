@@ -5,6 +5,7 @@ import logo from '../Assets/logo1.jpg';
 import {Link,useHistory} from 'react-router-dom';
 import { verifyEmail } from '../Firebase/verifyemailaddress';
 import Firebaseauth from '../Firebase/firebase';
+import { role } from '../Firebase/role';
 
 export default function Auth() {
     const emailRef=useRef();
@@ -19,6 +20,7 @@ export default function Auth() {
     const [submitsuccess,setSubmitsuccess] = useState(false);
     const [loginsuccess,setLoginsuccess] = useState(false);
     const history = useHistory();
+    const allrole = role("allroles");
     useEffect(() => {
     
     }, [])
@@ -47,7 +49,7 @@ export default function Auth() {
            }
            setLoading(false);
     }
-    async function signIn(e){
+    async function signIn(e){       
         const auth = getAuth();
         e.preventDefault();
    
@@ -56,7 +58,7 @@ export default function Auth() {
             setLoading(true);
             const emailcheck = loginemailRef.current.value;
             const checkemailbvpedu = emailcheck.split("-");
-            if(checkemailbvpedu[1] !== "bvcoel@bvp.edu.in"){
+            if(checkemailbvpedu[1] !== "bvcoel@bvp.edu.in"&&!allrole.includes(emailcheck)){
             throw "Since you are not using official college email id for example: example-bvcoel@bvp.edu.in ";
             }
         
