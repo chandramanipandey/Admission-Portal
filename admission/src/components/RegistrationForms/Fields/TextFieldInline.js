@@ -5,14 +5,14 @@ import { FieldsContext } from "../../States/FieldStates"
 
 export default function TextFieldInline({ title, placeholder, controlId }) {
 
-  const {permanentAddressState,guardianNameState,guardianAddressState, lastInstituteNameFEState, lastInstituteAddressFEState, lastClassFEState, fatherNameState } = useContext(FieldsContext)
+  const {permanentAddressState,guardianNameState,guardianAddressState, lastInstituteNameFEState, lastInstituteAddressFEState, lastClassState, fatherNameState } = useContext(FieldsContext)
   
   const [permanentAddress, setPermanentAddress] = permanentAddressState
   const [guardianAddress, setGuardianAddress] = guardianAddressState
   const [guardianName, setGuardianName] = guardianNameState
   const [lastInstituteNameFE, setLastInstituteNameFE] = lastInstituteNameFEState
   const [lastInstituteAddressFE, setLastInstituteAddressFE] = lastInstituteAddressFEState
-  const [lastClassFE, setLastClassFE] = lastClassFEState
+  const [lastClass, setLastClass] = lastClassState
   const [fatherName, setFatherName] = fatherNameState
 
   return (
@@ -37,7 +37,6 @@ export default function TextFieldInline({ title, placeholder, controlId }) {
     switch (controlId) {
       case "fatherName":
         setFatherName(e.target.value)
-        console.log({fatherName})
         break
       case "permanentAddress":
         setPermanentAddress(e.target.value)
@@ -54,8 +53,8 @@ export default function TextFieldInline({ title, placeholder, controlId }) {
       case "lastInstituteAddressFE":
         setLastInstituteAddressFE(e.target.value)
         break
-      case "lastClassFE":
-        setLastClassFE(e.target.value)
+      case "lastClass":
+        setLastClass(e.target.value)
         break
       default:
         console.log("No Match for TextFieldInline")

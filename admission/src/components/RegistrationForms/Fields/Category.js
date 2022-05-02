@@ -10,6 +10,10 @@ export default function Category() {
 
   const [ category, setCategory ] = categoryState
 
+  const handleChange = (e) => {
+    setCategory(e.target.value)
+  }
+
   return (
     <div>
       <Form.Group>
@@ -20,7 +24,7 @@ export default function Category() {
           <Col sm={10}>
             <Form.Control
               as="select"
-              onChange={(e) => console.log(e.target.value)}
+              onChange={(e) => handleChange(e)}
             >
               <option value="Open">Open</option>
               <option value="SC">SC</option>

@@ -34,19 +34,23 @@ export function AdminDashboardPage() {
 export function StudentDashboardPage() {
     const history = useHistory();
     const auth = getAuth();
+    
     async function handleClick(data) {
+        const studentData = await receivefromfirebase(auth.currentUser.uid);
+        console.log(studentData);
+        
         if (data == "fedseform") {
             history.push('/fedseform');
         }
 
-        if (data == "FeesDetails") {
-            
-            
-            history.push('/FeesDetails')
-            
+        if (data == "MyProfile") {
+            history.push('/MyProfile')
         }
-        // const data = await receivefromfirebase(auth.currentUser.uid);
-        // console.log(data);
+        
+        if (data == "FeesDetails") {
+            history.push('/FeesDetails')
+        }
+        
     }
     return (
         <div>

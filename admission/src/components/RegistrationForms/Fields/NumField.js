@@ -6,12 +6,14 @@ import { FieldsContext } from "../../States/FieldStates"
 
 export default function NumField({ title, maxlength, controlId, placeholder }) {
   
-  const { cetMeritNoState, parentsAnnualIncomeState, aadharNoState, senderAcNoState } = useContext(FieldsContext)
+  const { cetMeritNoState, parentsAnnualIncomeState, aadharNoState, senderAcNoState, guardianMobileState, studentMobileState } = useContext(FieldsContext)
 
   const [ cetMeritNo, setCetMeritNo ] = cetMeritNoState
   const [ parentsAnnualIncome, setParentsAnnualIncome ] = parentsAnnualIncomeState
   const [ aadharNo, setAadharNo ] = aadharNoState
   const [ senderAcNo, setSenderAcNo ] = senderAcNoState
+  const [ guardianMobile, setGuardianMobile] = guardianMobileState
+  const [ studentMobile, setStudentMobile ] = studentMobileState
   
   return (
     <div>
@@ -35,8 +37,9 @@ export default function NumField({ title, maxlength, controlId, placeholder }) {
 
   function handleChange(e, controlId) {
     switch (controlId) {
-      case "cetmeritNo":
+      case "cetMeritNo":
         setCetMeritNo(e.target.value)
+        console.log(cetMeritNo)
         break
       case "parentsAnnualIncome":
         setParentsAnnualIncome(e.target.value)
@@ -46,6 +49,14 @@ export default function NumField({ title, maxlength, controlId, placeholder }) {
         break
       case "senderAcNo":
         setSenderAcNo(e.target.value) 
+        break
+      case "guardianMobile":
+        setGuardianMobile(e.target.value)
+        console.log(guardianMobile)
+        break
+      case "studentMobile":
+        setStudentMobile(e.target.value)
+        console.log(studentMobile)
         break
       default:
         console.log("Does not match any case")

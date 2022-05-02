@@ -31,20 +31,12 @@ export default function YesNo({ title, name, controlId }) {
               <Form.Check type="radio" label="No" name={name} value={false} />
             </Col>
             <Col md={6}>
-              {hasPAN === "true" && <TextFieldCol title="PAN no." placeholder="Enter PAN no." controlId="PANNo" />}
-              {hasGivenMHTCET === "true" && <TextFieldCol title="MHTCET Score" placeholder="Enter MHTCET Score" controlId="CETScore" />}
-              {hasGivenJEEMains === "true" && <TextFieldCol title="JEE Mains Score" placeholder="Enter JEE Mains Score" controlId="JEEMainsScore" />}
-              {hasGivenJEEAdvanced === "true" && <TextFieldCol title="JEE Advanced Score" placeholder="Enter JEE Advanced Score" controlId="JEEAdvancedScore" />}
+              {hasPAN === "true" && controlId==="hasPAN" && <TextFieldCol title="PAN no." placeholder="Enter PAN no." controlId="PANNo" />}
+              {hasGivenMHTCET === "true" && controlId==="mhtcet" && <TextFieldCol title="MHTCET Score" placeholder="Enter MHTCET Score" controlId="CETScore" />}
+              {hasGivenJEEMains === "true" && controlId==="jeeMains" && <TextFieldCol title="JEE Mains Score" placeholder="Enter JEE Mains Score" controlId="JEEMainsScore" />}
+              {hasGivenJEEAdvanced === "true" && controlId==="jeeAdvanced" && <TextFieldCol title="JEE Advanced Score" placeholder="Enter JEE Advanced Score" controlId="JEEAdvancedScore" />}
             </Col>
           </Form.Group>
-
-          {/* JEE Advanced Field */}
-          {hasGivenJEEMains === "true" && 
-          <YesNo 
-            title="Do you have JEE Advanced Score?"
-            name="jeeAdvanced"
-            controlId="jeeAdvanced"
-          />}
 
         </fieldset>
       </Form.Group>

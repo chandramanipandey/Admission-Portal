@@ -9,6 +9,8 @@ export default function RadioField({title, option1, option2, name, controlId}) {
   const { candidateAdmissionState } = useContext(FieldsContext)
   const [ candidateAdmission, setCandidateAdmission ] = candidateAdmissionState
 
+  // const [isChecked, setIsChecked] = useState(false)
+
   return (
     <div>
       <Form.Group>

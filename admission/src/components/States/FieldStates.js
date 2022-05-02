@@ -5,30 +5,29 @@ export const FieldsContext = createContext()
 // FieldsProvider Function for FieldsContext
 
 export const FieldsProvider = (props) => {
-    
-
-    const [motherName, setMotherName] = useState("")
-    const [studentName, setStudentName] = useState("")
-    const [candidateAdmission, setCandidateAdmission] = useState("")
-
-    const [permanentAddress, setPermanentAddress] = useState("")
-    const [guardianName, setGuardianName] = useState("")
+  
+  const [motherName, setMotherName] = useState("")
+  const [studentName, setStudentName] = useState("")
+  const [candidateAdmission, setCandidateAdmission] = useState("")
+  
+  const [permanentAddress, setPermanentAddress] = useState("")
+  const [guardianName, setGuardianName] = useState("")
     const [guardianAddress, setGuardianAddress] = useState("")
     const [lastInstituteNameFE, setLastInstituteNameFE] = useState("")
     const [lastInstituteAddressFE, setLastInstituteAddressFE] = useState("")
-    const [lastClassFE, setLastClassFE] = useState("")
+    const [lastClass, setLastClass] = useState("")
     const [fatherName, setFatherName] = useState("")
-
+    
     const [studentGender, setStudentGender] = useState("")
-
+    
     const [permanentPin, setPermanentPin] = useState("")
     const [guardianPin, setGuardianPin] = useState("")
     const [studentMobile, setStudentMobile] = useState("")
     const [motherMobile, setMotherMobile] = useState("")
     const [fatherMobile, setFatherMobile] = useState("")
-
+    
     const [dob, setDob] = useState("")
-
+    
     const [placeOfBirth, setPlaceOfBirth] = useState("")
     const [religion, setReligion] = useState("")
     const [casteName, setCasteName] = useState("")
@@ -37,7 +36,7 @@ export const FieldsProvider = (props) => {
     const [district, setDistrict] = useState("")
     const [guardianCity, setGuardianCity] = useState("")
     const [guardianDistrict, setGuardianDistrict] = useState("")
-
+    
     const [phyHandicapped, setPhyHandicapped] = useState(false)
     const [hasPAN, setHasPAN] = useState(false)
     const [hasGivenMHTCET, setHasGivenMHTCET] = useState(false)
@@ -48,18 +47,18 @@ export const FieldsProvider = (props) => {
     const [JEEAdvancedScore, setJEEAdvancedScore] = useState("")
     
     const [maharashtraPass, setMaharashtraPass] = useState(false)
-
+    
     const [cetMeritNo, setCetMeritNo] = useState("")
     const [parentsAnnualIncome, setParentsAnnualIncome] = useState("")
     const [aadharNo, setAadharNo] = useState("")
-
+    
     const [permanentEmail, setPermanentEmail] = useState("")
     const [guardianEmail, setGuardianEmail] = useState("")
-
+    
     const [category, setCategory] = useState("Open")
-
+    
     const [yearOfLeaving, setYearOfLeaving] = useState(new Date())
-
+    
     const [transactionId, setTransactionId] = useState("")
     const [senderAcName, setSenderAcName] = useState("")
     const [senderAcNo, setSenderAcNo] = useState("")
@@ -68,11 +67,15 @@ export const FieldsProvider = (props) => {
     
     const [senderBankName, setSenderBankName] = useState("")
     const [senderBankIFSC, setSenderBankIFSC] = useState("")
+    
+    const [PANNo, setPANNo] = useState()
+    const [guardianMobile, setGuardianMobile] = useState()
+    
 
-     return (
+    return (
       <FieldsContext.Provider
-        value={{
-          
+      value={{
+          guardianMobileState: [guardianMobile, setGuardianMobile],
 
           motherNameState: [motherName, setMotherName],
           studentNameState: [studentName, setStudentName],
@@ -83,7 +86,7 @@ export const FieldsProvider = (props) => {
           guardianAddressState: [guardianAddress, setGuardianAddress],
           lastInstituteNameFEState: [lastInstituteNameFE, setLastInstituteNameFE],
           lastInstituteAddressFEState: [lastInstituteAddressFE, setLastInstituteAddressFE],
-          lastClassFEState: [lastClassFE, setLastClassFE],
+          lastClassState: [lastClass, setLastClass],
           fatherNameState: [fatherName, setFatherName],
 
           studentGenderState: [studentGender, setStudentGender],
@@ -108,6 +111,7 @@ export const FieldsProvider = (props) => {
           phyHandicappedState: [phyHandicapped, setPhyHandicapped],
           maharashtraPassState: [maharashtraPass, setMaharashtraPass],
           hasPANState: [hasPAN, setHasPAN],
+          PANNoState: [PANNo, setPANNo],
           hasGivenMHTCETState: [hasGivenMHTCET, setHasGivenMHTCET] ,
           CETScoreState: [CETScore, setCETScore],
           hasGivenJEEMainsState: [hasGivenJEEMains, setHasGivenJEEMains],

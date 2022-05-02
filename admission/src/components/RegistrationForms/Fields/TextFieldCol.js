@@ -5,7 +5,7 @@ import { FieldsContext } from "../../States/FieldStates"
 
 export default function TextFieldCol({ title, placeholder, controlId }) {
 
-    const { placeOfBirthState, religionState, casteNameState, nationalityState, cityState, districtState, guardianCityState, guardianDistrictState } = useContext(FieldsContext)
+    const { placeOfBirthState, religionState, casteNameState, nationalityState, cityState, districtState, guardianCityState, guardianDistrictState, PANNoState, CETScoreState, JEEMainsScoreState, JEEAdvancedScoreState } = useContext(FieldsContext)
 
     const [ placeOfBirth, setPlaceOfBirth] = placeOfBirthState
     const [ religion, setReligion] = religionState
@@ -15,7 +15,11 @@ export default function TextFieldCol({ title, placeholder, controlId }) {
     const [ district, setDistrict ] = districtState 
     const [ guardianCity, setGuardianCity ] = guardianCityState
     const [ guardianDistrict, setGuardianDistrict ] = guardianDistrictState
-
+    const [ PANNo, setPANNo] = PANNoState
+    const [ CETScore, setCETScore ] = CETScoreState
+    const [ JEEMainsScore, setJEEMainsScore ] = JEEMainsScoreState
+    const [ JEEAdvancedScore, setJEEAdvancedScore ] = JEEAdvancedScoreState
+    
     return (
       <div>
         <Form.Group controlId={controlId}>
@@ -36,9 +40,9 @@ export default function TextFieldCol({ title, placeholder, controlId }) {
   
     function handleChange(e, controlId) {
       switch (controlId) {
-        // case "PANNo":
-        //   setPANNo(e.target.value)
-        //   break
+        case "PANNo":
+          setPANNo(e.target.value)
+          break
         case "placeOfBirth":
           setPlaceOfBirth(e.target.value)
           break
@@ -82,8 +86,18 @@ export default function TextFieldCol({ title, placeholder, controlId }) {
         // case "lastClassFE":
         //   setLastClassFE(e.target.value)
         //   break
+        case "CETScore":
+          setCETScore(e.target.value)
+          break
+        case "JEEMainsScore":
+          setJEEMainsScore(e.target.value)
+          break
+        case "JEEAdvancedScore":
+          setJEEAdvancedScore(e.target.value)
+          console.log(JEEAdvancedScore)
+          break
         default:
-          console.log("No Match for TextFieldInline")
+          console.log("No Match for TextFieldCol")
       }
     }
   }
