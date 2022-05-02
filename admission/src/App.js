@@ -8,6 +8,7 @@ import Dashboard from "./components/Dashboard/Dashboard"
 import FEDSEForm from "./components/RegistrationForms/FEDSEForm"
 import {FieldsProvider} from "./components/States/FieldStates"
 import MyProfile from "./components/MyProfile/MyProfile"
+import FeesDetails from "./components/Dashboard/components/FeesDetails"
 
 function App() {
   return (
@@ -15,11 +16,12 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Auth} />
-          <Route path="/Dashboard" component={ Dashboard } />
 
         {/* Added FieldsProvider so that states can be accessed in FEDSE Form from FieldsContext */}
         <FieldsProvider>
+          <Route path="/Dashboard" component={Dashboard} />
           <Route path="/MyProfile" component={ MyProfile } />
+          <Route path="/FeesDetails" component={FeesDetails} />
           <Route path="/fedseform" component={FEDSEForm} />
         </FieldsProvider>
 

@@ -6,11 +6,12 @@ import { FieldsContext } from "../../States/FieldStates"
 
 export default function NumField({ title, maxlength, controlId, placeholder }) {
   
-  const { cetMeritNoState, parentsAnnualIncomeState, aadharNoState } = useContext(FieldsContext)
+  const { cetMeritNoState, parentsAnnualIncomeState, aadharNoState, senderAcNoState } = useContext(FieldsContext)
 
   const [ cetMeritNo, setCetMeritNo ] = cetMeritNoState
   const [ parentsAnnualIncome, setParentsAnnualIncome ] = parentsAnnualIncomeState
   const [ aadharNo, setAadharNo ] = aadharNoState
+  const [ senderAcNo, setSenderAcNo ] = senderAcNoState
   
   return (
     <div>
@@ -21,6 +22,7 @@ export default function NumField({ title, maxlength, controlId, placeholder }) {
           </Form.Label>
           <Col sm={10}>
             <Form.Control
+              type="number"
               placeholder={placeholder}
               maxlength={maxlength}
               onChange={(e) => handleChange(e, controlId)}
@@ -42,7 +44,9 @@ export default function NumField({ title, maxlength, controlId, placeholder }) {
       case "aadharNo":
         setAadharNo(e.target.value)
         break
-      
+      case "senderAcNo":
+        setSenderAcNo(e.target.value) 
+        break
       default:
         console.log("Does not match any case")
     }
