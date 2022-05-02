@@ -21,6 +21,11 @@ export default function Auth() {
     const [loginsuccess,setLoginsuccess] = useState(false);
     const history = useHistory();
     const allrole = role("allroles");
+    const adminrole = role("admin");
+    const csrole = role("csdepartment");
+    const mrole = role("mdepartment");
+    const crole = role("csdepartment");
+    const erole = role("edepartment");
     useEffect(() => {
     
     }, [])
@@ -66,7 +71,27 @@ export default function Auth() {
             if(!auth.currentUser.emailVerified){
                 throw "Please verify your email to log in to portal, Check Junk/Spam emails if you have trouble finding email verification link";
             }
-            await history.push("/Dashboard") 
+            if(adminrole.includes(emailcheck)){
+               //admin login
+                await history.push("/Dashboard") 
+            }
+            else if(crole.includes(emailcheck)){
+                //civil dept login
+                await history.push("/Dashboard")                          
+            }
+            else if(csrole.includes(emailcheck)){
+               //computer dept login
+               await history.push("/Dashboard") 
+                
+            }
+            else if(mrole.includes(emailcheck)){
+               //mechanical dept login
+               await history.push("/Dashboard") 
+            }
+            else if(erole.includes(emailcheck)){
+               //electronics dept login
+               await history.push("/Dashboard")     
+            }
             setLoginsuccess(true);  
             document.getElementById("signin-form").reset();
            }catch(e){
