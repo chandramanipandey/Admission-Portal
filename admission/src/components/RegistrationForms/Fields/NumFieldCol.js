@@ -10,7 +10,6 @@ export default function NumField({ title, maxlength, controlId, placeholder }) {
 
   const [permanentPin, setPermanentPin] = permanentPinState
   const [guardianPin, setGuardianPin] = guardianPinState
-  const [studentMobile, setStudentMobile] = studentMobileState
   const [motherMobile, setMotherMobile] = motherMobileState
   const [fatherMobile, setFatherMobile] = fatherMobileState
 
@@ -24,6 +23,7 @@ export default function NumField({ title, maxlength, controlId, placeholder }) {
           <Col sm={8}>
             <Form.Control
               placeholder={placeholder}
+              type="number"
               maxlength={maxlength}
               onChange={(e) => handleChange(e, controlId)}
             />
@@ -47,9 +47,7 @@ export default function NumField({ title, maxlength, controlId, placeholder }) {
       case "guardianPin":
         setGuardianPin(e.target.value)
         break
-      case "studentMobile":
-        setStudentMobile(e.target.value)
-        break
+      
       default:
         console.log("Does not match any case")
     }

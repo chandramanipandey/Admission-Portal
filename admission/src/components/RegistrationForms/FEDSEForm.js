@@ -27,7 +27,7 @@ import NavigationBar from "../Dashboard/NavigationBar"
 
 export default function FEDSEForm() {
   const auth = getAuth();
-  const { motherNameState, studentNameState, candidateAdmissionState, permanentAddressState, guardianNameState,  guardianAddressState,  lastInstituteNameFEState,  lastInstituteAddressFEState, lastClassFEState, fatherNameState, studentGenderState, permanentPinState, guardianPinState, studentMobileState, motherMobileState, fatherMobileState, dobState, placeOfBirthState, religionState, casteNameState, nationalityState, cityState, districtState, guardianCityState, guardianDistrictState, phyHandicappedState, hasPANState, hasGivenMHTCETState, CETScoreState, hasGivenJEEMainsState,JEEMainsScoreState, hasGivenJEEAdvancedState, JEEAdvancedScoreState, maharashtraPassState, cetMeritNoState, parentsAnnualIncomeState, aadharNoState, permanentEmailState, guardianEmailState, categoryState, yearOfLeavingState } = useContext(FieldsContext)
+  const { motherNameState, studentNameState, candidateAdmissionState, permanentAddressState, guardianNameState,  guardianAddressState,  lastInstituteNameFEState,  lastInstituteAddressFEState, lastClassState, fatherNameState, studentGenderState, permanentPinState, guardianPinState, studentMobileState, motherMobileState, fatherMobileState, dobState, placeOfBirthState, religionState, casteNameState, nationalityState, cityState, districtState, guardianCityState, guardianDistrictState, phyHandicappedState, hasPANState, hasGivenMHTCETState, CETScoreState, hasGivenJEEMainsState,JEEMainsScoreState, hasGivenJEEAdvancedState, JEEAdvancedScoreState, maharashtraPassState, cetMeritNoState, parentsAnnualIncomeState, aadharNoState, permanentEmailState, guardianEmailState, categoryState, yearOfLeavingState } = useContext(FieldsContext)
 
   const [ placeOfBirth, setPlaceOfBirth] = placeOfBirthState
     const [ religion, setReligion] = religionState
@@ -67,7 +67,7 @@ export default function FEDSEForm() {
   const [guardianName, setGuardianName] = guardianNameState
   const [lastInstituteNameFE, setLastInstituteNameFE] = lastInstituteNameFEState
   const [lastInstituteAddressFE, setLastInstituteAddressFE] = lastInstituteAddressFEState
-  const [lastClassFE, setLastClassFE] = lastClassFEState
+  const [lastClass, setLastClass] = lastClassState
   const [fatherName, setFatherName] = fatherNameState
 
   const [ yearOfLeaving, setYearOfLeaving ] = yearOfLeavingState
@@ -110,7 +110,7 @@ export default function FEDSEForm() {
     guardianName:guardianName,
     lastInstituteNameFE:lastInstituteNameFE,
     lastInstituteAddressFE:lastInstituteAddressFE,
-    lastClassFE:lastClassFE,
+    lastClass:lastClass,
     fatherName:fatherName,
     yearOfLeaving:yearOfLeaving,
     phyHandicapped:phyHandicapped,
@@ -241,13 +241,22 @@ export default function FEDSEForm() {
           name="jeeMains"
           controlId="jeeMains"
         />
+
+        {hasGivenJEEMains=="true" &&
+        <YesNo 
+          title="Do you have JEE Advanced Score?"
+          name="jeeAdvanced"
+          controlId="jeeAdvanced"
+        /> }
         
+
         <NumField
           title="Enter CET Merit number"
           maxlength="12"
-          controlId="cetMeritno"
+          controlId="cetMeritNo"
           placeholder="CET Merit Number (12 digit)"
         />
+        
 
         <NumField
           title="Aadhar Card number"
@@ -286,7 +295,7 @@ export default function FEDSEForm() {
           <Col md>
             <NumFieldCol
               title="Pin Code"
-              placeholder="Enter your city Pincode"
+              placeholder="Enter 6 digit Pin Code"
               controlId="permanentPin"
             />
           </Col>
@@ -309,22 +318,23 @@ export default function FEDSEForm() {
           placeholder="Enter Name of the Guardian"
           controlId="guardianName"
         />
+        
         <TextFieldInline
-          title="Guardian Address"
+          title="Guardian's Address"
           placeholder="Enter Address here"
           controlId="guardianAddress"
         />
         <Row>
           <Col md>
             <TextFieldCol
-              title="City"
+              title="Guardian's City"
               placeholder="Enter city for Guardian, for example, Pimpri-Chinchwad"
               controlId="guardianCity"
             />
           </Col>
           <Col md>
             <NumFieldCol
-                title="Pin Code"
+                title="Guardian's Pin Code"
                 placeholder="Enter Guardian Address PinCode"
                 controlId="guardianPin"
             />
@@ -334,7 +344,7 @@ export default function FEDSEForm() {
         <Row>
           <Col md>
             <TextFieldCol
-                title="District"
+                title="Guardian's District"
                 placeholder="for example, Pune"
                 controlId="guardianDistrict"
             />  
@@ -390,7 +400,7 @@ export default function FEDSEForm() {
          <TextFieldInline
           title="Last Class Studied"
           placeholder="Last Class"
-          controlId="lastclassFE"
+          controlId="lastClass"
         />
         
         <YearField title="Year of Leaving" controlId="yearofLeavingFE" />

@@ -46,7 +46,6 @@ export default function GenderField({ controlId }) {
     switch (controlId) {
       case "studentGender":
         setStudentGender(e.target.value)
-        console.log(studentGender)
         break
       default:
         console.log("No Match in Gender")
