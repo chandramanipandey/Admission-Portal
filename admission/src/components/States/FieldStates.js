@@ -62,7 +62,7 @@ export const FieldsProvider = (props) => {
     const [transactionId, setTransactionId] = useState("")
     const [senderAcName, setSenderAcName] = useState("")
     const [senderAcNo, setSenderAcNo] = useState("")
-    const [transactionDate, setTransactionDate] = useState()
+    const [transactionDate, setTransactionDate] = useState("")
     const [transactionReceipt, setTransactionReceipt] = useState()
     
     const [senderBankName, setSenderBankName] = useState("")

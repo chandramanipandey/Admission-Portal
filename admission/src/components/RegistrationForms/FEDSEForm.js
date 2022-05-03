@@ -126,7 +126,7 @@ export default function FEDSEForm() {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    adduserdata(FeDseFormData,auth.currentUser.uid);
+    adduserdata(FeDseFormData,auth.currentUser.uid,"Admission_Data");
   }
 
   return (

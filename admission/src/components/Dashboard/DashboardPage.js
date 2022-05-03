@@ -36,7 +36,7 @@ export function StudentDashboardPage() {
     const auth = getAuth();
     
     async function handleClick(data) {
-        const studentData = await receivefromfirebase(auth.currentUser.uid);
+        const studentData = await receivefromfirebase(auth.currentUser.uid,"Admission_Data");
         console.log(studentData);
         
         if (data == "fedseform") {

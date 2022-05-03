@@ -12,8 +12,12 @@ import DateFieldInline from "../../RegistrationForms/Fields/DateFieldInline";
 import {Details} from "../../Others/keywords"
 
 import { FieldsContext } from "../../States/FieldStates";
+import { adduserdata } from "../../Firebase/addtofirebase";
+import { getAuth } from "firebase/auth";
+import { addpaymentreceipt } from "../../Firebase/addtransactionsliptofirebase";
 
 export default function FeesDetails() {
+	const auth = getAuth();
 	const { senderBankNameState, senderAcNameState, senderAcNoState, senderBankIFSCState, transactionIdState, transactionDateState, transactionReceiptState} = useContext(FieldsContext)
 	const BANK = Details.BANK
 
@@ -24,11 +28,22 @@ export default function FeesDetails() {
 	const [transactionDate, setTransactionDate] = transactionDateState
 	const [transactionReceipt, setTransactionReceipt] = transactionReceiptState
   const [ senderAcNo, setSenderAcNo ] = senderAcNoState
+  const TransactionData = {
+transactionId : transactionIdState[0],
+senderAcName : senderAcNameState[0],
+senderBankName : senderBankNameState[0],
+senderBankIFSC : senderBankIFSCState[0],
+transactionDate : transactionDateState[0],
+transactionReceipt : transactionReceiptState[0],
+senderAcNo : senderAcNoState[0],	  
+  }
   
-	const handleSubmit = (e) => {
+	async function handleSubmit(e){
     e.preventDefault();
-		console.log("Hello Submitted")
-		console.log(transactionId)
+	const receiptlink = await addpaymentreceipt(auth.currentUser.uid,TransactionData.transactionReceipt);
+	TransactionData.Receipt= receiptlink;
+	delete TransactionData.transactionReceipt;
+	await adduserdata(TransactionData,auth.currentUser.uid,"Fees_Paid(Pending Approval)")
   }
 
 	return (
