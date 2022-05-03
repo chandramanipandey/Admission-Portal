@@ -73,7 +73,7 @@ export default function Auth() {
             }
             if(adminrole.includes(emailcheck)){
                //admin login
-                await history.push("/Dashboard") 
+                await history.push("/AdminView") 
             }
             else if(crole.includes(emailcheck)){
                 //civil dept login
@@ -94,7 +94,7 @@ export default function Auth() {
             }
             else {
                //Student login
-               await history.push("/Dashboard")     
+               await history.push("/StudentView")     
                 
             }
             setLoginsuccess(true);  
