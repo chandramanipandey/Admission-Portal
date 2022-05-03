@@ -5,101 +5,34 @@ import "../CSS/DashboardPage.css"
 import { useHistory, Link } from "react-router-dom";
 import { receivefromfirebase } from "../Firebase/receivefromfirebase";
 import { getAuth } from "firebase/auth";
+import DashboardCard from "./DashboardCard";
 
 export function AdminDashboardPage() {
     
     return (
         <div>
             <Row>
-                <Col>
-                <Link to={"/StudentList"}>
-                    <Card body><h1>Total Students 50</h1>
-                        <p></p><br />
-                        <a className="primary">See list of Students &gt;</a>
-                    </Card>
-                </Link>
-                    
-                </Col>
-                <Col>
-                <Link to={"#"}>
-                    <Card body ><h1>Student Fees</h1>
-                        <p></p><br />
-                        <a className="primary">Check Fees &gt;</a>
-                    </Card>
-                </Link>     
-                </Col>
-
-                <Col>
-                <Link to={"#"}>
-                    <Card body ><h1>Fees Tracking</h1>
-                    <p></p><br />
-                    <a className="primary">Track Fees &gt;</a>
-                    </Card>
-                </Link>
-                </Col>
+                <DashboardCard title="Total Students" titleText="See list of Students &gt;" controlId="StudentList"/>
+                <DashboardCard title="Student Fees" titleText="Check Fees &gt;" controlId="fedseform"/>
+                <DashboardCard title="Fees Tracking" titleText="Track Fees &gt;" controlId="fedseform"/>
+            </Row>
+            <Row className="mt-3">
+                <DashboardCard title="Notice Generation" titleText="Generate Notice &gt;" />
             </Row>
         </div>
     )
 }
 
 export function StudentDashboardPage() {
-    const history = useHistory();
-    const auth = getAuth();
     
-    async function handleClick(data) {
-        const studentData = await receivefromfirebase(auth.currentUser.uid,"Admission_Data");
-        console.log(studentData);
-        
-        if (data == "fedseform") {
-            history.push('/fedseform');
-        }
-
-        if (data == "MyProfile") {
-            history.push('/MyProfile')
-        }
-        
-        if (data == "FeesDetails") {
-            history.push('/FeesDetails')
-        }
-        
-    }
     return (
         <div>       
-            <Row>
-                <Col>
-                <Link to={"/fedseform"}>
-                <Card body>
-                        <h1>Register Yourself</h1>
-                        <br></br>
-                        <br></br>
-                        <a href="#" onClick={() => handleClick("fedseform")}>Registration Form Link &gt;</a>
-                    </Card>
-                </Link>
-                    
-                </Col>
-                <Col>
-                <Link to={"/FeesDetails"}>
-                <Card body>
-                        <h1>Fees Corner</h1>
-                        <br></br>
-                        <br></br>
-                        <a href="#" onClick={() => handleClick("FeesDetails")}>Fill Fee Details &gt;</a>
-                    </Card>
-                </Link>
-                    
-                </Col>
-                <Col>
-                <Link to={"/MyProfile"}>
-                <Card body>
-                        <h1>My Profile</h1>
-                        <br></br>
-                        <br></br>
-                        <a onClick={() => handleClick("MyProfile")}>Check Profile &gt;</a>
-                    </Card>
-                </Link>
-                    
-                </Col>
+            <Row className="mt-3">
+                <DashboardCard title="Register Yourself" titleText="Registration Form Link &gt;" controlId="fedseform" />
+                <DashboardCard title="Fees Corner" titleText="Fill Fee Details &gt;" controlId="FeesDetails"/>
+                <DashboardCard title="My Profile" titleText="Check Profile &gt;" controlId="MyProfile"/>
             </Row>
         </div>
+        
     )
 }
