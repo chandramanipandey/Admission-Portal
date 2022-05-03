@@ -4,11 +4,33 @@ import NavigationBar from '../Dashboard/NavigationBar'
 import RadioField from '../RegistrationForms/Fields/RadioField'
 import TextField from '../RegistrationForms/Fields/TextField'
 import TextFieldInline from '../RegistrationForms/Fields/TextFieldInline'
+import { receivefromfirebase } from '../Firebase/receivefromfirebase'
+import { useHistory } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { getAuth } from 'firebase/auth'
+
 
 export default function MyProfile() {
-  return (
-	  <div>
-		  <NavigationBar />
+  const history = useHistory();
+  const auth = getAuth();
+
+  const [loading, setLoading] = useState(false)
+  const [studentData, setStudentData] = useState({name: "Johnny"})
+
+  async function fetchStudentData() {
+    let response = await receivefromfirebase(auth.currentUser.uid);
+    setStudentData(response)
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    fetchStudentData()
+    console.log("useEffect Running")
+  }, [])
+
+    return loading ? "Loading Page" : (
+      <div>
+      <NavigationBar />
 		  <Card>
 			<Card.Header className='text-center' as="h2" >My Profile</Card.Header>
   		<Card.Body>
@@ -36,33 +58,14 @@ export default function MyProfile() {
           placeholder="Enter Full Name"
           controlId="fatherName"
         />
-				{/* <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-    <Form.Label column sm="2">
-      Email
-    </Form.Label>
-    <Col sm="10">
-      <Form.Control plaintext readOnly defaultValue="email@example.com" />
-    </Col>
-  </Form.Group>
-
-  <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-    <Form.Label column sm="2">
-      Password
-    </Form.Label>
-    <Col sm="10">
-      <Form.Control type="password" placeholder="Password" />
-    </Col>
-  </Form.Group> */}
+				
 				</Form>
-			{/* <Card.Title>Special title treatment</Card.Title>
-			<Card.Text>
-				With supporting text below as a natural lead-in to additional content.
-			</Card.Text>
-			<Button variant="primary">Go somewhere</Button> */}
+		
 			</Card.Body>
 
 		  </Card>
+		  
 	  </div>
 
   )
-}
+    }

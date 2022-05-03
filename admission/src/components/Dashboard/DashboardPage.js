@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Card, Row, Col } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../CSS/DashboardPage.css"
@@ -34,10 +34,22 @@ export function AdminDashboardPage() {
 export function StudentDashboardPage() {
     const history = useHistory();
     const auth = getAuth();
+
+    // const [fetchData, dataSet] = useState(null)
+    let person = { name: 'John'}
     
+    // useEffect(() => {
+    //     async function fetchStudentData() {
+    //         let response = await receivefromfirebase(auth.currentUser.uid);
+    //         person = response
+    //     }
+
+    //     fetchStudentData()
+    // }, [])
+
     async function handleClick(data) {
-        const studentData = await receivefromfirebase(auth.currentUser.uid);
-        console.log(studentData);
+        // const studentData = await receivefromfirebase(auth.currentUser.uid);
+        console.log(person);
         
         if (data == "fedseform") {
             history.push('/fedseform');
@@ -53,7 +65,7 @@ export function StudentDashboardPage() {
         
     }
     return (
-        <div>
+        <div>       
             <Row>
                 <Col>
                     <Card body>
