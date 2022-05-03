@@ -1,10 +1,10 @@
-import React from "react"
-import {Navbar, Container, Nav, NavDropdown} from "react-bootstrap"
-import userImage from "./Sample_User_Icon.png"
-import "../CSS/Navbar.css"
-import { logout } from "../Firebase/logoutuser"
-import { useHistory } from "react-router-dom"
-import { getAuth } from "firebase/auth"
+import React from "react";
+import {Navbar, Container, Nav, NavDropdown} from "react-bootstrap";
+import userImage from "../Assets/Sample_User_Icon.png";
+import "../CSS/Navbar.css";
+import { logout } from "../Firebase/logoutuser";
+import { useHistory } from "react-router-dom";
+import { getAuth } from "firebase/auth";
 
 export default function NavigationBar({userType, userName}) {
     const history = useHistory();
