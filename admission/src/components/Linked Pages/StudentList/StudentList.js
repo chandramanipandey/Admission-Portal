@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { Button, Card, Form, Nav, Row, Col, Tabs, Tab } from "react-bootstrap";
+import { Tabs, Tab } from "react-bootstrap";
 
 import { getAuth } from "firebase/auth";
 import { receivefromfirebase } from "../../Firebase/receivefromfirebase";
