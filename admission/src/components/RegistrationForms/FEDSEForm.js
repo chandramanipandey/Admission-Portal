@@ -24,12 +24,19 @@ import "../CSS/FEForm.css"
 import { adduserdata } from "../Firebase/addtofirebase"
 import { getAuth } from "firebase/auth"
 import NavigationBar from "../Dashboard/NavigationBar"
+import Department from "./Fields/DepartmentField"
+import ClassField from "./Fields/ClassField"
 
 export default function FEDSEForm() {
   const auth = getAuth();
-  const { motherNameState, studentNameState, candidateAdmissionState, permanentAddressState, guardianNameState,  guardianAddressState,  lastInstituteNameFEState,  lastInstituteAddressFEState, lastClassState, fatherNameState, studentGenderState, permanentPinState, guardianPinState, studentMobileState, motherMobileState, fatherMobileState, dobState, placeOfBirthState, religionState, casteNameState, nationalityState, cityState, districtState, guardianCityState, guardianDistrictState, phyHandicappedState, hasPANState, hasGivenMHTCETState, CETScoreState, hasGivenJEEMainsState,JEEMainsScoreState, hasGivenJEEAdvancedState, JEEAdvancedScoreState, maharashtraPassState, cetMeritNoState, parentsAnnualIncomeState, aadharNoState, permanentEmailState, guardianEmailState, categoryState, yearOfLeavingState } = useContext(FieldsContext)
+  const { motherNameState, studentNameState, candidateAdmissionState, permanentAddressState, guardianNameState,  guardianAddressState,  lastInstituteNameFEState,  lastInstituteAddressFEState, lastClassState, fatherNameState, studentGenderState, permanentPinState, guardianPinState, studentMobileState, motherMobileState, fatherMobileState, dobState, placeOfBirthState, religionState, casteNameState, nationalityState, cityState, districtState, guardianCityState, guardianDistrictState, phyHandicappedState, hasPANState, hasGivenMHTCETState, CETScoreState, hasGivenJEEMainsState,JEEMainsScoreState, hasGivenJEEAdvancedState, JEEAdvancedScoreState, maharashtraPassState, cetMeritNoState, parentsAnnualIncomeState, aadharNoState, permanentEmailState, guardianEmailState, categoryState, yearOfLeavingState, prnState, collegeEmailState, departmentState, currentClassState } = useContext(FieldsContext)
 
-  const [ placeOfBirth, setPlaceOfBirth] = placeOfBirthState
+  const [ prn, setPrn] = prnState
+  const [ collegeEmail, setCollegeEmail ] = collegeEmailState
+  const [ department, setDepartment] = departmentState
+  const [ currentClass, setCurrentClass ] = currentClassState
+
+    const [ placeOfBirth, setPlaceOfBirth] = placeOfBirthState
     const [ religion, setReligion] = religionState
     const [ casteName, setCasteName ] = casteNameState
     const [ nationality, setNationality] = nationalityState
@@ -121,7 +128,11 @@ export default function FEDSEForm() {
     hasGivenJEEMains:hasGivenJEEMains,
     JEEMainsScore:JEEMainsScore,
     hasGivenJEEAdvanced:hasGivenJEEAdvanced,
-    JEEAdvancedScore:JEEAdvancedScore
+    JEEAdvancedScore:JEEAdvancedScore,
+    prn:prn,
+    collegeEmail: collegeEmail,
+    department: department,
+    currentClass: currentClass
   }
   
   const handleSubmit = (e) => {
@@ -410,6 +421,21 @@ export default function FEDSEForm() {
         />
         
         <YearField title="Year of Leaving" controlId="yearofLeavingFE" />
+{/* 4 Fields */}
+
+        <TextField
+          title="Permanent Registration Number (PRN)"
+          placeholder="Enter PRN"
+          maxlength="9"
+          controlId="prn"
+        />
+
+        <EmailFieldInline title="College Email" controlId="collegeEmail" />
+
+        <Department />
+
+        <ClassField title="Current Class" />
+
         
         {/* </FieldsProvider> */}
 
