@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Card, Row, Col } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../CSS/DashboardPage.css"
@@ -53,7 +53,7 @@ export function StudentDashboardPage() {
         
     }
     return (
-        <div>
+        <div>       
             <Row>
                 <Col>
                     <Card body>
