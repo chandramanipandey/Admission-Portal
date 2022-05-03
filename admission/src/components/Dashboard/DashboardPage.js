@@ -34,22 +34,10 @@ export function AdminDashboardPage() {
 export function StudentDashboardPage() {
     const history = useHistory();
     const auth = getAuth();
-
-    // const [fetchData, dataSet] = useState(null)
-    let person = { name: 'John'}
     
-    // useEffect(() => {
-    //     async function fetchStudentData() {
-    //         let response = await receivefromfirebase(auth.currentUser.uid);
-    //         person = response
-    //     }
-
-    //     fetchStudentData()
-    // }, [])
-
     async function handleClick(data) {
-        // const studentData = await receivefromfirebase(auth.currentUser.uid);
-        console.log(person);
+        const studentData = await receivefromfirebase(auth.currentUser.uid,"Admission_Data");
+        console.log(studentData);
         
         if (data == "fedseform") {
             history.push('/fedseform');

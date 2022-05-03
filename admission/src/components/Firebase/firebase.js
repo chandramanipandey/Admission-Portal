@@ -1,4 +1,5 @@
 import  { initializeApp } from 'firebase/app';
+import { getStorage } from 'firebase/storage';
 
 
 const firebaseConfig = {
@@ -10,6 +11,6 @@ const firebaseConfig = {
   messagingSenderId: "972457920826",
   appId: "1:972457920826:web:a9122d7dd4d749a97de803"
 };
-  
  const Firebaseauth = initializeApp(firebaseConfig);
+ export const storage = getStorage(Firebaseauth);
  export default Firebaseauth;

@@ -1,11 +1,16 @@
-import { getDatabase, ref, set } from "firebase/database";
-export function adduserdata(object,uid){
+import { getDatabase, ref, update } from "firebase/database";
+export function adduserdata(object,uid,subsection){
     try{
-        console.log(object.studentName);
-        console.log(object)
+    if(subsection!=null){
         const db = getDatabase();
-    set(ref(db,'STUDENTS/'+uid+'/'),object);
-    
+        update(ref(db,'STUDENTS/'+uid+'/'+subsection+'/'),object);
+        
+    }
+    else{
+        const db = getDatabase();
+        update(ref(db,'STUDENTS/'+uid+'/'),object);    
+        
+    }
     }
     catch(e){
         console.log(e)

@@ -18,7 +18,8 @@ export default function MyProfile() {
   const [studentData, setStudentData] = useState({name: "Johnny"})
 
   async function fetchStudentData() {
-    let response = await receivefromfirebase(auth.currentUser.uid);
+    let response = await receivefromfirebase(auth.currentUser.uid, "Admission_Data");
+
     setStudentData(response)
     setLoading(false)
   }

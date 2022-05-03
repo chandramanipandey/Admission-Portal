@@ -92,6 +92,11 @@ export default function Auth() {
                //electronics dept login
                await history.push("/Dashboard")     
             }
+            else {
+               //Student login
+               await history.push("/Dashboard")     
+                
+            }
             setLoginsuccess(true);  
             document.getElementById("signin-form").reset();
            }catch(e){
