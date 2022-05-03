@@ -9,6 +9,8 @@ import FEDSEForm from "./components/RegistrationForms/FEDSEForm"
 import {FieldsProvider} from "./components/States/FieldStates"
 import MyProfile from "./components/MyProfile/MyProfile"
 import FeesDetails from "./components/Dashboard/components/FeesDetails"
+import AdminView from "./components/Dashboard/components/AdminView"
+import StudentView from "./components/Dashboard/components/StudentView"
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path="/MyProfile" component={ MyProfile } />
           <Route path="/FeesDetails" component={FeesDetails} />
           <Route path="/fedseform" component={FEDSEForm} />
+          <Route path="/AdminView" component={AdminView} />
+          <Route path="/StudentView" component={StudentView} />
         </FieldsProvider>
 
         </Switch>
