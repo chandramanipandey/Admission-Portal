@@ -8,6 +8,8 @@ import { receivefromfirebase } from '../Firebase/receivefromfirebase'
 import { useHistory } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { getAuth } from 'firebase/auth'
+import "../CSS/Footer.css"
+import Footer from '../Dashboard/Footer'
 
 
 export default function MyProfile() {
@@ -76,8 +78,11 @@ export default function MyProfile() {
 			</Card.Body>
 
 		  </Card>
-		  
+
 	  </div>
 
   )
+
+
     }
+
