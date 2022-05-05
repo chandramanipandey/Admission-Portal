@@ -57,7 +57,7 @@ export default function FeesDetails() {
     await adduserdata(
       TransactionData,
       auth.currentUser.uid,
-      "Fees_Paid(Pending Approval)"
+      "Fees_Paid_Pending"
     );
   }
 

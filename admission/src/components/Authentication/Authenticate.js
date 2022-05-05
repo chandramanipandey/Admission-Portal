@@ -94,7 +94,7 @@ export default function Auth() {
             }
             else {
                //Student login
-               await history.push("/StudentView")     
+               await history.push("/StudentView")    
                 
             }
             setLoginsuccess(true);  

@@ -29,34 +29,34 @@ import ClassField from "./Fields/ClassField"
 
 export default function FEDSEForm() {
   const auth = getAuth();
-  const { motherNameState, studentNameState, candidateAdmissionState, permanentAddressState, guardianNameState,  guardianAddressState,  lastInstituteNameFEState,  lastInstituteAddressFEState, lastClassState, fatherNameState, studentGenderState, permanentPinState, guardianPinState, studentMobileState, motherMobileState, fatherMobileState, dobState, placeOfBirthState, religionState, casteNameState, nationalityState, cityState, districtState, guardianCityState, guardianDistrictState, phyHandicappedState, hasPANState, hasGivenMHTCETState, CETScoreState, hasGivenJEEMainsState,JEEMainsScoreState, hasGivenJEEAdvancedState, JEEAdvancedScoreState, maharashtraPassState, cetMeritNoState, parentsAnnualIncomeState, aadharNoState, permanentEmailState, guardianEmailState, categoryState, yearOfLeavingState, prnState, collegeEmailState, departmentState, currentClassState } = useContext(FieldsContext)
+  const { motherNameState, studentNameState, candidateAdmissionState, permanentAddressState, guardianNameState, guardianAddressState, lastInstituteNameFEState, lastInstituteAddressFEState, lastClassState, fatherNameState, studentGenderState, permanentPinState, guardianPinState, studentMobileState, motherMobileState, fatherMobileState, dobState, placeOfBirthState, religionState, casteNameState, nationalityState, cityState, districtState, guardianCityState, guardianDistrictState, phyHandicappedState, hasPANState, hasGivenMHTCETState, CETScoreState, hasGivenJEEMainsState, JEEMainsScoreState, hasGivenJEEAdvancedState, JEEAdvancedScoreState, maharashtraPassState, cetMeritNoState, parentsAnnualIncomeState, aadharNoState, permanentEmailState, guardianEmailState, categoryState, yearOfLeavingState, prnState, collegeEmailState, departmentState, currentClassState } = useContext(FieldsContext)
 
-  const [ prn, setPrn] = prnState
-  const [ collegeEmail, setCollegeEmail ] = collegeEmailState
-  const [ department, setDepartment] = departmentState
-  const [ currentClass, setCurrentClass ] = currentClassState
+  const [prn, setPrn] = prnState
+  const [collegeEmail, setCollegeEmail] = collegeEmailState
+  const [department, setDepartment] = departmentState
+  const [currentClass, setCurrentClass] = currentClassState
 
-    const [ placeOfBirth, setPlaceOfBirth] = placeOfBirthState
-    const [ religion, setReligion] = religionState
-    const [ casteName, setCasteName ] = casteNameState
-    const [ nationality, setNationality] = nationalityState
-    const [ city, setCity ] = cityState
-    const [ district, setDistrict ] = districtState 
-    const [ guardianCity, setGuardianCity ] = guardianCityState
-    const [ guardianDistrict, setGuardianDistrict ] = guardianDistrictState
+  const [placeOfBirth, setPlaceOfBirth] = placeOfBirthState
+  const [religion, setReligion] = religionState
+  const [casteName, setCasteName] = casteNameState
+  const [nationality, setNationality] = nationalityState
+  const [city, setCity] = cityState
+  const [district, setDistrict] = districtState
+  const [guardianCity, setGuardianCity] = guardianCityState
+  const [guardianDistrict, setGuardianDistrict] = guardianDistrictState
 
-    const [ category, setCategory ] = categoryState
+  const [category, setCategory] = categoryState
 
-    const [dob, setDob] = dobState
+  const [dob, setDob] = dobState
 
-    const [ permanentEmail, setPermanentEmail ] = permanentEmailState
-  const [ guardianEmail, setGuardianEmail ] = guardianEmailState
+  const [permanentEmail, setPermanentEmail] = permanentEmailState
+  const [guardianEmail, setGuardianEmail] = guardianEmailState
 
   const [studentGender, setStudentGender] = studentGenderState
 
-  const [ cetMeritNo, setCetMeritNo ] = cetMeritNoState
-  const [ parentsAnnualIncome, setParentsAnnualIncome ] = parentsAnnualIncomeState
-  const [ aadharNo, setAadharNo ] = aadharNoState
+  const [cetMeritNo, setCetMeritNo] = cetMeritNoState
+  const [parentsAnnualIncome, setParentsAnnualIncome] = parentsAnnualIncomeState
+  const [aadharNo, setAadharNo] = aadharNoState
 
   const [permanentPin, setPermanentPin] = permanentPinState
   const [guardianPin, setGuardianPin] = guardianPinState
@@ -64,7 +64,7 @@ export default function FEDSEForm() {
   const [motherMobile, setMotherMobile] = motherMobileState
   const [fatherMobile, setFatherMobile] = fatherMobileState
 
-  const [ candidateAdmission, setCandidateAdmission ] = candidateAdmissionState
+  const [candidateAdmission, setCandidateAdmission] = candidateAdmissionState
 
   const [motherName, setMotherName] = motherNameState
   const [studentName, setStudentName] = studentNameState
@@ -77,7 +77,7 @@ export default function FEDSEForm() {
   const [lastClass, setLastClass] = lastClassState
   const [fatherName, setFatherName] = fatherNameState
 
-  const [ yearOfLeaving, setYearOfLeaving ] = yearOfLeavingState
+  const [yearOfLeaving, setYearOfLeaving] = yearOfLeavingState
 
   const [phyHandicapped, setPhyHandicapped] = phyHandicappedState
   const [maharashtraPass, setMaharashtraPass] = maharashtraPassState
@@ -88,101 +88,112 @@ export default function FEDSEForm() {
   const [JEEMainsScore, setJEEMainsScore] = JEEMainsScoreState
   const [hasGivenJEEAdvanced, setHasGivenJEEAdvanced] = hasGivenJEEAdvancedState
   const [JEEAdvancedScore, setJEEAdvancedScore] = JEEAdvancedScoreState
-  
+
   const FeDseFormData = {
-    placeOfBirth:placeOfBirth,
-    religion:religion,
-    nationality:nationality,
-    district:district,
-    guardianCity:guardianCity,
-    guardianDistrict:guardianDistrict,
-    category:category,
-    dob:dob,
-    permanentEmail:permanentEmail,
-    guardianEmail:guardianEmail,
-    studentGender:studentGender,
-    cetMeritNo:cetMeritNo,
-    parentsAnnualIncome:parentsAnnualIncome,
-    aadharNo:aadharNo,
-    permanentPin:permanentPin,
-    guardianPin:guardianPin,
-    studentMobile:studentMobile,
-    motherMobile:motherMobile,
-    fatherMobile:fatherMobile,
-    candidateAdmission:candidateAdmission,
-    motherName:motherName,
-    studentName:studentName,
-    permanentAddress:permanentAddress,
-    guardianAddress:guardianAddress,
-    guardianName:guardianName,
-    lastInstituteNameFE:lastInstituteNameFE,
-    lastInstituteAddressFE:lastInstituteAddressFE,
-    lastClass:lastClass,
-    fatherName:fatherName,
-    yearOfLeaving:yearOfLeaving,
-    phyHandicapped:phyHandicapped,
-    maharashtraPass:maharashtraPass,
-    hasPAN:hasPAN,
-    hasGivenMHTCET:hasGivenMHTCET,
-    CETScore:CETScore,
-    hasGivenJEEMains:hasGivenJEEMains,
-    JEEMainsScore:JEEMainsScore,
-    hasGivenJEEAdvanced:hasGivenJEEAdvanced,
-    JEEAdvancedScore:JEEAdvancedScore,
-    prn:prn,
+    placeOfBirth: placeOfBirth,
+    religion: religion,
+    nationality: nationality,
+    district: district,
+    guardianCity: guardianCity,
+    guardianDistrict: guardianDistrict,
+    category: category,
+    dob: dob,
+    permanentEmail: permanentEmail,
+    guardianEmail: guardianEmail,
+    studentGender: studentGender,
+    cetMeritNo: cetMeritNo,
+    parentsAnnualIncome: parentsAnnualIncome,
+    aadharNo: aadharNo,
+    permanentPin: permanentPin,
+    guardianPin: guardianPin,
+    studentMobile: studentMobile,
+    motherMobile: motherMobile,
+    fatherMobile: fatherMobile,
+    candidateAdmission: candidateAdmission,
+    motherName: motherName,
+    studentName: studentName,
+    permanentAddress: permanentAddress,
+    guardianAddress: guardianAddress,
+    guardianName: guardianName,
+    lastInstituteNameFE: lastInstituteNameFE,
+    lastInstituteAddressFE: lastInstituteAddressFE,
+    lastClass: lastClass,
+    fatherName: fatherName,
+    yearOfLeaving: yearOfLeaving,
+    phyHandicapped: phyHandicapped,
+    maharashtraPass: maharashtraPass,
+    hasPAN: hasPAN,
+    hasGivenMHTCET: hasGivenMHTCET,
+    CETScore: CETScore,
+    hasGivenJEEMains: hasGivenJEEMains,
+    JEEMainsScore: JEEMainsScore,
+    hasGivenJEEAdvanced: hasGivenJEEAdvanced,
+    JEEAdvancedScore: JEEAdvancedScore,
+    prn: prn,
     collegeEmail: collegeEmail,
     department: department,
     currentClass: currentClass
   }
-  
+  const GenStudentData = {
+    userName: studentName,
+    userMobile: studentMobile,
+    prn: prn,
+    collegeEmail: collegeEmail,
+    dob: dob,
+    department: department,
+    currentClass: currentClass
+
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    adduserdata(FeDseFormData,auth.currentUser.uid,"Admission_Data");
+    adduserdata(FeDseFormData, auth.currentUser.uid, "Admission_Data");
+    adduserdata(GenStudentData, auth.currentUser.uid, "User_Info");
   }
 
   return (
     <div>
       <NavigationBar />
-      
-      <div className="row align-items-md-stretch w-100 mt-3">
-			<div className="col-md">
-				<div className="h-100 p-5 text-white bg-dark rounded-3">
-				<h1>FE / DSE Registration Form</h1>
-				<p>Register Yourself</p>
-				</div>
-			</div>
-		</div>
 
-    <hr />
+      <div className="row align-items-md-stretch w-100 mt-3">
+        <div className="col-md">
+          <div className="h-100 p-5 text-white bg-dark rounded-3">
+            <h1>FE / DSE Registration Form</h1>
+            <p>Register Yourself</p>
+          </div>
+        </div>
+      </div>
+
+      <hr />
 
       <Form onSubmit={handleSubmit}>
 
         {/* <FieldsProvider> */}
 
-          <RadioField title="Cadidate Admission" 
-            option1="First Year(F.E)" 
-            option2="Direct Second Year(D.S.E)" 
-            name="candidateAdmission" 
-            controlId="candidateAdmission" 
-          />
+        <RadioField title="Cadidate Admission"
+          option1="First Year(F.E)"
+          option2="Direct Second Year(D.S.E)"
+          name="candidateAdmission"
+          controlId="candidateAdmission"
+        />
 
-          <TextField
-            title="Candidate Name"
-            placeholder="Enter Full Name"
-            controlId="candidateName"
-          />
-          <TextField
-            title="Mother's Name"
-            placeholder="Enter Full Name"
-            controlId="motherName"
-          />
-          <TextFieldInline
+        <TextField
+          title="Candidate Name"
+          placeholder="Enter Full Name"
+          controlId="candidateName"
+        />
+        <TextField
+          title="Mother's Name"
+          placeholder="Enter Full Name"
+          controlId="motherName"
+        />
+        <TextFieldInline
           title="Father's Name"
           placeholder="Enter Full Name"
           controlId="fatherName"
         />
 
-        
+
 
         <Row>
           <Col md>
@@ -196,16 +207,16 @@ export default function FEDSEForm() {
             />
           </Col>
         </Row>
-        
+
         <Row>
           <Col md>
             <GenderField controlId="studentGender" />
           </Col>
           <Col md>
             <YesNo
-            title="Phy. Handicapped"
-            name="handicappedRadio"
-            controlId="phyHandicapped"
+              title="Phy. Handicapped"
+              name="handicappedRadio"
+              controlId="phyHandicapped"
             />
           </Col>
         </Row>
@@ -247,25 +258,25 @@ export default function FEDSEForm() {
           </Col>
         </Row>
 
-        <YesNo 
+        <YesNo
           title="Do you have MHTCET Score?"
           name="mhtcet"
           controlId="mhtcet"
         />
 
-        <YesNo 
+        <YesNo
           title="Do you have JEE Mains Score?"
           name="jeeMains"
           controlId="jeeMains"
         />
 
-        {hasGivenJEEMains=="true" &&
-        <YesNo 
-          title="Do you have JEE Advanced Score?"
-          name="jeeAdvanced"
-          controlId="jeeAdvanced"
-        /> }
-        
+        {hasGivenJEEMains == "true" &&
+          <YesNo
+            title="Do you have JEE Advanced Score?"
+            name="jeeAdvanced"
+            controlId="jeeAdvanced"
+          />}
+
 
         <NumField
           title="Enter CET Merit number"
@@ -273,7 +284,7 @@ export default function FEDSEForm() {
           controlId="cetMeritNo"
           placeholder="CET Merit Number (12 digit)"
         />
-        
+
 
         <NumField
           title="Aadhar Card number"
@@ -289,10 +300,10 @@ export default function FEDSEForm() {
         />
 
         <NumField
-              title="Parents Annual Income(Rs)"
-              controlId="parentsAnnualIncome"
-              placeholder="Enter in Rs"
-              maxlength="15"
+          title="Parents Annual Income(Rs)"
+          controlId="parentsAnnualIncome"
+          placeholder="Enter in Rs"
+          maxlength="15"
         />
 
         <TextFieldInline
@@ -319,7 +330,7 @@ export default function FEDSEForm() {
         </Row>
         <Row>
           <Col md>
-          <TextFieldCol
+            <TextFieldCol
               title="District"
               placeholder="for example, Pune"
               controlId="district"
@@ -351,9 +362,9 @@ export default function FEDSEForm() {
           </Col>
           <Col md>
             <NumFieldCol
-                title="Guardian's Pin Code"
-                placeholder="Enter Guardian Address PinCode"
-                controlId="guardianPin"
+              title="Guardian's Pin Code"
+              placeholder="Enter Guardian Address PinCode"
+              controlId="guardianPin"
             />
           </Col>
         </Row>
@@ -361,10 +372,10 @@ export default function FEDSEForm() {
         <Row>
           <Col md>
             <TextFieldCol
-                title="Guardian's District"
-                placeholder="for example, Pune"
-                controlId="guardianDistrict"
-            />  
+              title="Guardian's District"
+              placeholder="for example, Pune"
+              controlId="guardianDistrict"
+            />
           </Col>
           <Col md>
             <EmailFieldCol controlId="guardianEmail" />
@@ -395,7 +406,7 @@ export default function FEDSEForm() {
             />
           </Col>
           <Col>
-          <NumFieldCol
+            <NumFieldCol
               title="Father's Mobile No"
               placeholder="Enter 10 digit Mobile No"
               maxlength="10"
@@ -413,15 +424,15 @@ export default function FEDSEForm() {
           title="Institute Address"
           placeholder="Enter last institute address"
           controlId="lastInstituteAddressFE"
-        /> 
-         <TextFieldInline
+        />
+        <TextFieldInline
           title="Last Class Studied"
           placeholder="Last Class"
           controlId="lastClass"
         />
-        
+
         <YearField title="Year of Leaving" controlId="yearofLeavingFE" />
-{/* 4 Fields */}
+        {/* 4 Fields */}
 
         <TextField
           title="Permanent Registration Number (PRN)"
@@ -436,7 +447,7 @@ export default function FEDSEForm() {
 
         <ClassField title="Current Class" />
 
-        
+
         {/* </FieldsProvider> */}
 
 
@@ -447,7 +458,7 @@ export default function FEDSEForm() {
         <StudentUndertaking />
 
         <ParentUndertaking />
-        
+
         <Button variant="primary" type="submit" >Submit</Button>{' '}
         <br></br>
         <br></br>

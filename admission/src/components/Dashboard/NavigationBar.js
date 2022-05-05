@@ -1,35 +1,36 @@
 import React from "react"
-import {Navbar, Container, Nav, NavDropdown, Row, Col} from "react-bootstrap"
+import { Navbar, Container, Nav, NavDropdown, Row, Col } from "react-bootstrap"
 import userImage from "../Assets/Sample_User_Icon.png"
 import "../CSS/Navbar.css"
+import { useState } from "react"
 import { logout } from "../Firebase/logoutuser"
 import { useHistory } from "react-router-dom"
 import { getAuth } from "firebase/auth"
 import bvcoel_logo from "../Images/bvcoe_logo_3.png"
 import { receiveallstudentfromfirebase } from "../Firebase/receiveallstudentdata"
+import { receiveallpendingpaymentsfromfirebase } from "../Firebase/receiveallpendingpayments"
 
-export default function NavigationBar({userType, userName}) {
+export default function NavigationBar({ userType, userName }) {
+    const [userInfo, setUserInfo] = useState(localStorage.getItem('response'));
     const history = useHistory();
     const auth = getAuth();
-    async function handleClick(data){
-        if (data === "home")
-        {
+    async function handleClick(data) {
+        if (data === "home") {
             history.push("/Dashboard")
         }
-        if (data === "logout")
-        {
+        if (data === "logout") {
             logout();
             await history.push("/");
         }
     }
-    async function handleLinkclick(){
-       await receiveallstudentfromfirebase();
+    async function handleLinkclick() {
+
     }
     return (
         <div>
             <Row className="CollegeInfo">
                 <Col md={2}>
-                    <img src={bvcoel_logo} width="200px"/>
+                    <img src={bvcoel_logo} width="200px" />
                 </Col>
                 <Col md={8}>
                     <Row>
@@ -57,18 +58,19 @@ export default function NavigationBar({userType, userName}) {
                 </Nav>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-                <Nav>
-                    <Nav.Link onclick = {handleLinkclick()}>Link</Nav.Link>
-                    
-                    <Nav.Link><img src={userImage} width="30px" height="30px" /></Nav.Link>
-                    <NavDropdown title={""} id="basic-nav-dropdown">
-                        <NavDropdown.Item  onClick={() => handleClick("logout")}>Log Out</NavDropdown.Item>
-                    </NavDropdown>
-                </Nav>
+                    <Nav>
+
+                        <Nav.Link onclick={handleLinkclick()}>Link</Nav.Link>
+
+                        <Nav.Link><img src={userImage} width="30px" height="30px" /></Nav.Link>
+                        <NavDropdown title={userName} id="basic-nav-dropdown">
+                            <NavDropdown.Item onClick={() => handleClick("logout")}>Log Out</NavDropdown.Item>
+                        </NavDropdown>
+                    </Nav>
                 </Navbar.Collapse>
             </Navbar>
 
         </div>
-        
+
     )
 }

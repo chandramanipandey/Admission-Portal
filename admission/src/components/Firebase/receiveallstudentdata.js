@@ -1,20 +1,22 @@
-import { getDatabase, ref, set,update,get,child } from "firebase/database";
-export async function receiveallstudentfromfirebase(){
-    try{
-            var allstudentdata = [];
-            const dbRef = ref(getDatabase());
-            const data  = await get(child(dbRef, `STUDENTS/`))
-            const snapshot = data.val()
-            for(var key in snapshot){
-                const data = snapshot[key];
-                const formdata = data.Admission_Data;
-                allstudentdata[key]=formdata;
-            }
-            return allstudentdata;
+import { getDatabase, ref, set, update, get, child } from "firebase/database";
+export async function receiveallstudentfromfirebase() {
+    try {
+        var allstudentdata = [];
+        const dbRef = ref(getDatabase());
+        const data = await get(child(dbRef, `STUDENTS/`))
+        const snapshot = data.val()
+        for (var key in snapshot) {
+            const alldata = snapshot[key];
+            const userInfo = alldata["User_Info"];
+            const admissionInfo = alldata["Admission_Data"];
+            allstudentdata["studentInfo"] = userInfo;
+            allstudentdata["Admission_Data"] = admissionInfo;
+        }
+        return allstudentdata
 
     }
 
-    catch(e){
+    catch (e) {
         console.log(e);
     }
 }
