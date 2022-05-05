@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Card, Row, Col } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../CSS/DashboardPage.css"
-
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { receivefromfirebase } from "../Firebase/receivefromfirebase";
 import { getAuth } from "firebase/auth";
 import DashboardCard from "./DashboardCard";
@@ -13,9 +12,9 @@ export function AdminDashboardPage() {
     return (
         <div>
             <Row>
-                <DashboardCard title="Total Students" titleText="See list of Students &gt;" />
-                <DashboardCard title="Student Fees" titleText="Check Fees &gt;" />
-                <DashboardCard title="Fees Tracking" titleText="Track Fees &gt;" />
+                <DashboardCard title="Total Students" titleText="See list of Students &gt;" controlId="StudentList"/>
+                <DashboardCard title="Student Fees" titleText="Check Fees &gt;" controlId="fedseform"/>
+                <DashboardCard title="Fees Tracking" titleText="Track Fees &gt;" controlId="fedseform"/>
             </Row>
             <Row className="mt-3">
                 <DashboardCard title="Notice Generation" titleText="Generate Notice &gt;" />

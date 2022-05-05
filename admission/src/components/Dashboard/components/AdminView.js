@@ -1,6 +1,7 @@
 import React from 'react'
 import NavigationBar from "../NavigationBar"
 import {AdminDashboardPage, StudentDashboardPage} from "../DashboardPage"
+import Footer from '../Footer'
 
 export default function AdminView() {
 	return (
@@ -10,6 +11,8 @@ export default function AdminView() {
 				<div className='mt-3'>
 					<AdminDashboardPage />
 				</div>
+				<Footer />
+
 
 		</div>
 	)

@@ -8,6 +8,8 @@ import { receivefromfirebase } from '../Firebase/receivefromfirebase'
 import { useHistory } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { getAuth } from 'firebase/auth'
+import "../CSS/Footer.css"
+import Footer from '../Dashboard/Footer'
 
 
 export default function MyProfile() {
@@ -32,8 +34,19 @@ export default function MyProfile() {
     return loading ? "Loading Page" : (
       <div>
       <NavigationBar />
+      <div className="row align-items-md-stretch w-100">
+        <div className="col-md">
+          <div className="h-100 p-5 text-white bg-dark rounded-3">
+            <h1>My Profile</h1>
+            {/* <p>Enter your Fees Details.</p> */}
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
 		  <Card>
-			<Card.Header className='text-center' as="h2" >My Profile</Card.Header>
+			{/* <Card.Header className='text-center' as="h2" >My Profile</Card.Header> */}
   		<Card.Body>
 				<Form>
 
@@ -65,8 +78,11 @@ export default function MyProfile() {
 			</Card.Body>
 
 		  </Card>
-		  
+
 	  </div>
 
   )
+
+
     }
+

@@ -71,10 +71,19 @@ export const FieldsProvider = (props) => {
     const [PANNo, setPANNo] = useState()
     const [guardianMobile, setGuardianMobile] = useState()
     
+    const [prn, setPrn] = useState("")
+    const [collegeEmail, setCollegeEmail] = useState("")
+    const [department, setDepartment] = useState("Computer Science")
+    const [currentClass, setCurrentClass] = useState("FE")
 
     return (
       <FieldsContext.Provider
       value={{
+          prnState: [prn, setPrn],
+          collegeEmailState: [collegeEmail, setCollegeEmail],
+          departmentState: [department, setDepartment],
+          currentClassState: [currentClass, setCurrentClass],
+
           guardianMobileState: [guardianMobile, setGuardianMobile],
 
           motherNameState: [motherName, setMotherName],
