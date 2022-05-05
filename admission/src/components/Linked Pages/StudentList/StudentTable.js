@@ -3,8 +3,6 @@ import { Table, Badge } from "react-bootstrap";
 import useAsync from "../../Others/useAsync";
 import { useHistory } from "react-router-dom";
 
-
-
 export default function StudentList(props) {
 
     const history = useHistory();
