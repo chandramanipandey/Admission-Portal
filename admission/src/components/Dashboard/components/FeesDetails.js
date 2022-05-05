@@ -43,7 +43,7 @@ senderAcNo : senderAcNoState[0],
 	const receiptlink = await addpaymentreceipt(auth.currentUser.uid,TransactionData.transactionReceipt);
 	TransactionData.Receipt= receiptlink;
 	delete TransactionData.transactionReceipt;
-	await adduserdata(TransactionData,auth.currentUser.uid,"Fees_Paid(Pending Approval)")
+	await adduserdata(TransactionData,auth.currentUser.uid,"Fees_Paid_Pending-Approval")
   }
 
 	return (

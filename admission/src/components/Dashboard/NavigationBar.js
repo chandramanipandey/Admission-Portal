@@ -6,6 +6,7 @@ import { logout } from "../Firebase/logoutuser"
 import { useHistory } from "react-router-dom"
 import { getAuth } from "firebase/auth"
 import bvcoel_logo from "../Images/bvcoe_logo_3.png"
+import { receiveallstudentfromfirebase } from "../Firebase/receiveallstudentdata"
 
 export default function NavigationBar({userType, userName}) {
     const history = useHistory();
@@ -20,6 +21,9 @@ export default function NavigationBar({userType, userName}) {
             logout();
             await history.push("/");
         }
+    }
+    async function handleLinkclick(){
+       await receiveallstudentfromfirebase();
     }
     return (
         <div>
@@ -54,7 +58,7 @@ export default function NavigationBar({userType, userName}) {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                 <Nav>
-                    <Nav.Link href="#link">Link</Nav.Link>
+                    <Nav.Link onclick = {handleLinkclick()}>Link</Nav.Link>
                     
                     <Nav.Link><img src={userImage} width="30px" height="30px" /></Nav.Link>
                     <NavDropdown title={""} id="basic-nav-dropdown">
