@@ -9,8 +9,8 @@ export async function receiveallstudentfromfirebase() {
             const alldata = snapshot[key];
             const userInfo = alldata["User_Info"];
             const admissionInfo = alldata["Admission_Data"];
-            allstudentdata["studentInfo"] = userInfo;
-            allstudentdata["Admission_Data"] = admissionInfo;
+            allstudentdata[key] = {userInfo:userInfo,admissionInfo:admissionInfo};
+    
         }
         return allstudentdata
 
