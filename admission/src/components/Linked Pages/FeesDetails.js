@@ -50,14 +50,15 @@ export default function FeesDetails() {
     e.preventDefault();
     const receiptlink = await addpaymentreceipt(
       auth.currentUser.uid,
-      TransactionData.transactionReceipt
+      TransactionData.transactionReceipt,
+      TransactionData
     );
     TransactionData.Receipt = receiptlink;
     delete TransactionData.transactionReceipt;
     await adduserdata(
       TransactionData,
       auth.currentUser.uid,
-      "Fees_Paid(Pending Approval)"
+      "Fees_Paid_Pending"
     );
   }
 

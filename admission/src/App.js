@@ -13,6 +13,7 @@ import StudentList from "./components/Linked Pages/StudentList/StudentList";
 import StudentDetail from "./components/Linked Pages/StudentList/StudentDetail";
 import AdminView from "./components/Dashboard/components/AdminView"
 import StudentView from "./components/Dashboard/components/StudentView"
+import Aboutus from "./components/Dashboard/Aboutus";
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
           <Route path="/StudentDetail/:prn" component={StudentDetail} account={true}/>
           <Route path="/AdminView" component={AdminView} account={true}/>
           <Route path="/StudentView" component={StudentView} account={true}/>
+          <Route path="/Aboutus" component={Aboutus} account={true}/>
+
           {/* <Route path='/404' component={Auth} />
           <Redirect from='*' to='/404' /> */}
         </FieldsProvider>
