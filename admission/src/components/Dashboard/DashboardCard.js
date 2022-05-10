@@ -23,6 +23,10 @@ export default function DashboardCard({title, titleText, controlId}) {
 			if (controlId == "StudentList") {
 					history.push('/StudentList')
 			}
+
+			if (controlId == "StudentFees") {
+				history.push('/StudentFees')
+			}
 			
 	}
 

@@ -21,7 +21,6 @@ export default function MyProfile() {
 
   async function fetchStudentData() {
     let response = await receivefromfirebase(auth.currentUser.uid, "Admission_Data");
-
     setStudentData(response)
     setLoading(false)
   }

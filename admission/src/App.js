@@ -10,6 +10,7 @@ import FEDSEForm from "./components/RegistrationForms/FEDSEForm";
 import MyProfile from "./components/MyProfile/MyProfile";
 import FeesDetails from "./components/Linked Pages/FeesDetails";
 import StudentList from "./components/Linked Pages/StudentList/StudentList";
+import StudentFees from "./components/Linked Pages/StudentFees";
 import StudentDetail from "./components/Linked Pages/StudentList/StudentDetail";
 import AdminView from "./components/Dashboard/components/AdminView"
 import StudentView from "./components/Dashboard/components/StudentView"
@@ -33,6 +34,7 @@ function App() {
           <Route path="/AdminView" component={AdminView} account={true}/>
           <Route path="/StudentView" component={StudentView} account={true}/>
           <Route path="/Aboutus" component={Aboutus} account={true}/>
+          <Route path="/StudentFees" component={StudentFees} account={true} />
 
           {/* <Route path='/404' component={Auth} />
           <Redirect from='*' to='/404' /> */}
