@@ -6,39 +6,16 @@ import { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap'
 
 export default function StudentFees() {
-	const [studentFeesList, setStudentFeesList] = useState(null)
 	const [loading, setLoading] = useState(true)
-	const [studentObjects, setStudentObjects] = useState()
 	const [displayDataAll, setDisplayDataAll] = useState([])
 
-	let StudentObj = []
 
 	async function fetchStudentFeesList() {
 		let response = await receiveallpendingpaymentsfromfirebase()
-		setStudentFeesList(response)
-
-		if (studentFeesList) {
-			for (const key in studentFeesList) {
-				StudentObj[key] = studentFeesList[key]
-			}
-			setStudentObjects(StudentObj)
-		}
-
-		setLoading(false)
-
-
-	}
-
-	useEffect(() => {
-		console.log("useEffect Running")
-		fetchStudentFeesList()
-
-		console.log(loading)
-		console.log(StudentObj)
 		const displayData = []
 
-		for (var key in studentObjects) {
-			const data = studentObjects[key];
+		for (var key in response) {
+			const data = response[key];
 			const userdata = data['userdata']
 
 			var userdataD = []
@@ -57,8 +34,11 @@ export default function StudentFees() {
 		}
 
 		setDisplayDataAll(displayData)
-		console.log("UseEffect Displaydata")
+	}
 
+	useEffect(() => {
+		fetchStudentFeesList();
+		setLoading(false);
 	}, [])
 
 	return loading ? "Loading Page" : (
@@ -86,7 +66,6 @@ export default function StudentFees() {
 
 				{!loading && Object.keys(displayDataAll).map((key, value) => {
 					var data = displayDataAll[key];
-					console.log(data);
 					return (
 
 						<tbody>
