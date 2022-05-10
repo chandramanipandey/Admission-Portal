@@ -12,8 +12,7 @@ export async function receiveallpendingpaymentsfromfirebase() {
             if (AllData !== undefined) {
                 const userdata = AllData["User_Info"];
                 const PendingFeesData = AllData["Fees_Paid_Pending"];
-                allstudentdata["StudentInfo"] = userdata;
-                allstudentdata["PendingFeesInfo"] = PendingFeesData;
+                allstudentdata[key] = {userdata:userdata,PendingFeesData:PendingFeesData};
             }
         }
         return allstudentdata;
