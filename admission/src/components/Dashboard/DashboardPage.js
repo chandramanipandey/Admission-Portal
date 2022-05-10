@@ -13,7 +13,7 @@ export function AdminDashboardPage() {
         <div>
             <Row>
                 <DashboardCard title="Total Students" titleText="See list of Students &gt;" controlId="StudentList"/>
-                <DashboardCard title="Student Fees" titleText="Check Fees &gt;" controlId="fedseform"/>
+                <DashboardCard title="Student Fees" titleText="Check Approved / Pending Fees &gt;" controlId="StudentFees"/>
                 <DashboardCard title="Fees Tracking" titleText="Track Fees &gt;" controlId="fedseform"/>
             </Row>
             <Row className="mt-3">

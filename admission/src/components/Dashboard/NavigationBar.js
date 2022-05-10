@@ -51,7 +51,7 @@ export default function NavigationBar({ userType, userName }) {
             </Row>
 
 
-            <Navbar expand="lg" className="Navbar-Box" >
+            <Navbar expand="lg" className="Navbar-Box mb-3" >
                 <Navbar.Brand href="#home">BVCOEL College Management System | {userType} View</Navbar.Brand>
                 <Nav className="me-auto">
                     <Nav.Link onClick={() => handleClick("home")}>Home</Nav.Link>
@@ -60,7 +60,7 @@ export default function NavigationBar({ userType, userName }) {
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                     <Nav>
 
-                        <Nav.Link onclick={handleLinkclick()}>Link</Nav.Link>
+                        <Nav.Link onClick={handleLinkclick()}>Link</Nav.Link>
 
                         <Nav.Link><img src={userImage} width="30px" height="30px" /></Nav.Link>
                         <NavDropdown title={userName} id="basic-nav-dropdown">

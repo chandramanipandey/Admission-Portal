@@ -1,5 +1,5 @@
 import React from 'react';
-import { CDBFooter, CDBFooterLink, CDBBtn, CDBIcon, CDBContainer, CDBBox } from 'cdbreact';
+// import { CDBFooter, CDBFooterLink, CDBBtn, CDBIcon, CDBContainer, CDBBox } from 'cdbreact';
 import { Col, Row } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
@@ -26,9 +26,7 @@ export default function Footer() {
 
 
 						
-						
 					</ul>
-					
 				</Row>
 			</footer>
 		</div>

@@ -13,6 +13,7 @@ export async function receiveallpendingpaymentsfromfirebase() {
                 const userdata = AllData["User_Info"];
                 const PendingFeesData = AllData["Fees_Paid_Pending"];
                 allstudentdata[key] = {userdata:userdata,PendingFeesData:PendingFeesData};
+
             }
         }
         return allstudentdata;
