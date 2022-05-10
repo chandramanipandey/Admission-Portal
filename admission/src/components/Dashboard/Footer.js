@@ -1,5 +1,5 @@
 import React from 'react';
-import { CDBFooter, CDBFooterLink, CDBBtn, CDBIcon, CDBContainer, CDBBox } from 'cdbreact';
+// import { CDBFooter, CDBFooterLink, CDBBtn, CDBIcon, CDBContainer, CDBBox } from 'cdbreact';
 import { Col, Row } from 'react-bootstrap';
 
 export default function Footer() {
@@ -20,9 +20,7 @@ export default function Footer() {
 						<li class="ms-3 pr-3"><a class="text-muted" href="https://www.facebook.com/BVCOELPune/"><i class="fa-brands fa-facebook fa-2x"></i></a></li>
 						<li class="ms-3 pr-3"><a class="text-muted" href="#"><i class="fa-brands fa-twitter fa-2x"></i></a></li>
 						<li class="ms-3 pr-3"><a class="text-muted" href="https://t.me/bvcoel"><i class="fa-brands fa-telegram fa-2x"></i></a></li>
-						
 					</ul>
-					
 				</Row>
 			</footer>
 		</div>
