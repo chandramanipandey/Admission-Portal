@@ -14,9 +14,9 @@ export default function StudentFees() {
 	let StudentObj = []
 
 	async function fetchStudentFeesList() {
-    let response = await receiveallpendingpaymentsfromfirebase()
+		let response = await receiveallpendingpaymentsfromfirebase()
 		setStudentFeesList(response)
-		
+
 		if (studentFeesList) {
 			for (const key in studentFeesList) {
 				StudentObj[key] = studentFeesList[key]
@@ -30,21 +30,21 @@ export default function StudentFees() {
 	}
 
 	useEffect(() => {
-    console.log("useEffect Running")
-    fetchStudentFeesList()
+		console.log("useEffect Running")
+		fetchStudentFeesList()
 
 		console.log(loading)
 		console.log(StudentObj)
 		const displayData = []
 
-		for(var key in studentObjects) {
+		for (var key in studentObjects) {
 			const data = studentObjects[key];
 			const userdata = data['userdata']
-			
+
 			var userdataD = []
 
 			const PendingFeesData = data['PendingFeesData']
-			for(var key2 in userdata) {
+			for (var key2 in userdata) {
 				userdataD[key2] = userdata[key2]
 
 			}
@@ -53,57 +53,62 @@ export default function StudentFees() {
 				userdataD[key3] = PendingFeesData[key3]
 			}
 			displayData[key] = userdataD;
-			
+
 		}
 
 		setDisplayDataAll(displayData)
 		console.log("UseEffect Displaydata")
-		displayData.forEach(x => console.log(x))
-  }, [])
+
+	}, [])
 
 	return loading ? "Loading Page" : (
 		<div>
-			<NavigationBar userType="Admin"/>
+			<NavigationBar userType="Admin" />
 			<h1>Student Fees</h1>
-			{/* {console.log("Student Objects")}
-			{console.log(studentObjects)} */}
 
-
-			{console.log("display all")}
-			{console.log(displayDataAll)}
-
-{/* PendingFeesData userdata */}
-      <Table className="project-list-table table-nowrap align-middle table-hover responsive-sm">
+			{/* PendingFeesData userdata */}
+			<Table className="project-list-table table-nowrap align-middle table-hover responsive-sm">
 				<thead>
 					<tr>
 						{/* UID TransactionID */}
+						<th>PRN</th>
 						<th>Name</th>
 						<th>Department</th>
 						<th>Class</th>
-						<th>Rollno</th>
-						<th>Category</th>
-						<th>Fees Paid</th>
-						<th>Pending Fees</th>
-						<th>Total Fees</th>
+						<th>Account Name</th>
+						<th>Account Number</th>
+						<th>Bank Name</th>
+						<th>Bank IFSC</th>
+						<th>Transaction Date</th>
+						<th>Transaction ID</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-						<td>Test</td>
-					</tr>
-				</tbody>
-			</Table>
 
+				{!loading && Object.keys(displayDataAll).map((key, value) => {
+					var data = displayDataAll[key];
+					console.log(data);
+					return (
+
+						<tbody>
+							<tr>
+
+								<td>{data.prn}</td>
+								<td>{data.userName}</td>
+								<td>{data.department}</td>
+								<td>{data.currentClass}</td>
+								<td>{data.senderAcName}</td>
+								<td>{data.senderAcNo}</td>
+								<td>{data.senderBankName}</td>
+								<td>{data.senderBankIFSC}</td>
+								<td>{data.transactionDate}</td>
+								<td>{data.transactionId}</td>
+							</tr>
+						</tbody>
+					);
+				})}
+			</Table>
 			<Footer />
-			
+
 		</div>
 	)
 }
