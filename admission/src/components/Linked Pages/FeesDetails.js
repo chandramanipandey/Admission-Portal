@@ -53,7 +53,9 @@ export default function FeesDetails() {
       TransactionData.transactionReceipt,
       TransactionData
     );
-    TransactionData.Receipt = receiptlink;
+    TransactionData.Receipt = receiptlink['downloadlink'];
+    TransactionData.Timestamp = receiptlink['Timestamp'];
+
     delete TransactionData.transactionReceipt;
     await adduserdata(
       TransactionData,

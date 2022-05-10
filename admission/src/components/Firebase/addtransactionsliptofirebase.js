@@ -28,7 +28,7 @@ export async function addpaymentreceipt(uid, file, TransactionData) {
         // Add latest receipt links to Fee_receipts in rtdb
         const db = getDatabase();
         update(databaseref(db, 'All_Fee_Receipts/'), { [keyname]: TransactionData });
-        return downloadlink;
+        return [downloadlink, Timestamp];
     }
     catch (e) {
         console.log(e);
