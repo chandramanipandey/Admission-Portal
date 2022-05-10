@@ -1,6 +1,11 @@
 import React from 'react';
 import  "../CSS/Aboutus.css";
 import { Button } from 'react-bootstrap';
+import udaychandrakantpatkar from '../Assets/patkarsir.jpg'
+import chandramanipandey from '../Assets/chandramani.jpg'
+import harshitpanse from '../Assets/harshit.jpg'
+import priyanshusingh from '../Assets/priyanshu.jpg'
+import shubhambhavsar from '../Assets/shubham.jpg'
 export default function Aboutus() {
   return (
   <div>
@@ -31,7 +36,7 @@ export default function Aboutus() {
   <div class="row">
     <div class="column">
       <div class="card text-white border-dark bg-dark mb-3">
-        <img src="" alt="logo"   style={{width:100}}/> 
+        <img src={udaychandrakantpatkar} alt="logo"   style={{width:'100%'}}/> 
         <div class="container">
           <h2 style={{fontFamily:'Cambria'}}>Prof. Uday Chandrakant Patkar</h2>
           <p class="title">Mentor</p>
@@ -45,7 +50,7 @@ export default function Aboutus() {
 
     <div class="column">
       <div class="card text-white border-dark bg-dark mb-3">
-        <img src="" alt="logo"   style={{width:100}}/> 
+        <img src={chandramanipandey} alt="logo"   style={{width:'100%'}}/> 
         <div class="container">
           <h2 style={{fontFamily:'Cambria'}}>Chandramani Pandey</h2>
           <p class="title">Developer</p>
@@ -57,7 +62,7 @@ export default function Aboutus() {
     </div>
     <div class="column">
       <div class="card text-white border-dark bg-dark mb-3">
-        <img src="" alt="logo"   style={{width:100}}/> 
+        <img src={harshitpanse} alt="logo"   style={{width:'100%'}}/> 
         <div class="container">
           <h2 style={{fontFamily:'Cambria'}}>Harshit Panse</h2>
           <p class="title">Developer</p>
@@ -69,7 +74,7 @@ export default function Aboutus() {
     </div>
     <div class="column">
       <div class="card text-white border-dark bg-dark mb-3">
-        <img src="" alt="logo"   style={{width:100}}/> 
+        <img src={priyanshusingh} alt="logo"   style={{width:'100%'}}/> 
         <div class="container">
           <h2 style={{fontFamily:'Cambria'}}>Priyanshu Singh</h2>
           <p class="title">Developer</p>
@@ -83,7 +88,7 @@ export default function Aboutus() {
 
     <div class="column">
       <div class="card text-white border-dark bg-dark mb-3">
-        <img src="" alt="logo"   style={{width:100}}/>
+        <img src={shubhambhavsar} alt="logo"   style={{width:'100%'}}/>
         <div class="container">
           <h2  style={{fontFamily:'Cambria'}}>Shubham Bhavsar</h2>
           <p class="title">Developer</p>
