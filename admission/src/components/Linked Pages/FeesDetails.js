@@ -36,6 +36,7 @@ export default function FeesDetails() {
   const [transactionDate, setTransactionDate] = transactionDateState;
   const [transactionReceipt, setTransactionReceipt] = transactionReceiptState;
   const [senderAcNo, setSenderAcNo] = senderAcNoState;
+  
   const TransactionData = {
     transactionId: transactionIdState[0],
     senderAcName: senderAcNameState[0],
