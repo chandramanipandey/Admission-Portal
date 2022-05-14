@@ -4,9 +4,12 @@ import { AdminDashboardPage, StudentDashboardPage } from "./DashboardPage"
 import { useState, useEffect } from 'react';
 import { getAuth } from 'firebase/auth';
 import { receivefromfirebase } from '../Firebase/receivefromfirebase';
+import { useHistory } from 'react-router-dom';
 
 export default function Dashboard() {
     const auth = getAuth();
+    const history = useHistory();
+    const [userauth, setuserauth] = useState(undefined)
     const [loading, setLoading] = useState(false)
     const [userData, setUserData] = useState({ Name: 'Name' });
     async function fetchUserData() {
@@ -15,10 +18,18 @@ export default function Dashboard() {
         setUserData(response);
     }
 
+
     useEffect(() => {
-        fetchUserData()
-        console.log("useEffect Running")
-    }, [])
+        try {
+            setuserauth(auth.currentUser.uid)
+            fetchUserData()
+            console.log("useEffect Running")
+        }
+        catch (e) {
+            history.push('/', e);
+        }
+    }, [auth])
+
     return (
         <div>
             <NavigationBar userType="Admin" userName={userData.userName} />

@@ -1,4 +1,5 @@
 import React from "react"
+import { useEffect } from "react"
 import { Form, Button, Col, Row } from "react-bootstrap"
 import TextField from "./Fields/TextField"
 import NumField from "./Fields/NumField"
@@ -26,9 +27,11 @@ import { getAuth } from "firebase/auth"
 import NavigationBar from "../Dashboard/NavigationBar"
 import Department from "./Fields/DepartmentField"
 import ClassField from "./Fields/ClassField"
-
+import { useHistory } from "react-router-dom"
 export default function FEDSEForm() {
   const auth = getAuth();
+  const history = useHistory();
+  const [userauth, setuserauth] = useState(undefined)
   const { motherNameState, studentNameState, candidateAdmissionState, permanentAddressState, guardianNameState, guardianAddressState, lastInstituteNameFEState, lastInstituteAddressFEState, lastClassState, fatherNameState, studentGenderState, permanentPinState, guardianPinState, studentMobileState, motherMobileState, fatherMobileState, dobState, placeOfBirthState, religionState, casteNameState, nationalityState, cityState, districtState, guardianCityState, guardianDistrictState, phyHandicappedState, hasPANState, hasGivenMHTCETState, CETScoreState, hasGivenJEEMainsState, JEEMainsScoreState, hasGivenJEEAdvancedState, JEEAdvancedScoreState, maharashtraPassState, cetMeritNoState, parentsAnnualIncomeState, aadharNoState, permanentEmailState, guardianEmailState, categoryState, yearOfLeavingState, prnState, collegeEmailState, departmentState, currentClassState } = useContext(FieldsContext)
 
   const [prn, setPrn] = prnState
@@ -144,6 +147,14 @@ export default function FEDSEForm() {
     currentClass: currentClass
 
   }
+  useEffect(() => {
+    try {
+      setuserauth(auth.currentUser.uid)
+    }
+    catch (e) {
+      history.push('/', e);
+    }
+  }, [auth])
 
   const handleSubmit = (e) => {
     e.preventDefault();

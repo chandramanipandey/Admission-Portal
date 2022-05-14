@@ -11,277 +11,287 @@ import NavigationBar from "../../Dashboard/NavigationBar";
 import StudentTable from "../../Linked Pages/StudentList/StudentTable";
 
 export default function StudentList() {
+   const auth = getAuth();
+   const history = useHistory();
+   const [userauth, setuserauth] = useState(undefined)
+   useEffect(() => {
+      try {
+         setuserauth(auth.currentUser.uid)
+      }
+      catch (e) {
+         history.push('/', e);
+      }
+   }, [auth])
+   const data = [
+      {
+         "firstYear": [
+            {
+               "name": "Ajay Kothari",
+               "prn": "36253786211",
+               "department": "computer Science",
+               "class": "abc",
+               "rollno": "09",
+               "dob": "03/05/2000",
+               "category": "obc",
+               "feesPaid": "no",
+               "pendingFees": "30000",
+               "totalFees": "85500"
+            },
+            {
+               "name": "Ajay Kothari",
+               "prn": "36253786212",
+               "department": "computer Science",
+               "class": "abc",
+               "rollno": "09",
+               "dob": "03/05/2000",
+               "category": "obc",
+               "feesPaid": "no",
+               "pendingFees": "30000",
+               "totalFees": "85500"
+            },
+            {
+               "name": "Ajay Kothari",
+               "prn": "36253786213",
+               "department": "computer Science",
+               "class": "abc",
+               "rollno": "09",
+               "dob": "03/05/2000",
+               "category": "obc",
+               "feesPaid": "no",
+               "pendingFees": "30000",
+               "totalFees": "85500"
+            },
+            {
+               "name": "Ajay Kothari",
+               "prn": "36253786214",
+               "department": "computer Science",
+               "class": "abc",
+               "rollno": "09",
+               "dob": "03/05/2000",
+               "category": "obc",
+               "feesPaid": "no",
+               "pendingFees": "30000",
+               "totalFees": "85500"
+            }
+         ]
+      },
+      {
+         "secondYear": [
+            {
+               "name": "Ajay Kothari",
+               "prn": "36253786215",
+               "department": "computer Science",
+               "class": "abc",
+               "rollno": "09",
+               "dob": "03/05/2000",
+               "category": "obc",
+               "feesPaid": "no",
+               "pendingFees": "30000",
+               "totalFees": "85500"
+            },
+            {
+               "name": "Ajay Kothari",
+               "prn": "36253786216",
+               "department": "computer Science",
+               "class": "abc",
+               "rollno": "09",
+               "dob": "03/05/2000",
+               "category": "obc",
+               "feesPaid": "no",
+               "pendingFees": "30000",
+               "totalFees": "85500"
+            },
+            {
+               "name": "Ajay Kothari",
+               "prn": "36253786217",
+               "department": "computer Science",
+               "class": "abc",
+               "rollno": "09",
+               "dob": "03/05/2000",
+               "category": "obc",
+               "feesPaid": "no",
+               "pendingFees": "30000",
+               "totalFees": "85500"
+            },
+            {
+               "name": "Ajay Kothari",
+               "prn": "36253786218",
+               "department": "computer Science",
+               "class": "abc",
+               "rollno": "09",
+               "dob": "03/05/2000",
+               "category": "obc",
+               "feesPaid": "no",
+               "pendingFees": "30000",
+               "totalFees": "85500"
+            }
+         ]
+      },
+      {
+         "thirdYear": [
+            {
+               "name": "Ajay Kothari",
+               "prn": "36253786219",
+               "department": "computer Science",
+               "class": "abc",
+               "rollno": "09",
+               "dob": "03/05/2000",
+               "category": "obc",
+               "feesPaid": "no",
+               "pendingFees": "30000",
+               "totalFees": "85500"
+            },
+            {
+               "name": "Ajay Kothari",
+               "prn": "36253786220",
+               "department": "computer Science",
+               "class": "abc",
+               "rollno": "09",
+               "dob": "03/05/2000",
+               "category": "obc",
+               "feesPaid": "no",
+               "pendingFees": "30000",
+               "totalFees": "85500"
+            },
+            {
+               "name": "Ajay Kothari",
+               "prn": "36253786221",
+               "department": "computer Science",
+               "class": "abc",
+               "rollno": "09",
+               "dob": "03/05/2000",
+               "category": "obc",
+               "feesPaid": "no",
+               "pendingFees": "30000",
+               "totalFees": "85500"
+            },
+            {
+               "name": "Ajay Kothari",
+               "prn": "36253786222",
+               "department": "computer Science",
+               "class": "abc",
+               "rollno": "09",
+               "dob": "03/05/2000",
+               "category": "obc",
+               "feesPaid": "no",
+               "pendingFees": "30000",
+               "totalFees": "85500"
+            }
+         ]
+      },
+      {
+         "finalYear": [
+            {
+               "name": "Ajay Kothari",
+               "prn": "36253786223",
+               "department": "computer Science",
+               "class": "abc",
+               "rollno": "09",
+               "dob": "03/05/2000",
+               "category": "obc",
+               "feesPaid": "no",
+               "pendingFees": "30000",
+               "totalFees": "85500"
+            },
+            {
+               "name": "Ajay Kothari",
+               "prn": "36253786224",
+               "department": "computer Science",
+               "class": "abc",
+               "rollno": "09",
+               "dob": "03/05/2000",
+               "category": "obc",
+               "feesPaid": "no",
+               "pendingFees": "30000",
+               "totalFees": "85500"
+            },
+            {
+               "name": "Ajay Kothari",
+               "prn": "36253786225",
+               "department": "computer Science",
+               "class": "abc",
+               "rollno": "09",
+               "dob": "03/05/2000",
+               "category": "obc",
+               "feesPaid": "no",
+               "pendingFees": "30000",
+               "totalFees": "85500"
+            },
+            {
+               "name": "Ajay Kothari",
+               "prn": "36253786226",
+               "department": "computer Science",
+               "class": "abc",
+               "rollno": "09",
+               "dob": "03/05/2000",
+               "category": "obc",
+               "feesPaid": "no",
+               "pendingFees": "30000",
+               "totalFees": "85500"
+            }
+         ]
+      }
+   ];
 
-  const data = [
-    {
-      "firstYear":[
-         {
-            "name":"Ajay Kothari",
-            "prn":"36253786211",
-            "department":"computer Science",
-            "class":"abc",
-            "rollno":"09",
-            "dob":"03/05/2000",
-            "category":"obc",
-            "feesPaid":"no",
-            "pendingFees":"30000",
-            "totalFees":"85500"
-         },
-         {
-            "name":"Ajay Kothari",
-            "prn":"36253786212",
-            "department":"computer Science",
-            "class":"abc",
-            "rollno":"09",
-            "dob":"03/05/2000",
-            "category":"obc",
-            "feesPaid":"no",
-            "pendingFees":"30000",
-            "totalFees":"85500"
-         },
-         {
-            "name":"Ajay Kothari",
-            "prn":"36253786213",
-            "department":"computer Science",
-            "class":"abc",
-            "rollno":"09",
-            "dob":"03/05/2000",
-            "category":"obc",
-            "feesPaid":"no",
-            "pendingFees":"30000",
-            "totalFees":"85500"
-         },
-         {
-            "name":"Ajay Kothari",
-            "prn":"36253786214",
-            "department":"computer Science",
-            "class":"abc",
-            "rollno":"09",
-            "dob":"03/05/2000",
-            "category":"obc",
-            "feesPaid":"no",
-            "pendingFees":"30000",
-            "totalFees":"85500"
-         }
-      ]
-   },
-   {
-      "secondYear":[
-         {
-            "name":"Ajay Kothari",
-            "prn":"36253786215",
-            "department":"computer Science",
-            "class":"abc",
-            "rollno":"09",
-            "dob":"03/05/2000",
-            "category":"obc",
-            "feesPaid":"no",
-            "pendingFees":"30000",
-            "totalFees":"85500"
-         },
-         {
-            "name":"Ajay Kothari",
-            "prn":"36253786216",
-            "department":"computer Science",
-            "class":"abc",
-            "rollno":"09",
-            "dob":"03/05/2000",
-            "category":"obc",
-            "feesPaid":"no",
-            "pendingFees":"30000",
-            "totalFees":"85500"
-         },
-         {
-            "name":"Ajay Kothari",
-            "prn":"36253786217",
-            "department":"computer Science",
-            "class":"abc",
-            "rollno":"09",
-            "dob":"03/05/2000",
-            "category":"obc",
-            "feesPaid":"no",
-            "pendingFees":"30000",
-            "totalFees":"85500"
-         },
-         {
-            "name":"Ajay Kothari",
-            "prn":"36253786218",
-            "department":"computer Science",
-            "class":"abc",
-            "rollno":"09",
-            "dob":"03/05/2000",
-            "category":"obc",
-            "feesPaid":"no",
-            "pendingFees":"30000",
-            "totalFees":"85500"
-         }
-      ]
-   },
-   {
-      "thirdYear":[
-         {
-            "name":"Ajay Kothari",
-            "prn":"36253786219",
-            "department":"computer Science",
-            "class":"abc",
-            "rollno":"09",
-            "dob":"03/05/2000",
-            "category":"obc",
-            "feesPaid":"no",
-            "pendingFees":"30000",
-            "totalFees":"85500"
-         },
-         {
-            "name":"Ajay Kothari",
-            "prn":"36253786220",
-            "department":"computer Science",
-            "class":"abc",
-            "rollno":"09",
-            "dob":"03/05/2000",
-            "category":"obc",
-            "feesPaid":"no",
-            "pendingFees":"30000",
-            "totalFees":"85500"
-         },
-         {
-            "name":"Ajay Kothari",
-            "prn":"36253786221",
-            "department":"computer Science",
-            "class":"abc",
-            "rollno":"09",
-            "dob":"03/05/2000",
-            "category":"obc",
-            "feesPaid":"no",
-            "pendingFees":"30000",
-            "totalFees":"85500"
-         },
-         {
-            "name":"Ajay Kothari",
-            "prn":"36253786222",
-            "department":"computer Science",
-            "class":"abc",
-            "rollno":"09",
-            "dob":"03/05/2000",
-            "category":"obc",
-            "feesPaid":"no",
-            "pendingFees":"30000",
-            "totalFees":"85500"
-         }
-      ]
-   },
-   {
-      "finalYear":[
-         {
-            "name":"Ajay Kothari",
-            "prn":"36253786223",
-            "department":"computer Science",
-            "class":"abc",
-            "rollno":"09",
-            "dob":"03/05/2000",
-            "category":"obc",
-            "feesPaid":"no",
-            "pendingFees":"30000",
-            "totalFees":"85500"
-         },
-         {
-            "name":"Ajay Kothari",
-            "prn":"36253786224",
-            "department":"computer Science",
-            "class":"abc",
-            "rollno":"09",
-            "dob":"03/05/2000",
-            "category":"obc",
-            "feesPaid":"no",
-            "pendingFees":"30000",
-            "totalFees":"85500"
-         },
-         {
-            "name":"Ajay Kothari",
-            "prn":"36253786225",
-            "department":"computer Science",
-            "class":"abc",
-            "rollno":"09",
-            "dob":"03/05/2000",
-            "category":"obc",
-            "feesPaid":"no",
-            "pendingFees":"30000",
-            "totalFees":"85500"
-         },
-         {
-            "name":"Ajay Kothari",
-            "prn":"36253786226",
-            "department":"computer Science",
-            "class":"abc",
-            "rollno":"09",
-            "dob":"03/05/2000",
-            "category":"obc",
-            "feesPaid":"no",
-            "pendingFees":"30000",
-            "totalFees":"85500"
-         }
-      ]
+   const [key, setKey] = useState(1);
+   const [studentData, setStudentData] = useState(data[0]?.firstYear);
+
+
+   async function keyCheck(key) {
+      if (key == 1) {
+         setKey(key);
+         setStudentData(studentData);
+      };
+      if (key == 2) {
+         setKey(key);
+         setStudentData(data[1]?.secondYear);
+      };
+      if (key == 3) {
+         setKey(key);
+         setStudentData(data[2]?.thirdYear);
+      };
+      if (key == 4) {
+         setKey(key);
+         setStudentData(data[3]?.finalYear);
+      };
    }
-  ];
 
-  const [key, setKey] = useState(1);
-  const [studentData, setStudentData] = useState(data[0]?.firstYear);
-  
+   return (
+      <>
+         <NavigationBar userType="Admin" userName="User Name" />
+         <div className="row align-items-md-stretch w-100">
+            <div className="col-md">
+               <div className="h-100 p-5 text-white bg-dark rounded-3">
+                  <h1>Students List</h1>
+               </div>
+            </div>
+         </div>
 
-  async function keyCheck(key) {
-    if(key == 1){
-      setKey(key);
-      setStudentData(studentData);
-    };
-    if(key == 2){
-      setKey(key);
-      setStudentData(data[1]?.secondYear);
-    };
-    if(key == 3){
-      setKey(key);
-      setStudentData(data[2]?.thirdYear);
-    };
-    if(key == 4){
-      setKey(key);
-      setStudentData(data[3]?.finalYear);
-    };
-  }
+         <hr />
+         <div>
+            <Tabs
+               id="controlled-tab-example"
+               activeKey={key}
+               onSelect={(k) => keyCheck(k)}
+               className="mb-3"
+            >
+               <Tab eventKey={1} title="First Year" >
+                  <StudentTable studentData={studentData} key={studentData?.prn} />
+               </Tab>
 
-  return (
-    <>
-      <NavigationBar userType="Admin" userName="User Name" />
-      <div className="row align-items-md-stretch w-100">
-        <div className="col-md">
-          <div className="h-100 p-5 text-white bg-dark rounded-3">
-            <h1>Students List</h1>
-          </div>
-        </div>
-      </div>
+               <Tab eventKey={2} title="Second Year" >
+                  <StudentTable studentData={data[1]?.secondYear} key={studentData?.prn} />
+               </Tab>
 
-      <hr />
-      <div>
-        <Tabs
-          id="controlled-tab-example"
-          activeKey={key}
-          onSelect={(k) => keyCheck(k)}
-          className="mb-3"
-        >
-          <Tab eventKey={1} title="First Year" >
-            <StudentTable studentData={studentData} key={studentData?.prn}/>
-          </Tab>
+               <Tab eventKey={3} title="Third Year">
+                  <StudentTable studentData={data[2]?.thirdYear} key={studentData?.prn} />
+               </Tab>
 
-          <Tab eventKey={2} title="Second Year" >
-            <StudentTable studentData={data[1]?.secondYear} key={studentData?.prn}/>
-          </Tab>
-
-          <Tab eventKey={3} title="Third Year">
-            <StudentTable studentData={data[2]?.thirdYear} key={studentData?.prn}/>
-          </Tab>
-
-          <Tab eventKey={4} title="Final Year">
-            <StudentTable studentData={data[3]?.finalYear} key={studentData?.prn}/>
-          </Tab>
-        </Tabs>
-      </div>
-    </>
-  );
+               <Tab eventKey={4} title="Final Year">
+                  <StudentTable studentData={data[3]?.finalYear} key={studentData?.prn} />
+               </Tab>
+            </Tabs>
+         </div>
+      </>
+   );
 }
