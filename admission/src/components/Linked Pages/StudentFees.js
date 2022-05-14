@@ -5,7 +5,6 @@ import { receiveallpendingpaymentsfromfirebase } from '../Firebase/receiveallpen
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { getAuth } from 'firebase/auth'
-import { Table } from 'react-bootstrap'
 import { Button, Table, Form } from 'react-bootstrap'
 
 export default function StudentFees() {
@@ -21,7 +20,7 @@ export default function StudentFees() {
 			setLoading(false);
 		}
 		catch (e) {
-			history.push('/', e);
+			history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
 		}
 	}, [auth])
 

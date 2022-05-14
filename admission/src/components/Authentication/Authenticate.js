@@ -8,6 +8,7 @@ import Firebaseauth from '../Firebase/firebase';
 import { role } from '../Firebase/role';
 
 export default function Auth(params) {
+    const auth = getAuth();
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
@@ -115,7 +116,7 @@ export default function Auth(params) {
     return (
         <div style={{ justifyContent: 'center', alignContent: 'center' }}>
             <div style={{ display: 'flex', alignContent: 'center', justifyContent: 'center' }}>
-                {autherror === undefined ? null : <Alert variant="danger">{"You are not authorised to visit this website, if you are an authorised user please login to continue"} </Alert>}
+                {autherror === undefined ? null : <Alert variant="danger">{params.location.state} </Alert>}
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
                 <img src={logo} alt="" style={{ width: '250px', height: '160px' }} />

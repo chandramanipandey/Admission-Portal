@@ -19,7 +19,7 @@ export default function StudentList() {
          setuserauth(auth.currentUser.uid)
       }
       catch (e) {
-         history.push('/', e);
+         history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
       }
    }, [auth])
    const data = [
