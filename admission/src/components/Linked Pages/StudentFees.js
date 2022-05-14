@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { getAuth } from 'firebase/auth'
 import { Table } from 'react-bootstrap'
+import { Button, Table, Form } from 'react-bootstrap'
 
 export default function StudentFees() {
 	const [loading, setLoading] = useState(true)
@@ -24,26 +25,28 @@ export default function StudentFees() {
 		}
 	}, [auth])
 
+	const [isApproved, setIsApproved] = useState(true)
 
 	async function fetchStudentFeesList() {
 		let response = await receiveallpendingpaymentsfromfirebase()
+		console.log(response)
 		const displayData = []
 
 		for (var key in response) {
 			const data = response[key];
 			const userdata = data['userdata']
+			const PendingFeesData = data['PendingFeesData']
 
 			var userdataD = []
 
-			const PendingFeesData = data['PendingFeesData']
 			for (var key2 in userdata) {
 				userdataD[key2] = userdata[key2]
-
 			}
 
 			for (var key3 in PendingFeesData) {
 				userdataD[key3] = PendingFeesData[key3]
 			}
+
 			displayData[key] = userdataD;
 
 		}
@@ -54,7 +57,14 @@ export default function StudentFees() {
 	return loading ? "Loading Page" : (
 		<div>
 			<NavigationBar userType="Admin" />
-			<h1>Student Fees</h1>
+
+			<div className="row align-items-md-stretch w-100 mb-3">
+        <div className="col-md">
+          <div className="h-100 p-5 text-white bg-dark rounded-3">
+            <h1>Students Fees</h1>
+          </div>
+        </div>
+      </div>
 
 			{/* PendingFeesData userdata */}
 			<Table className="project-list-table table-nowrap align-middle table-hover responsive-sm">
@@ -71,16 +81,24 @@ export default function StudentFees() {
 						<th>Bank IFSC</th>
 						<th>Transaction Date</th>
 						<th>Transaction ID</th>
+						<th>Receipt Approved</th>
 					</tr>
 				</thead>
 
 				{!loading && Object.keys(displayDataAll).map((key, value) => {
 					var data = displayDataAll[key];
-					return (
+					console.log(data)
 
+					function handleApprove() {
+						setIsApproved(!isApproved)
+						console.log(data.transactionId)
+						// UID
+						// isApproved	
+					}
+
+					return (
 						<tbody>
 							<tr>
-
 								<td>{data.prn}</td>
 								<td>{data.userName}</td>
 								<td>{data.department}</td>
@@ -91,11 +109,14 @@ export default function StudentFees() {
 								<td>{data.senderBankIFSC}</td>
 								<td>{data.transactionDate}</td>
 								<td>{data.transactionId}</td>
+								<td><button className={!isApproved ? 'btn btn-sm btn-success' : 'btn btn-sm btn-secondary'} onClick={handleApprove}>{!isApproved ? "Approve" : "Approved"}</button></td>
+								
 							</tr>
 						</tbody>
-					);
+					)
 				})}
 			</Table>
+			{console.log(isApproved)}
 			<Footer />
 
 		</div>
