@@ -7,27 +7,28 @@ export default function DashboardCard({title, titleText, controlId}) {
 	const history = useHistory();
 
 	async function handleClick(controlId) {
-			
-			if (controlId == "fedseform") {
-					history.push('/fedseform');
+			switch (controlId) {
+				case "fedseform":
+						history.push('/fedseform');
+						break
+				case "MyProfile":
+						history.push('/MyProfile')
+						break
+				case "FeesDetails":
+						history.push('/FeesDetails')
+						break
+				case "StudentList":
+						history.push('/StudentList')
+						break
+				case "StudentFees":
+					history.push('/StudentFees')
+					break
+				case "GenerateNotice":
+					history.push('/GenerateNotice')
+					break
+				default:
+					console.log("Doesn't Match any History.push")
 			}
-
-			if (controlId == "MyProfile") {
-					history.push('/MyProfile')
-			}
-			
-			if (controlId == "FeesDetails") {
-					history.push('/FeesDetails')
-			}
-
-			if (controlId == "StudentList") {
-					history.push('/StudentList')
-			}
-
-			if (controlId == "StudentFees") {
-				history.push('/StudentFees')
-			}
-			
 	}
 
 	return (
