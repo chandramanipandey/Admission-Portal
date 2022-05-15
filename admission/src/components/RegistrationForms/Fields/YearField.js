@@ -1,31 +1,41 @@
-import React from "react"
-import { Col, Form, Row } from "react-bootstrap"
-import { useState, useContext } from "react"
-import DatePicker from "react-datepicker"
-import { FieldsContext } from "../../States/FieldStates"
+import React from "react";
+import { Col, Form, Row } from "react-bootstrap";
+import { useState, useContext } from "react";
+import YearPicker from "react-year-picker";
+import { FieldsContext } from "../../States/FieldStates";
 
-export default function YearField({ title, controlId }) {
-  // const [yearOfLeaving, setYearOfLeaving] = useState(new Date())
+export default function YearField({ title, controlId, isDisabled }) {
+  const { yearOfLeavingState } = useContext(FieldsContext);
 
-  const { yearOfLeavingState } = useContext( FieldsContext )
+  const [yearOfLeaving, setYearOfLeaving] = yearOfLeavingState;
 
-  const [ yearOfLeaving, setYearOfLeaving ] = yearOfLeavingState
+  function handleChange(date) {
+    setYearOfLeaving(date);
+  }
 
   return (
     <div>
       <Form.Group as={Row}>
-        <Form.Label column sm={2}>
+        <Form.Label column sm={3}>
           {title}
         </Form.Label>
-        <Col sm={10}>
-          <DatePicker
-      selected={yearOfLeaving}
-      onChange={(date) => setYearOfLeaving(date)}
-      showYearPicker
-      dateFormat="yyyy"
-    />
+        <Col sm={9}>
+          {isDisabled ? (
+            <YearPicker
+              selected={yearOfLeaving}
+              onChange={handleChange}
+              dateFormat="yyyy"
+              disabled
+            />
+          ) : (
+            <YearPicker
+              selected={yearOfLeaving}
+              onChange={handleChange}
+              dateFormat="yyyy"
+            />
+          )}
         </Col>
       </Form.Group>
     </div>
-  )
+  );
 }

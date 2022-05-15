@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Col } from 'react-bootstrap'
 
-export default function TextFieldDisabled({title, placeholder}) {
+export default function TextFieldDisabled({title, placeholder, size}) {
 
 	return (
 		<div>
@@ -10,7 +10,7 @@ export default function TextFieldDisabled({title, placeholder}) {
           <Col md={2}>
             <Form.Label>{title}</Form.Label>
           </Col>
-          <Col md={10}>
+          <Col md={size? size : 10}>
             <Form.Control
               placeholder={placeholder}
 							disabled
