@@ -17,7 +17,7 @@ export function AdminDashboardPage() {
                 <DashboardCard title="Fees Tracking" titleText="Track Fees &gt;" controlId="fedseform"/>
             </Row>
             <Row className="mt-3">
-                <DashboardCard title="Notice Generation" titleText="Generate Notice &gt;" />
+                <DashboardCard title="Notice Generation" titleText="Generate Notice &gt;" controlId="GenerateNotice" />
             </Row>
         </div>
     )

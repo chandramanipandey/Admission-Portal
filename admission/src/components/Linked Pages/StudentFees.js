@@ -3,11 +3,27 @@ import Footer from '../Dashboard/Footer'
 import NavigationBar from '../Dashboard/NavigationBar'
 import { receiveallpendingpaymentsfromfirebase } from '../Firebase/receiveallpendingpayments'
 import { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { getAuth } from 'firebase/auth'
 import { Button, Table, Form } from 'react-bootstrap'
 
 export default function StudentFees() {
 	const [loading, setLoading] = useState(true)
 	const [displayDataAll, setDisplayDataAll] = useState([])
+	const auth = getAuth();
+	const history = useHistory();
+	const [userauth, setuserauth] = useState(undefined)
+	useEffect(() => {
+		try {
+			setuserauth(auth.currentUser.uid);
+			fetchStudentFeesList();
+			setLoading(false);
+		}
+		catch (e) {
+			history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
+		}
+	}, [auth])
+
 	const [isApproved, setIsApproved] = useState(true)
 
 	async function fetchStudentFeesList() {
@@ -35,15 +51,8 @@ export default function StudentFees() {
 		}
 
 		setDisplayDataAll(displayData)
+		console.log(displayData);
 	}
-
-	useEffect(() => {
-		fetchStudentFeesList();
-		setLoading(false);
-	}, [])
-
-	
-
 	return loading ? "Loading Page" : (
 		<div>
 			<NavigationBar userType="Admin" />

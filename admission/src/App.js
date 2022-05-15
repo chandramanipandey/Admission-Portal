@@ -15,6 +15,7 @@ import StudentDetail from "./components/Linked Pages/StudentList/StudentDetail";
 import AdminView from "./components/Dashboard/components/AdminView"
 import StudentView from "./components/Dashboard/components/StudentView"
 import Aboutus from "./components/Dashboard/Aboutus";
+import NoticeGeneration from "./components/Linked Pages/NoticeGeneration";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/StudentView" component={StudentView} account={true}/>
           <Route path="/Aboutus" component={Aboutus} account={true}/>
           <Route path="/StudentFees" component={StudentFees} account={true} />
+          <Route path="/GenerateNotice" component={NoticeGeneration} account={true} />
 
           {/* <Route path='/404' component={Auth} />
           <Redirect from='*' to='/404' /> */}

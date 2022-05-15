@@ -1,5 +1,5 @@
 import { Button, Form, Modal } from "react-bootstrap";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import TextField from "../RegistrationForms/Fields/TextField";
 import NumField from "../RegistrationForms/Fields/NumField";
 import DateField from "../RegistrationForms/Fields/DateField";
@@ -15,9 +15,12 @@ import { FieldsContext } from "../States/FieldStates";
 import { adduserdata } from "../Firebase/addtofirebase";
 import { getAuth } from "firebase/auth";
 import { addpaymentreceipt } from "../Firebase/addtransactionsliptofirebase";
+import { Link, useHistory } from 'react-router-dom';
 
 export default function FeesDetails() {
   const auth = getAuth();
+  const history = useHistory();
+  const [userauth, setuserauth] = useState(undefined)
   const {
     senderBankNameState,
     senderAcNameState,
@@ -46,6 +49,15 @@ export default function FeesDetails() {
     transactionReceipt: transactionReceiptState[0],
     senderAcNo: senderAcNoState[0],
   };
+  useEffect(() => {
+    try {
+      setuserauth(auth.currentUser.uid)
+    }
+    catch (e) {
+      console.log('Feesdetails error')
+      history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
+    }
+  }, [auth])
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -64,7 +76,6 @@ export default function FeesDetails() {
       "Fees_Paid_Pending"
     );
   }
-
   return (
     <>
       <NavigationBar userType="Admin" userName="User Name" />
@@ -143,5 +154,6 @@ export default function FeesDetails() {
         <div className="pb-3"></div>
       </Form>
     </>
+
   );
 }
