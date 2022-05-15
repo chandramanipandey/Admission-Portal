@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { getAuth } from 'firebase/auth';
 import { receivefromfirebase } from '../Firebase/receivefromfirebase';
 import { useHistory } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
 
 export default function Dashboard() {
     const auth = getAuth();
@@ -21,14 +22,22 @@ export default function Dashboard() {
 
     useEffect(() => {
         try {
-            setuserauth(auth.currentUser.uid)
-            fetchUserData()
-            console.log("useEffect Running")
+
+            auth.onAuthStateChanged((authobj) => {
+                if (authobj) {
+                    setuserauth(authobj.uid)
+                }
+                else {
+                    history.push('/', "You are not authorised to visit this website or you have recently logged out successfully, if you are an authorised user please login to continue");
+                }
+            }
+            );
+            fetchUserData();
         }
         catch (e) {
-            history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
+            console.log(e);
         }
-    }, [auth])
+    }, [])
 
     return (
         <div>

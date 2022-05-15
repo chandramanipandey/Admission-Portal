@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form"
 import { useState, useContext } from "react"
 import { FieldsContext } from "../../States/FieldStates"
 
-export default function NumField({ title, maxlength, controlId, placeholder }) {
+export default function NumField({ title, maxlength, controlId, placeholder, isDisabled, size }) {
   
   const { cetMeritNoState, parentsAnnualIncomeState, aadharNoState, senderAcNoState, guardianMobileState, studentMobileState } = useContext(FieldsContext)
 
@@ -19,16 +19,26 @@ export default function NumField({ title, maxlength, controlId, placeholder }) {
     <div>
       <Form.Group>
         <Form.Row>
-          <Form.Label column sm={2}>
+          <Form.Label column sm={3}>
             {title}
           </Form.Label>
-          <Col sm={10}>
-            <Form.Control
+          <Col sm={size? size : 9}> 
+            {isDisabled ? (
+              <Form.Control
+              type="number"
+              placeholder={placeholder}
+              maxlength={maxlength}
+              onChange={(e) => handleChange(e, controlId)}
+              disabled
+            />
+            ) : (
+              <Form.Control
               type="number"
               placeholder={placeholder}
               maxlength={maxlength}
               onChange={(e) => handleChange(e, controlId)}
             />
+            )}
           </Col>
         </Form.Row>
       </Form.Group>

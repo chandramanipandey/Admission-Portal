@@ -20,7 +20,7 @@ export default function NavigationBar({ userType, userName }) {
         }
         if (data === "logout") {
             logout();
-            await history.push("/");
+            await history.push("/",null);
         }
     }
     async function handleLinkclick() {

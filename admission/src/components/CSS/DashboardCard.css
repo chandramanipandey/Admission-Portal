@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+
+h2 {
+    color: #262626;
+    font-family: "Nunito", sans-serif;
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: 700;
+  }
+
+.dashboardCard {
+    display: block;
+    position: relative;
+    max-width: 100%;
+    background-color: #f2f8f9;
+    border-radius: 4px;
+    padding: 32px 24px;
+    margin: 12px;
+    text-decoration: none;
+    z-index: 0;
+    overflow: hidden;
+    cursor: pointer;
+}
+  
+.dashboardCard:before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: -16px;
+      right: -16px;
+      background: #343a40;
+      height: 32px;
+      width: 32px;
+      border-radius: 32px;
+      transform: scale(1);
+      transform-origin: 50% 50%;
+      transition: transform 0.25s ease-out;
+    }
+  
+    .dashboardCard:hover:before {
+        transform: scale(31);
+        
+    }
+
+    .dashboardCard :hover  {
+        transition: all 0.3s ease-out;
+        color: #ffffff;
+        }
+    
+    .dashboardCard p :hover {
+        transition: all 0.3s ease-out;
+        color: rgba(255, 255, 255, 0.8);
+    }
+    
+    

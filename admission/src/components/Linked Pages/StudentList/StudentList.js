@@ -8,6 +8,7 @@ import { Tabs, Tab } from "react-bootstrap";
 import { getAuth } from "firebase/auth";
 import NavigationBar from "../../Dashboard/NavigationBar";
 import StudentTable from "../../Linked Pages/StudentList/StudentTable";
+import { onAuthStateChanged } from "firebase/auth";
 import { receiveallstudentfromfirebase } from "../../Firebase/receiveallstudentdata";
 
 export default function StudentList() {
@@ -16,12 +17,21 @@ export default function StudentList() {
    const [userauth, setuserauth] = useState(undefined)
    useEffect(() => {
       try {
-         setuserauth(auth.currentUser.uid)
+
+         auth.onAuthStateChanged((authobj) => {
+            if (authobj) {
+               setuserauth(authobj.uid)
+            }
+            else {
+               history.push('/', "You are not authorised to visit this website or you have recently logged out successfully, if you are an authorised user please login to continue");
+            }
+         }
+         );
       }
       catch (e) {
-         history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
+         console.log(e);
       }
-   }, [auth])
+   }, [])
    const data = [
       {
          "firstYear": [

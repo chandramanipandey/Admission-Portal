@@ -32,6 +32,9 @@ export function StudentDashboardPage() {
                 <DashboardCard title="Fees Corner" titleText="Fill Fee Details &gt;" controlId="FeesDetails"/>
                 <DashboardCard title="My Profile" titleText="Check Profile &gt;" controlId="MyProfile"/>
             </Row>
+            <Row className="mt-3">
+                <DashboardCard title="Fee Structure" titleText="Manage Fee Structure &gt;" controlId="FeeStructure" />
+            </Row>
         </div>
         
     )

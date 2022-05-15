@@ -21,13 +21,15 @@ import ParentUndertaking from "./ParentUndertaking"
 
 import { createContext, useState, useContext } from "react"
 import { FieldsProvider, FieldsContext } from "../States/FieldStates"
-import "../CSS/FEForm.css"
+import "../CSS/Forms.css"
 import { adduserdata } from "../Firebase/addtofirebase"
 import { getAuth } from "firebase/auth"
 import NavigationBar from "../Dashboard/NavigationBar"
 import Department from "./Fields/DepartmentField"
 import ClassField from "./Fields/ClassField"
 import { useHistory } from "react-router-dom"
+import { onAuthStateChanged } from "firebase/auth"
+import { addroletofirebase } from "../Firebase/addroletofirebase"
 export default function FEDSEForm() {
   const auth = getAuth();
   const history = useHistory();
@@ -137,7 +139,7 @@ export default function FEDSEForm() {
     department: department,
     currentClass: currentClass
   }
-  
+
   const GenStudentData = {
     userName: studentName,
     userMobile: studentMobile,
@@ -145,22 +147,33 @@ export default function FEDSEForm() {
     collegeEmail: collegeEmail,
     dob: dob,
     department: department,
-    currentClass: currentClass
+    currentClass: currentClass,
+    Role: 'Student'
 
   }
   useEffect(() => {
     try {
-      setuserauth(auth.currentUser.uid)
+
+      auth.onAuthStateChanged((authobj) => {
+        if (authobj) {
+          setuserauth(authobj.uid)
+        }
+        else {
+          history.push('/', "You are not authorised to visit this website or you have recently logged out successfully, if you are an authorised user please login to continue");
+        }
+      }
+      );
     }
     catch (e) {
-      history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
+      console.log(e);
     }
-  }, [auth])
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();
     adduserdata(FeDseFormData, auth.currentUser.uid, "Admission_Data");
     adduserdata(GenStudentData, auth.currentUser.uid, "User_Info");
+    addroletofirebase(auth.currentUser.uid,auth.currentUser.email,'Student',GenStudentData['department']);
   }
 
   return (

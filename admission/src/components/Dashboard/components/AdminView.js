@@ -5,19 +5,28 @@ import { getAuth } from 'firebase/auth'
 import NavigationBar from "../NavigationBar"
 import { AdminDashboardPage, StudentDashboardPage } from "../DashboardPage"
 import Footer from '../Footer'
-
+import { onAuthStateChanged } from 'firebase/auth'
 export default function AdminView() {
 	const auth = getAuth();
 	const history = useHistory();
 	const [userauth, setuserauth] = useState(undefined)
 	useEffect(() => {
 		try {
-			setuserauth(auth.currentUser.uid)
+
+			auth.onAuthStateChanged((authobj) => {
+				if (authobj) {
+					setuserauth(authobj.uid)
+				}
+				else {
+					history.push('/', "You are not authorised to visit this website or you have recently logged out successfully, if you are an authorised user please login to continue");
+				}
+			}
+			);
 		}
 		catch (e) {
-			history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
+			console.log(e);
 		}
-	}, [auth])
+	}, [])
 	return (
 		<div>
 

@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { getAuth } from 'firebase/auth'
 import { Button, Table, Form } from 'react-bootstrap'
-
+import { onAuthStateChanged } from 'firebase/auth'
 export default function StudentFees() {
 	const [loading, setLoading] = useState(true)
 	const [displayDataAll, setDisplayDataAll] = useState([])
@@ -17,14 +17,22 @@ export default function StudentFees() {
 	
 	useEffect(() => {
 		try {
-			setuserauth(auth.currentUser.uid);
+
+			auth.onAuthStateChanged((authobj) => {
+				if (authobj) {
+					setuserauth(authobj.uid)
+				}
+				else {
+					history.push('/', "You are not authorised to visit this website or you have recently logged out successfully, if you are an authorised user please login to continue");
+				}
+			}
+			);
 			fetchStudentFeesList();
-			setLoading(false);
 		}
 		catch (e) {
-			history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
+			console.log(e);
 		}
-	}, [auth])
+	}, [])
 
 
 	async function fetchStudentFeesList() {
@@ -59,12 +67,12 @@ export default function StudentFees() {
 			<NavigationBar userType="Admin" />
 
 			<div className="row align-items-md-stretch w-100 mb-3">
-        <div className="col-md">
-          <div className="h-100 p-5 text-white bg-dark rounded-3">
-            <h1>Students Fees</h1>
-          </div>
-        </div>
-      </div>
+				<div className="col-md">
+					<div className="h-100 p-5 text-white bg-dark rounded-3">
+						<h1>Students Fees</h1>
+					</div>
+				</div>
+			</div>
 
 			{/* PendingFeesData userdata */}
 			<Table className="project-list-table table-nowrap align-middle table-hover responsive-sm">
@@ -110,7 +118,7 @@ export default function StudentFees() {
 								<td>{data.transactionDate}</td>
 								<td>{data.transactionId}</td>
 								<td><button className={!isApproved ? 'btn btn-sm btn-success' : 'btn btn-sm btn-secondary'} onClick={handleApprove}>{!isApproved ? "Approve" : "Approved"}</button></td>
-								
+
 							</tr>
 						</tbody>
 					)
