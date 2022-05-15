@@ -11,6 +11,7 @@ export function admingeneratenotice(uid, noticeblock) {
         const keyname = uid + '-' + date + '|' + month + '|' + year + '-' + Hour + ':' + Minutes + ':' + Seconds;
         const Timestamp = date + '|' + month + '|' + year + '-' + Hour + ':' + Minutes + ':' + Seconds;
         noticeblock['Timestamp'] = Timestamp;
+        noticeblock['key'] = keyname;
         const db = getDatabase();
         update(ref(db, 'Notice/'), { [keyname]: noticeblock });
 
