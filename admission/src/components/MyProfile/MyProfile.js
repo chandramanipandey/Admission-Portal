@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import { getAuth } from 'firebase/auth'
 import "../CSS/Footer.css"
 import Footer from '../Dashboard/Footer'
+import { onAuthStateChanged } from 'firebase/auth'
 
 
 export default function MyProfile() {
@@ -28,13 +29,22 @@ export default function MyProfile() {
 
   useEffect(() => {
     try {
-      setuserauth(auth.currentUser.uid)
-      fetchStudentData()
+
+      auth.onAuthStateChanged((authobj) => {
+        if (authobj) {
+          setuserauth(authobj.uid)
+        }
+        else {
+          history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
+        }
+      }
+      );
+      fetchStudentData();
     }
     catch (e) {
-      history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
+      console.log(e);
     }
-  }, [auth])
+  }, [])
 
 
 

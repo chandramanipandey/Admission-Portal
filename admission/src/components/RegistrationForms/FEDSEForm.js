@@ -28,6 +28,7 @@ import NavigationBar from "../Dashboard/NavigationBar"
 import Department from "./Fields/DepartmentField"
 import ClassField from "./Fields/ClassField"
 import { useHistory } from "react-router-dom"
+import { onAuthStateChanged } from "firebase/auth"
 export default function FEDSEForm() {
   const auth = getAuth();
   const history = useHistory();
@@ -137,7 +138,7 @@ export default function FEDSEForm() {
     department: department,
     currentClass: currentClass
   }
-  
+
   const GenStudentData = {
     userName: studentName,
     userMobile: studentMobile,
@@ -150,12 +151,21 @@ export default function FEDSEForm() {
   }
   useEffect(() => {
     try {
-      setuserauth(auth.currentUser.uid)
+
+      auth.onAuthStateChanged((authobj) => {
+        if (authobj) {
+          setuserauth(authobj.uid)
+        }
+        else {
+          history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
+        }
+      }
+      );
     }
     catch (e) {
-      history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
+      console.log(e);
     }
-  }, [auth])
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();

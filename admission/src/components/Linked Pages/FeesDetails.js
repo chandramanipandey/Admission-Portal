@@ -16,6 +16,7 @@ import { adduserdata } from "../Firebase/addtofirebase";
 import { getAuth } from "firebase/auth";
 import { addpaymentreceipt } from "../Firebase/addtransactionsliptofirebase";
 import { Link, useHistory } from 'react-router-dom';
+import { onAuthStateChanged } from "firebase/auth";
 
 export default function FeesDetails() {
   const auth = getAuth();
@@ -39,7 +40,7 @@ export default function FeesDetails() {
   const [transactionDate, setTransactionDate] = transactionDateState;
   const [transactionReceipt, setTransactionReceipt] = transactionReceiptState;
   const [senderAcNo, setSenderAcNo] = senderAcNoState;
-  
+
   const TransactionData = {
     transactionId: transactionIdState[0],
     senderAcName: senderAcNameState[0],
@@ -51,13 +52,21 @@ export default function FeesDetails() {
   };
   useEffect(() => {
     try {
-      setuserauth(auth.currentUser.uid)
+
+      auth.onAuthStateChanged((authobj) => {
+        if (authobj) {
+          setuserauth(authobj.uid)
+        }
+        else {
+          history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
+        }
+      }
+      );
     }
     catch (e) {
-      console.log('Feesdetails error')
-      history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
+      console.log(e);
     }
-  }, [auth])
+  }, [])
 
   async function handleSubmit(e) {
     e.preventDefault();
