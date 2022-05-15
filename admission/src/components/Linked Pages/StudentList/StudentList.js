@@ -6,10 +6,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Tabs, Tab } from "react-bootstrap";
 
 import { getAuth } from "firebase/auth";
-import { receivefromfirebase } from "../../Firebase/receivefromfirebase";
 import NavigationBar from "../../Dashboard/NavigationBar";
 import StudentTable from "../../Linked Pages/StudentList/StudentTable";
 import { onAuthStateChanged } from "firebase/auth";
+import { receiveallstudentfromfirebase } from "../../Firebase/receiveallstudentdata";
 
 export default function StudentList() {
    const auth = getAuth();
