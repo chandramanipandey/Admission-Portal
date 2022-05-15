@@ -3,7 +3,7 @@ import { Col, Form } from "react-bootstrap"
 import { useState, useContext } from "react"
 import { FieldsContext } from "../../States/FieldStates"
 
-export default function DateFieldInline({title, controlId}) {
+export default function DateFieldInline({title, controlId, size}) {
 	const { transactionDateState } = useContext(FieldsContext)
 
 	const [transactionDate, setTransactionDate] = transactionDateState
@@ -12,10 +12,10 @@ export default function DateFieldInline({title, controlId}) {
     <div>
       <Form.Group>
         <Form.Row>
-          <Form.Label column md={2}>
+          <Form.Label column md={3}>
             {title}
           </Form.Label>
-          <Col sm={10}>
+          <Col sm={size? size : 9}>
             <Form.Control
               type="date"
               onChange={(e) => handleChange(e, controlId)}

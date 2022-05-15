@@ -2,6 +2,8 @@ import React from 'react'
 import { Col } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
+import "../CSS/DashboardCard.css"
+
 
 export default function DashboardCard({title, titleText, controlId}) {
 	const history = useHistory();
@@ -23,6 +25,9 @@ export default function DashboardCard({title, titleText, controlId}) {
 				case "StudentFees":
 					history.push('/StudentFees')
 					break
+				case "FeeStructure":
+					history.push('/FeeStructure')
+					break
 				case "GenerateNotice":
 					history.push('/GenerateNotice')
 					break
@@ -33,13 +38,9 @@ export default function DashboardCard({title, titleText, controlId}) {
 
 	return (
 			<Col md={4}>
-					<div className="d-flex align-items-start rounded border border-primary bg-fff">
+					<div className="dashboardCard d-flex align-items-start rounded border border-primary bg-fff" onClick={() => handleClick(controlId)}>
 							<div className="p-15">
-							<h1 className="mb-40">{title}</h1>
-
-							<a href="#" class="btn btn-primary" onClick={() => handleClick(controlId)}>
-								{titleText}
-							</a>
+							<h2 className="cardTitle mb-40">{title}</h2>
 							</div>
 					</div>
 			</Col>
