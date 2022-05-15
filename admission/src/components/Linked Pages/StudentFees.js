@@ -13,6 +13,8 @@ export default function StudentFees() {
 	const auth = getAuth();
 	const history = useHistory();
 	const [userauth, setuserauth] = useState(undefined)
+	const [isApproved, setIsApproved] = useState(true)
+	
 	useEffect(() => {
 		try {
 
@@ -32,7 +34,6 @@ export default function StudentFees() {
 		}
 	}, [])
 
-	const [isApproved, setIsApproved] = useState(true)
 
 	async function fetchStudentFeesList() {
 		let response = await receiveallpendingpaymentsfromfirebase()

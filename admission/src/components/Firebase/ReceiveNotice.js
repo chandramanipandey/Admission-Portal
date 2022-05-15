@@ -5,7 +5,7 @@ export async function receivenotice() {
         const dbRef = ref(getDatabase());
         const data = await get(child(dbRef, `Notice/`))
         const snapshot = data.val()
-        console.log("recived notices", snapshot)
+        // console.log("recived notices", snapshot)
         return (snapshot);
 
     }

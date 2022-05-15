@@ -1,13 +1,33 @@
 import React, { useState } from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
+import { admingeneratenotice } from '../../Firebase/GenerateNotice'
+import { getAuth } from 'firebase/auth'
+import { useHistory } from 'react-router-dom'
 
 export default function GenerateNewNotice() {
+	const auth = getAuth();
+  const history = useHistory();
+
+  const [userauth, setuserauth] = useState(undefined)
+
 	const [FENotice, setFENotice] = useState(false)
 	const [SENotice, setSENotice] = useState(false)
 	const [TENotice, setTENotice] = useState(false)
 	const [BENotice, setBENotice] = useState(false)
 	const [noticeTitle, setNoticeTitle] = useState("")
 	const [noticeContent, setNoticeContent] = useState("")
+	const [department, setDepartment] = useState("Computer")
+	
+
+	// useEffect(() => {
+  //   try {
+  //     setuserauth(auth.currentUser.uid)
+  //   }
+  //   catch (e) {
+  //     console.log('Generate Notice error')
+  //     history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
+  //   }
+  // }, [auth])
 
 	function handleChange(e, controlId) {
 		switch (controlId) {
@@ -17,6 +37,10 @@ export default function GenerateNewNotice() {
 			case "noticeContent":
 				setNoticeContent(e.target.value)
 				console.log(noticeContent)
+				break
+			case "department":
+				setDepartment(e.target.value)
+				console.log(department)
 				break
 			case "FECheck":
 				setFENotice(!FENotice)
@@ -41,11 +65,14 @@ export default function GenerateNewNotice() {
 
 	function handleGenerate(e) {
 		e.preventDefault();
-		console.log("Generate")
+		const noticeData = {FENotice, SENotice, TENotice, BENotice,noticeTitle, noticeContent, department}
+
+		admingeneratenotice(auth.currentUser.uid, noticeData)
+		console.log("Generated")
 	}
 
 	return (
-		<div className=''>
+		<div className='mb-3'>
 			<div className='p-2'>
 				<h4 className='p-2'>Generate New Notice</h4>
 				<hr />
@@ -73,25 +100,25 @@ export default function GenerateNewNotice() {
 							<Form.Row>
 								<Form.Label column md={1} className='mx-3'>For Year</Form.Label>
 								<Col md className=''>
-									<input type="checkbox" className='mr-2' onChange={() => handleChange("FECheck")}/>
+									<input type="checkbox" className='mr-2' onChange={(e) => handleChange(e, "FECheck")}/>
 									<label class="form-check-label" for="FECheckbox">
 										FE
 									</label>
 								</Col>
 								<Col>
-								<input type="checkbox" className='mr-2' onChange={() => handleChange("SECheck")}/>
+								<input type="checkbox" className='mr-2' onChange={(e) => handleChange(e, "SECheck")}/>
 									<label class="form-check-label" for="SECheckbox">
 										SE
 									</label>
 								</Col>
 								<Col>
-								<input type="checkbox" className='mr-2' onChange={() => handleChange("TECheck")}/>
+								<input type="checkbox" className='mr-2' onChange={(e) => handleChange(e, "TECheck")}/>
 									<label class="form-check-label" for="TECheckbox">
 										TE
 									</label>
 								</Col>
 								<Col>
-								<input type="checkbox" className='mr-2' onChange={() => handleChange("BECheck")}/>
+								<input type="checkbox" className='mr-2' onChange={(e) => handleChange(e, "BECheck")}/>
 									<label class="form-check-label" for="BECheckbox">
 										BE
 									</label>
@@ -103,11 +130,11 @@ export default function GenerateNewNotice() {
 							<Form.Row>
 								<Form.Label column md={1} className='mx-3'>For Department</Form.Label>
 								<Col md>
-									<Form.Control as="select" defaultValue={"Computer"} >
-										<option>Computer</option>
-										<option>Electronics and Telecommunication</option>
-										<option>Mechanical</option>
-										<option>Civil</option>
+									<Form.Control as="select" onChange={(e) => handleChange(e, "department")} >
+										<option value='Computer'>Computer</option>
+										<option value='Electronics and Telecommunication'>Electronics and Telecommunication</option>
+										<option value='Mechanical'>Mechanical</option>
+										<option value='Civil'>Civil</option>
 									</Form.Control>
 								</Col>
 							</Form.Row>
@@ -116,12 +143,12 @@ export default function GenerateNewNotice() {
 						<Button className='mx-3' variant="success" type="submit" >Generate</Button>{' '}
 
 				</Form>
-
-
 				<hr />
+
+
 			</div>
 
-			<h4>All Notices</h4>
+			
 
 		</div>
 	)

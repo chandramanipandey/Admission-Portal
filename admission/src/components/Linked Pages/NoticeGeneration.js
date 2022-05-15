@@ -3,8 +3,12 @@ import NavigationBar from '../Dashboard/NavigationBar'
 import Footer from '../Dashboard/Footer'
 import JumbotronDark from './components/JumbotronDark'
 import GenerateNewNotice from './components/GenerateNewNotice'
+
+import ViewAllNotices from './components/ViewAllNotices'
+
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { useHistory } from 'react-router-dom'
+
 export default function NoticeGeneration() {
 	const auth = getAuth();
 	const history = useHistory();
@@ -32,7 +36,7 @@ export default function NoticeGeneration() {
 			<JumbotronDark title={"Notice Generation"} />
 
 			<GenerateNewNotice />
-
+			<ViewAllNotices />
 
 			<Footer />
 		</div>

@@ -50,6 +50,7 @@ export default function FeesDetails() {
     transactionReceipt: transactionReceiptState[0],
     senderAcNo: senderAcNoState[0],
   };
+
   useEffect(() => {
     try {
 
@@ -79,12 +80,14 @@ export default function FeesDetails() {
     TransactionData.Timestamp = receiptlink['Timestamp'];
 
     delete TransactionData.transactionReceipt;
+    
     await adduserdata(
       TransactionData,
       auth.currentUser.uid,
       "Fees_Paid_Pending"
     );
   }
+
   return (
     <>
       <NavigationBar userType="Admin" userName="User Name" />
