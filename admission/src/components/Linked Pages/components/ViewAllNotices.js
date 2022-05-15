@@ -1,6 +1,6 @@
 // import { async } from '@firebase/util'
 import React, { useEffect } from 'react'
-import {Table, Button} from 'react-bootstrap'
+import {Table, Button, Row, Col} from 'react-bootstrap'
 import { receivenotice } from '../../Firebase/ReceiveNotice'
 import { useState } from 'react'
 import { admindeletenotice } from '../../Firebase/DeleteNotice'
@@ -28,7 +28,12 @@ export default function ViewAllNotices() {
 
 	return loading ? 'Loading Data' : (
 		<div>
-			<h4 className='p-2'>All Notices</h4>
+			<Row>
+				<Col md={2}>
+				<h4 className='p-2'>All Notices</h4>
+				</Col>
+				<Col md><Button variant='warning' onClick={fetchNoticeData}>Reload</Button></Col>
+			</Row>
 			<hr />
 			
 			<Table className="project-list-table table-nowrap align-middle table-hover responsive-sm">
