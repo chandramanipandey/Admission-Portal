@@ -29,6 +29,7 @@ import Department from "./Fields/DepartmentField"
 import ClassField from "./Fields/ClassField"
 import { useHistory } from "react-router-dom"
 import { onAuthStateChanged } from "firebase/auth"
+import { addroletofirebase } from "../Firebase/addroletofirebase"
 export default function FEDSEForm() {
   const auth = getAuth();
   const history = useHistory();
@@ -146,7 +147,8 @@ export default function FEDSEForm() {
     collegeEmail: collegeEmail,
     dob: dob,
     department: department,
-    currentClass: currentClass
+    currentClass: currentClass,
+    Role: 'Student'
 
   }
   useEffect(() => {
@@ -157,7 +159,7 @@ export default function FEDSEForm() {
           setuserauth(authobj.uid)
         }
         else {
-          history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
+          history.push('/', "You are not authorised to visit this website or you have recently logged out successfully, if you are an authorised user please login to continue");
         }
       }
       );
@@ -171,6 +173,7 @@ export default function FEDSEForm() {
     e.preventDefault();
     adduserdata(FeDseFormData, auth.currentUser.uid, "Admission_Data");
     adduserdata(GenStudentData, auth.currentUser.uid, "User_Info");
+    addroletofirebase(auth.currentUser.uid,auth.currentUser.email,'Student',GenStudentData['department']);
   }
 
   return (

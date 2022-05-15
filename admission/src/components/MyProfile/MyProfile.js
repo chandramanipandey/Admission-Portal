@@ -35,7 +35,7 @@ export default function MyProfile() {
           setuserauth(authobj.uid)
         }
         else {
-          history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
+          history.push('/', "You are not authorised to visit this website or you have recently logged out successfully, if you are an authorised user please login to continue");
         }
       }
       );

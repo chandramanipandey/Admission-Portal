@@ -20,11 +20,11 @@ export default function NavigationBar({ userType, userName }) {
         }
         if (data === "logout") {
             logout();
-            await history.push("/");
+            await history.push("/", null);
         }
     }
     async function handleLinkclick() {
-
+        window.location.replace("https://outlook.office.com/mail/");
     }
     return (
         <div>
@@ -60,9 +60,8 @@ export default function NavigationBar({ userType, userName }) {
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                     <Nav>
 
-                        <Nav.Link onClick={handleLinkclick()}>Link</Nav.Link>
 
-                        <Nav.Link><img src={userImage} width="30px" height="30px" /></Nav.Link>
+                        <Nav.Link><img onClick={() => handleLinkclick()} src={userImage} width="30px" height="30px" /></Nav.Link>
                         <NavDropdown title={userName} id="basic-nav-dropdown">
                             <NavDropdown.Item onClick={() => handleClick("logout")}>Log Out</NavDropdown.Item>
                         </NavDropdown>
