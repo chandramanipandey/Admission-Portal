@@ -16,7 +16,7 @@ export default function StudentDetail(props) {
         </div>
       </div>
       <div>
-      <h2>prn : {prn}</h2>
+      <h2>id : {prn}</h2>
       </div>
       </>
   )
