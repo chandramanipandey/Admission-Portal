@@ -1,6 +1,6 @@
 import React from "react"
 import { Navbar, Container, Nav, NavDropdown, Row, Col } from "react-bootstrap"
-import userImage from "../Assets/Sample_User_Icon.png"
+import outlooklogo from "../Assets/Sample_User_Icon.png"
 import "../CSS/Navbar.css"
 import { useState } from "react"
 import { logout } from "../Firebase/logoutuser"
@@ -61,7 +61,7 @@ export default function NavigationBar({ userType, userName }) {
                     <Nav>
 
 
-                        <Nav.Link><img onClick={() => handleLinkclick()} src={userImage} width="30px" height="30px" /></Nav.Link>
+                        <Nav.Link><img onClick={() => handleLinkclick()} src={outlooklogo} width="30px" height="30px" /></Nav.Link>
                         <NavDropdown title={userName} id="basic-nav-dropdown">
                             <NavDropdown.Item onClick={() => handleClick("logout")}>Log Out</NavDropdown.Item>
                         </NavDropdown>

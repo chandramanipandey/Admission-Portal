@@ -1,29 +1,36 @@
-import jsonobject from './roles.json'
+import { getDatabase, ref, set, update, get, child } from "firebase/database";
 
-export function role(r){
-    const roles = jsonobject[0];
-    const adminrole = roles.admin.split(',');
-    const CSdepartmentrole = roles.Computer.split(',');
-    const Mdepartmentrole = roles.Mechanical.split(',');
-    const Cdepartmentrole = roles.Civil.split(',');
-    const Edepartmentrole = roles.Electronics.split(',');
-    const Allroles = adminrole.concat(Mdepartmentrole,Cdepartmentrole,Edepartmentrole,CSdepartmentrole);
-    if(r === "admin"){
-        return adminrole;
+export async function getrole(uid) {
+    try {
+        const role = null;
+        const dbRef = ref(getDatabase());
+        const data = await get(child(dbRef, `Users_Roles/` + uid + '/'))
+        const snapshot = data.val()
+        return [snapshot['role'], snapshot['department']];
+
     }
-    else if(r === "csdepartment"){
-        return CSdepartmentrole;
+
+    catch (e) {
+        return [null, null];
+        console.log(e);
     }
-    else if(r === "cdepartment"){
-        return Cdepartmentrole;
+}
+export async function getallrole() {
+    try {
+        const allrole = ['dummymail@gmail.com'];
+        const dbRef = ref(getDatabase());
+        const data = await get(child(dbRef, `Users_Roles/`))
+        const snapshot = data.val()
+        for (var key in snapshot) {
+            const data2 = snapshot[key]
+            if (data2['role'] === 'Admin' || data2['role'] === 'HOD') {
+                allrole.push(data2['email']);
+            }
+        }
+        return allrole;
     }
-    else if(r === "mdepartment"){
-        return Mdepartmentrole
-    }
-    else if(r === "edepartment"){
-        return Edepartmentrole;
-    }
-    else if(r === "allroles"){
-        return Allroles;
+
+    catch (e) {
+        console.log(e);
     }
 }

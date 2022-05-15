@@ -5,7 +5,9 @@ import logo from '../Assets/logo1.jpg';
 import { Link, useHistory } from 'react-router-dom';
 import { verifyEmail } from '../Firebase/verifyemailaddress';
 import Firebaseauth from '../Firebase/firebase';
-import { role } from '../Firebase/role';
+import { getrole, getallrole } from '../Firebase/role';
+import outlooklogo from "../Assets/Sample_User_Icon.png"
+import { Nav } from "react-bootstrap"
 
 export default function Auth(params) {
     const auth = getAuth();
@@ -21,12 +23,7 @@ export default function Auth(params) {
     const [submitsuccess, setSubmitsuccess] = useState(false);
     const [loginsuccess, setLoginsuccess] = useState(false);
     const history = useHistory();
-    const allrole = role("allroles");
-    const adminrole = role("admin");
-    const csrole = role("csdepartment");
-    const mrole = role("mdepartment");
-    const crole = role("csdepartment");
-    const erole = role("edepartment");
+
     const [autherror, setautherror] = useState(undefined);
     useEffect(() => {
         try {
@@ -36,6 +33,9 @@ export default function Auth(params) {
             console.log(e)
         }
     }, [params])
+    async function handleLinkclick() {
+        window.location.replace("https://outlook.office.com/mail/");
+    }
     async function signUp(e) {
         const auth = getAuth();
         e.preventDefault();
@@ -70,6 +70,7 @@ export default function Auth(params) {
             setLoading(true);
             const emailcheck = loginemailRef.current.value;
             const checkemailbvpedu = emailcheck.split("-");
+            const allrole = await getallrole();
             if (checkemailbvpedu[1] !== "bvcoel@bvp.edu.in" && !allrole.includes(emailcheck)) {
                 throw "Since you are not using official college email id for example: example-bvcoel@bvp.edu.in ";
             }
@@ -77,37 +78,43 @@ export default function Auth(params) {
             await signInWithEmailAndPassword(auth, loginemailRef.current.value, loginpasswordRef.current.value);
             setLoginsuccess(true);
             document.getElementById("signin-form").reset();
-            setautherror(undefined);
+            setautherror(null);
             if (!auth.currentUser.emailVerified) {
                 throw "Please verify your email to log in to portal, Check Junk/Spam emails if you have trouble finding email verification link";
             }
-            if (adminrole.includes(emailcheck)) {
+            const role = await getrole(auth.currentUser.uid)
+            if (role[0] === 'Admin' && role[1] === 'Administration') {
                 //admin login
                 await history.push("/AdminView")
             }
-            else if (crole.includes(emailcheck)) {
+            else if (role[0] === 'HOD' && role[1] === 'Computer') {
                 //civil dept login
                 await history.push("/Dashboard")
             }
-            else if (csrole.includes(emailcheck)) {
+            else if (role[0] === 'HOD' && role[1] === 'Electronics') {
                 //computer dept login
                 await history.push("/Dashboard")
 
             }
-            else if (mrole.includes(emailcheck)) {
+            else if (role[0] === 'HOD' && role[1] === 'Mechanical') {
                 //mechanical dept login
                 await history.push("/Dashboard")
             }
-            else if (erole.includes(emailcheck)) {
+            else if (role[0] === 'HOD' && role[1] === 'Civil') {
                 //electronics dept login
                 await history.push("/Dashboard")
             }
-            else {
+            else if (role[0] === 'Student') {
                 //Student login
                 await history.push("/StudentView")
 
             }
+            else {
+                setLoginError("You are not found in database if you are already signed up on portal Please contact Admin")
+            }
+
         } catch (e) {
+            console.log(e)
             setLoginError('Login Failed' + "  " + e);
         }
         setLoading(false);
@@ -124,7 +131,7 @@ export default function Auth(params) {
             <div style={{ paddingBottom: '10px', display: 'flex', justifyContent: 'center', alignContent: 'center', fontFamily: "Times New Roman,sans-serif", color: "navy" }}>
                 <h1>Bharati Vidyapeeth's College Of Engineering</h1>
             </div>
-            <div style={{ paddingBottom: '30px', display: 'flex', justifyContent: 'center', alignContent: 'center', fontFamily: "Times New Roman,sans-serif", color: "dodgerblue" }}>
+            <div style={{ paddingBottom: '30px', display: 'flex', justifyContent: 'center', alignContent: 'center', fontFamily: "Times New Roman,sans-serif", color: "orange" }}>
                 <h2>Admission-Portal</h2>
             </div>
             <CardGroup >
@@ -160,6 +167,7 @@ export default function Auth(params) {
                             <Button disabled={loading} className="w-100" variant="success" type="submit" >
                                 Submit
                             </Button>
+                            <Nav.Link style={{ paddingTop: '30px', display: 'flex', alignContent: 'center', justifyContent: 'center' }}><img onClick={() => handleLinkclick()} src={outlooklogo} width="30px" height="30px" /></Nav.Link>
                         </Form>
                     </Card.Body>
 

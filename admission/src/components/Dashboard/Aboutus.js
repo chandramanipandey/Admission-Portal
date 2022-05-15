@@ -9,18 +9,31 @@ import shubhambhavsar from '../Assets/shubham.jpg'
 import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { getAuth } from 'firebase/auth'
+import { onAuthStateChanged } from 'firebase/auth';
 export default function Aboutus() {
   const auth = getAuth();
   const history = useHistory();
   const [userauth, setuserauth] = useState(undefined)
+
   useEffect(() => {
-    try {
-      setuserauth(auth.currentUser.uid)
-    }
-    catch (e) {
-      history.push('/', e);
-    }
-  }, [auth])
+		try {
+
+		auth.onAuthStateChanged((authobj) => {
+				if (authobj) {
+					setuserauth(authobj.uid)
+				}
+				else {
+					history.push('/', "You are not authorised to visit this website or you have recently logged out successfully , if you are an authorised user please login to continue");
+				}
+			}
+			);
+      console.log(auth.currentUser.uid)
+		}
+		catch (e) {
+			console.log(e);
+		}
+	}, [])
+
   return (
     <div>
       <div class="about-section">
