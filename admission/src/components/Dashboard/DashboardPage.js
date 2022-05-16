@@ -19,6 +19,7 @@ export function AdminDashboardPage() {
             </Row>
             <Row className="mt-3">
                 <DashboardCard title="Notice Generation" titleText="Generate Notice &gt;" controlId="GenerateNotice" />
+                <DashboardCard title="Fee Structure" titleText="Manage Fee Structure &gt;" controlId="FeeStructure" />
             </Row>
         </div>
     )
@@ -29,16 +30,19 @@ export function StudentDashboardPage() {
     const [newuser, setnewUser] = useState(true);
     useEffect(() => {
         try {
-            const check = checknewuser(auth.currentUser.uid);
-            if (check != true) {
-                setnewUser(false);
-            }
-
+            setnewuser();
         }
         catch (e) {
             console.log(e)
         }
     }, [])
+    async function setnewuser(){
+        const check = await checknewuser(auth.currentUser.uid);
+            if (check != true) {
+                setnewUser(false);
+            }
+            else setnewUser(true);
+    }
 
     return (
         <div>
@@ -46,7 +50,7 @@ export function StudentDashboardPage() {
                 {newuser && <DashboardCard title="Register Yourself" titleText="Registration Form Link &gt;" controlId="fedseform" />}
                 <DashboardCard title="Fees Corner" titleText="Fill Fee Details &gt;" controlId="FeesDetails" />
                 <DashboardCard title="My Profile" titleText="Check Profile &gt;" controlId="MyProfile" />
-                <DashboardCard title="Fee Structure" titleText="Manage Fee Structure &gt;" controlId="FeeStructure" />
+                
             </Row>
 
         </div>
