@@ -24,7 +24,11 @@ export default function NavigationBar({ userType, userName }) {
         }
         
         if (data === "manageUsers") {
-            await history.push("/ManageUsers");
+            history.push("/ManageUsers");
+        }
+        if(data === "logout"){
+            logout();
+            history.push("/","You have been logged out successfully"); 
         }
     }
     async function handleLinkclick() {
@@ -71,9 +75,9 @@ export default function NavigationBar({ userType, userName }) {
 
 
             <Navbar expand="lg" className="Navbar-Box mb-3" >
-                <Navbar.Brand href="#home">BVCOEL College Management System | {userType} View</Navbar.Brand>
+                <Navbar.Brand href="#">BVCOEL College Management System | {userType} View</Navbar.Brand>
                 <Nav className="me-auto">
-                    <Nav.Link onClick={() => handleClick("home")}>Home</Nav.Link>
+                    {/* <Nav.Link onClick={() => handleClick("home")}>Home</Nav.Link> */}
                 </Nav>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
