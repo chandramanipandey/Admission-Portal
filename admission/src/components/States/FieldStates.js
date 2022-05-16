@@ -73,8 +73,14 @@ export const FieldsProvider = (props) => {
     
     const [prn, setPrn] = useState("")
     const [collegeEmail, setCollegeEmail] = useState("")
-    const [department, setDepartment] = useState("Computer Science")
+    const [department, setDepartment] = useState("Computer")
     const [currentClass, setCurrentClass] = useState("FE")
+
+    const [SSCMarksheet, setSSCMarksheet] = useState(null)
+    const [HSCMarksheet, setHSCMarksheet] = useState(null)
+    const [CETMarksheet, setCETMarksheet] = useState(null)
+    const [JEEMainsMarksheet, setJEEMainsMarksheet] = useState(null)
+    const [JEEAdvMarksheet, setJEEAdvMarksheet] = useState(null)
 
     return (
       <FieldsContext.Provider
@@ -146,6 +152,13 @@ export const FieldsProvider = (props) => {
           transactionReceiptState: [transactionReceipt, setTransactionReceipt],
           senderBankNameState: [senderBankName, setSenderBankName],
           senderBankIFSCState: [senderBankIFSC, setSenderBankIFSC],
+
+          SSCMarksheetState: [SSCMarksheet, setSSCMarksheet],
+          HSCMarksheetState: [HSCMarksheet, setHSCMarksheet],
+          CETMarksheetState: [CETMarksheet, setCETMarksheet],
+          JEEMainsMarksheetState: [JEEMainsMarksheet, setJEEMainsMarksheet],
+          JEEAdvMarksheetState: [JEEAdvMarksheet, setJEEAdvMarksheet],
+          
         }}
       >
         {props.children}

@@ -64,7 +64,7 @@ export default function GenerateNewNotice() {
 	}
 
 	function handleGenerate(e) {
-		e.preventDefault();
+		// e.preventDefault();
 		const noticeData = {FENotice, SENotice, TENotice, BENotice,noticeTitle, noticeContent, department}
 
 		admingeneratenotice(auth.currentUser.uid, noticeData)
