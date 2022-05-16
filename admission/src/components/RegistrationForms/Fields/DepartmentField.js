@@ -24,7 +24,7 @@ export default function Department() {
               as="select"
               onChange={(e) => handleChange(e)}
             >
-              <option value="Computer Science">Computer Science</option>
+              <option value="Computer">Computer</option>
               <option value="Mechanical">Mechanical</option>
               <option value="Civil">Civil</option>
               <option value="ENTC">ENTC</option>

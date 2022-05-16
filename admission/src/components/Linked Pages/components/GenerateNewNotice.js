@@ -10,10 +10,10 @@ export default function GenerateNewNotice() {
 
   const [userauth, setuserauth] = useState(undefined)
 
-	const [FENotice, setFENotice] = useState(false)
-	const [SENotice, setSENotice] = useState(false)
-	const [TENotice, setTENotice] = useState(false)
-	const [BENotice, setBENotice] = useState(false)
+	const [FE, setFENotice] = useState(false)
+	const [SE, setSENotice] = useState(false)
+	const [TE, setTENotice] = useState(false)
+	const [BE, setBENotice] = useState(false)
 	const [noticeTitle, setNoticeTitle] = useState("")
 	const [noticeContent, setNoticeContent] = useState("")
 	const [department, setDepartment] = useState("Computer")
@@ -43,20 +43,20 @@ export default function GenerateNewNotice() {
 				console.log(department)
 				break
 			case "FECheck":
-				setFENotice(!FENotice)
-				console.log(FENotice)
+				setFENotice(!FE)
+				console.log(FE)
 				break
 			case "SECheck":
-				setSENotice(!SENotice)
-				console.log(SENotice)
+				setSENotice(!SE)
+				console.log(SE)
 				break
 			case "TECheck":
-				setTENotice(!TENotice)
-				console.log(TENotice)
+				setTENotice(!TE)
+				console.log(TE)
 				break
 			case "BECheck":
-				setBENotice(!BENotice)
-				console.log(BENotice)
+				setBENotice(!BE)
+				console.log(BE)
 				break
 			default:
 				console.log("No match case for Checkbox")
@@ -65,7 +65,7 @@ export default function GenerateNewNotice() {
 
 	function handleGenerate(e) {
 		e.preventDefault();
-		const noticeData = {FENotice, SENotice, TENotice, BENotice,noticeTitle, noticeContent, department}
+		const noticeData = {FE, SE, TE, BE,noticeTitle, noticeContent, department}
 
 		admingeneratenotice(auth.currentUser.uid, noticeData)
 		console.log("Generated")
@@ -132,7 +132,7 @@ export default function GenerateNewNotice() {
 								<Col md>
 									<Form.Control as="select" onChange={(e) => handleChange(e, "department")} >
 										<option value='Computer'>Computer</option>
-										<option value='Electronics and Telecommunication'>Electronics and Telecommunication</option>
+										<option value='ENTC'>Electronics and Telecommunication</option>
 										<option value='Mechanical'>Mechanical</option>
 										<option value='Civil'>Civil</option>
 									</Form.Control>
