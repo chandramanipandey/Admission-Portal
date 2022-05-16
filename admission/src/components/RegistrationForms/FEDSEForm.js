@@ -255,40 +255,27 @@ export default function FEDSEForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    const sscdownloadlink = 'Not_Uploaded'
+    const hscdownloadlink = 'Not_Uploaded'
+    const cetdownloadlink = 'Not_Uploaded'
+    const jeemaindownloadlink = 'Not_Uploaded'
+    const jeeadvanceddownloadlink = 'Not_Uploaded'
     if (SSCMarksheet != null) {
       const sscdownloadlink = await addadmissiondocumentstofirebase(auth.currentUser.uid, SSCMarksheet, 'SSC.jpg');
+    }
 
-    }
-    else {
-      const sscdownloadlink = 'Not_Uploaded'
-    }
     if (HSCMarksheet != null) {
       const hscdownloadlink = await addadmissiondocumentstofirebase(auth.currentUser.uid, HSCMarksheet, 'HSC.jpg');
-
-    }
-    else {
-      const hscdownloadlink = 'Not_Uploaded'
     }
     if (CETMarksheet != null) {
       const cetdownloadlink = await addadmissiondocumentstofirebase(auth.currentUser.uid, CETMarksheet, 'CET.jpg');
-
-    }
-    else {
-      const cetdownloadlink = 'Not_Uploaded'
     }
     if (JEEMainsMarksheet != null) {
       const jeemaindownloadlink = await addadmissiondocumentstofirebase(auth.currentUser.uid, JEEMainsMarksheet, 'JEEMAIN.jpg');
-
-    }
-    else {
-      const jeemaindownloadlink = 'Not_Uploaded'
     }
     if (JEEAdvMarksheet != null) {
       const jeeadvanceddownloadlink = await addadmissiondocumentstofirebase(auth.currentUser.uid, JEEAdvMarksheetState, 'JEEADVANCED.jpg');
 
-    }
-    else {
-      const jeeadvanceddownloadlink = 'Not_Uploaded'
     }
     FeDseFormData['sscmarksheet'] = sscdownloadlink;
     FeDseFormData['hscmarksheet'] = hscdownloadlink;
