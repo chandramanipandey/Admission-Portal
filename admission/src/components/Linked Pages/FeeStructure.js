@@ -198,7 +198,7 @@ export default function FeeStructure() {
                   <Nav.Link eventKey="first">First Year</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="second">Direct Secon Year</Nav.Link>
+                  <Nav.Link eventKey="second">Direct Second Year</Nav.Link>
                 </Nav.Item>
               </Nav>
             </Col>
