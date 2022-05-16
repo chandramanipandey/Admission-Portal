@@ -9,6 +9,7 @@ import { getrole, getallrole } from '../Firebase/role';
 import outlooklogo from "../Assets/Sample_User_Icon.png"
 import { Nav } from "react-bootstrap"
 import { resetpassword } from '../Firebase/forgotpassword';
+import { checknewuser } from '../Firebase/checknewstudent';
 export default function Auth(params) {
     const auth = getAuth();
     const emailRef = useRef();
@@ -100,7 +101,8 @@ export default function Auth(params) {
             if (!auth.currentUser.emailVerified) {
                 throw "Please verify your email to log in to portal, Check Junk/Spam emails if you have trouble finding email verification link";
             }
-            const role = await getrole(auth.currentUser.uid)
+            const role = await getrole(auth.currentUser.uid);
+            const checknew = await checknewuser(auth.currentUser.uid);
             if (role[0] === 'Admin' && role[1] === 'Administration') {
                 //admin login
                 await history.push("/AdminView")
@@ -122,7 +124,7 @@ export default function Auth(params) {
                 //electronics dept login
                 await history.push("/Dashboard")
             }
-            else if (role[0] === 'Student') {
+            else if (role[0] === 'Student'||checknew) {
                 //Student login
                 await history.push("/StudentView")
 
