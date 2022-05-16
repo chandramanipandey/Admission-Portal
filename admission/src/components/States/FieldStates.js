@@ -76,6 +76,16 @@ export const FieldsProvider = (props) => {
     const [department, setDepartment] = useState("Computer Science")
     const [currentClass, setCurrentClass] = useState("FE")
 
+    //Student categories
+    const [ financialYear, setFinancialYear ] = useState("")
+    const [ open, setOpen ] = useState("")
+    const [ oms, setOms ] = useState("")
+    const [ obc_ebc, setObc_ebc ] = useState("")
+    const [ sc, setSc ] = useState("")
+    const [ st_nt, setSt_nt ] = useState("")
+    const [ issueDate, setIssueDate ] = useState("")
+
+
     return (
       <FieldsContext.Provider
       value={{
@@ -146,6 +156,15 @@ export const FieldsProvider = (props) => {
           transactionReceiptState: [transactionReceipt, setTransactionReceipt],
           senderBankNameState: [senderBankName, setSenderBankName],
           senderBankIFSCState: [senderBankIFSC, setSenderBankIFSC],
+
+          //Student Categories
+          financialYearState: [ financialYear, setFinancialYear ],
+          openState: [ open, setOpen ],
+          omsState: [ oms, setOms ],
+          obc_ebcState: [ obc_ebc, setObc_ebc ],
+          scState: [ sc, setSc ],
+          st_ntState: [ st_nt, setSt_nt ],
+          issueDateState: [ issueDate, setIssueDate ],
         }}
       >
         {props.children}
