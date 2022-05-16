@@ -30,6 +30,8 @@ import ClassField from "./Fields/ClassField"
 import { useHistory } from "react-router-dom"
 import { onAuthStateChanged } from "firebase/auth"
 import { addroletofirebase } from "../Firebase/addroletofirebase"
+import { checknewuser } from "../Firebase/checknewstudent"
+import { Alert } from "react-bootstrap"
 export default function FEDSEForm() {
   const auth = getAuth();
   const history = useHistory();
@@ -93,7 +95,7 @@ export default function FEDSEForm() {
   const [JEEMainsScore, setJEEMainsScore] = JEEMainsScoreState
   const [hasGivenJEEAdvanced, setHasGivenJEEAdvanced] = hasGivenJEEAdvancedState
   const [JEEAdvancedScore, setJEEAdvancedScore] = JEEAdvancedScoreState
-
+  const [newuser,setnewUser] = useState();
   const FeDseFormData = {
     placeOfBirth: placeOfBirth,
     religion: religion,
@@ -163,11 +165,22 @@ export default function FEDSEForm() {
         }
       }
       );
+      setnewuserfunction();
     }
     catch (e) {
       console.log(e);
     }
   }, [])
+  async function setnewuserfunction() {
+		try{	
+        const newusercheck = await checknewuser(auth.currentUser.uid)
+        console.log(newusercheck)
+				setnewUser(newusercheck);
+		}
+		catch(e){
+			console.log(e);
+		}
+	}
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -176,11 +189,9 @@ export default function FEDSEForm() {
     addroletofirebase(auth.currentUser.uid,auth.currentUser.email,'Student',GenStudentData['department']);
   }
 
-  return (
-    <div>
-      <NavigationBar />
-
-      <div className="row align-items-md-stretch w-100 mt-3">
+  return(<div>
+    <NavigationBar />
+    <div className="row align-items-md-stretch w-100 mt-3">
         <div className="col-md">
           <div className="h-100 p-5 text-white bg-dark rounded-3">
             <h1>FE / DSE Registration Form</h1>
@@ -190,6 +201,7 @@ export default function FEDSEForm() {
       </div>
 
       <hr />
+    {newuser==true?
 
       <Form onSubmit={handleSubmit}>
 
@@ -488,8 +500,10 @@ export default function FEDSEForm() {
         <br></br>
         <br></br>
       </Form>
+    :<Alert variant="success" style={{ width: '100%' }}>You are already registered on this platform if you want to edit your form, Please contact Admin</Alert>}
     </div>
   )
+  
 }
 
 // nice

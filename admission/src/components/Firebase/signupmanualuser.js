@@ -18,24 +18,25 @@ export async function manualsignUpUser(email,password,User_Info){
        }
        
 }
+//Don't Change key value
 // User_Info{
-//     Name:,
-//     officialemailid:,
-//     phonenumber:,
+//     userName:,
+//     CollegeEmail:,
+//     userMobile:,
 //     designation:,
 //     department:,
-//     dateofbirth:
-//     typeofidadminuser:,
+//     dob:
+//     Role:,
 // }
 
 // function call example
 // await manualsignUpUser("bvcoelcomp@gmail.com","123456",{
-//     Name:'Admin Computer',
-//     officialemailid:'bvcoelcomp@gmail.com',
-//     phonenumber:'8888999977',
+//     userName:'Admin Computer',
+//     CollegeEmail:'bvcoelcomp@gmail.com',
+//     userMobile:'8888999977',
 //     designation:'Administration',
 //     department:'Computer Department',
-//     dateofbirth:'12-7-2000',
+//     dob:'12-7-2000',
 //     Role:'Admin'
 // });
 // logout();
