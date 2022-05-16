@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Tab, Row, Col, Nav, Form } from "react-bootstrap";
 import NumField from "../RegistrationForms/Fields/NumField";
+import TextField from "../RegistrationForms/Fields/TextField";
 // import YearField from "../RegistrationForms/Fields/YearField";
 import NavigationBar from "../Dashboard/NavigationBar";
 import DateFieldInline from "../RegistrationForms/Fields/DateFieldInline";
@@ -50,7 +51,6 @@ export default function FeeStructure() {
   function handleDisable(event) {
     var id = event.target.id;
     if (id === "cancel") {
-      reset();
       setAll(FormData, null);
       setFinancialYear('');
       setOpen('');
@@ -67,27 +67,35 @@ export default function FeeStructure() {
   };
 
   async function onSubmit(data) {
+    var year = document.getElementById('financialYear').value;
+    setFinancialYear(year);
+    FormData.financialYear = year;
     console.log(FormData);
     reset(FormData);
     alert("success !")
 
   };
 
-  useEffect(() => {
-    reset(financialYear,
-      open,
-      oms,
-      obc_ebc,
-      sc,
-      st_nt,
-      issueDate,);
-}, [openState]);
-
   const FeeStructureForm = ({key}) => {
     return (
       <div className="col-10" key={key}>
         <Form onSubmit={handleSubmit(onSubmit)} >
           {/* <YearField title="FINANCIAL YEAR" controlId="financialYear" /> */}
+          <Form.Group>
+        <Form.Row>
+          <Form.Label column sm={3}>
+            {"FINANCIAL YEAR"}
+          </Form.Label>
+          <Col sm={6}>
+            <Form.Control
+              placeholder="Enter Financial year : Eg. 2022"
+              defaultValue={financialYear === null ? '' : financialYear}
+              controlId="financialYear"
+              id="financialYear"
+            />
+          </Col>
+        </Form.Row>
+      </Form.Group>
           <NumField
             title="OPEN"
             placeholder="enter fees applicable for OPEN"
