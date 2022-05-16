@@ -50,9 +50,16 @@ export default function FeeStructure() {
   function handleDisable(event) {
     var id = event.target.id;
     if (id === "cancel") {
-      setAll(FormData, null);
       reset();
-      console.log("nn", FormData);
+      setAll(FormData, null);
+      setFinancialYear('');
+      setOpen('');
+      setOms('');
+      setObc_ebc('');
+      setSc('');
+      setSt_nt('');
+      setIssueDate('');
+
       setDisabled(true);
     } else if (id === "edit") {
       setDisabled(false);
@@ -76,10 +83,10 @@ export default function FeeStructure() {
       issueDate,);
 }, [openState]);
 
-  const FeeStructureForm = () => {
+  const FeeStructureForm = ({key}) => {
     return (
-      <div className="col-10">
-        <Form onSubmit={handleSubmit(onSubmit)}>
+      <div className="col-10" key={key}>
+        <Form onSubmit={handleSubmit(onSubmit)} >
           {/* <YearField title="FINANCIAL YEAR" controlId="financialYear" /> */}
           <NumField
             title="OPEN"
@@ -88,7 +95,7 @@ export default function FeeStructure() {
             maxLength={6}
             isDisabled={disabled}
             size={6}
-            value={open != null ? open : null}
+            value={open === null ? '' : open}
           />
           <NumField
             title="OTHER THAN MAHARASHTRA"
@@ -97,7 +104,7 @@ export default function FeeStructure() {
             maxlength={6}
             isDisabled={disabled}
             size={6}
-            value={oms != null ? oms : null}
+            value={oms === null ? '' : oms}
           />
           <NumField
             title="OBC/EBC"
@@ -106,7 +113,7 @@ export default function FeeStructure() {
             maxlength={6}
             isDisabled={disabled}
             size={6}
-            value={obc_ebc != null ? obc_ebc : null}
+            value={obc_ebc === null ? '' : obc_ebc}
           />
           <NumField
             title="SCHEDULED CASTE"
@@ -115,7 +122,7 @@ export default function FeeStructure() {
             maxlength={6}
             isDisabled={disabled}
             size={6}
-            value={sc != null ? sc : null}
+            value={sc === null ? '' : sc}
           />
 
           <NumField
@@ -125,7 +132,7 @@ export default function FeeStructure() {
             maxlength={6}
             isDisabled={disabled}
             size={6}
-            value={st_nt != null ? st_nt : null}
+            value={st_nt === null ? '' : st_nt}
           />
           <DateFieldInline 
           title="ISSUE DATE" 
@@ -207,7 +214,7 @@ export default function FeeStructure() {
                         Edit
                       </Button>
                     </div>
-                    {FeeStructureForm()}
+                    {FeeStructureForm({key:1})}
                   </div>
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
@@ -228,7 +235,7 @@ export default function FeeStructure() {
                         Edit
                       </Button>
                     </div>
-                    {FeeStructureForm()}
+                    {FeeStructureForm({key:2})}
                   </div>
                 </Tab.Pane>
               </Tab.Content>
