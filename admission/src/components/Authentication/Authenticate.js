@@ -8,7 +8,7 @@ import Firebaseauth from '../Firebase/firebase';
 import { getrole, getallrole } from '../Firebase/role';
 import outlooklogo from "../Assets/Sample_User_Icon.png"
 import { Nav } from "react-bootstrap"
-
+import { resetpassword } from '../Firebase/forgotpassword';
 export default function Auth(params) {
     const auth = getAuth();
     const emailRef = useRef();
@@ -23,6 +23,9 @@ export default function Auth(params) {
     const [submitsuccess, setSubmitsuccess] = useState(false);
     const [loginsuccess, setLoginsuccess] = useState(false);
     const history = useHistory();
+    const [forgotpassword, setforgotpassword] = useState(false);
+    const [loginorforgotpassword, setloginorforgotpassword] = useState('Log In')
+    const [passwordresetemail, setpasswordresetemail] = useState(false);
 
     const [autherror, setautherror] = useState(undefined);
     useEffect(() => {
@@ -33,6 +36,11 @@ export default function Auth(params) {
             console.log(e)
         }
     }, [params])
+    async function handleforgotclick() {
+        setforgotpassword(true);
+        setloginorforgotpassword('Send Password Reset Email');
+
+    }
     async function handleLinkclick() {
         window.location.replace("https://outlook.office.com/mail/");
     }
@@ -60,6 +68,16 @@ export default function Auth(params) {
             setError('Failed to create an account' + "  " + e);
         }
         setLoading(false);
+    }
+    async function signInorforgotpassword(e) {
+        if (forgotpassword) {
+            await resetpassword(loginemailRef.current.value);
+            setpasswordresetemail(true);
+            setforgotpassword(false);
+            setloginorforgotpassword('Log In');
+
+        }
+        else signIn(e);
     }
     async function signIn(e) {
         const auth = getAuth();
@@ -179,7 +197,8 @@ export default function Auth(params) {
                         <h1 className="text-center mb-4" style={{ fontFamily: "Times New Roman,sans-serif", color: "mediumslateblue" }}>Sign In </h1>
                         {loginerror && <Alert variant="danger">{loginerror}</Alert>}
                         {loginsuccess && <Alert variant="success" style={{ width: '100%' }}>You are Successfully Logged In on Admission-Portal</Alert>}
-                        <Form onSubmit={signIn} id="signin-form">
+                        {passwordresetemail && <Alert variant="success" style={{ width: '100%' }}>A link to reset your password is sent to your email id, Please check your spam folder if you have trouble finding the email</Alert>}
+                        <Form onSubmit={signInorforgotpassword} id="signin-form">
                             <Form.Group className="mb-3" id="email">
                                 <Form.Label>Email address</Form.Label>
                                 <Form.Control type="email" placeholder="Enter email" ref={loginemailRef} autoComplete="on" required />
@@ -188,14 +207,20 @@ export default function Auth(params) {
                                 </Form.Text>
                             </Form.Group>
 
-                            <Form.Group className="mb-3" id="password">
+                            {!forgotpassword && <Form.Group className="mb-3" id="password">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control type="password" placeholder="Password" ref={loginpasswordRef} autoComplete="on" required />
+                                <div style={{ paddingTop: '10px' }} onClick={() => handleforgotclick()}>
+                                    <a><h6>Forgot Password....?</h6></a>
+                                </div>
                             </Form.Group>
+
+                            }
+
 
 
                             <Button className="w-100" variant="primary" type="submit">
-                                Log In
+                                {loginorforgotpassword}
                             </Button>
                         </Form>
                     </Card.Body>
