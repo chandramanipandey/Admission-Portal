@@ -27,27 +27,12 @@ export function AdminDashboardPage() {
 
 export function StudentDashboardPage() {
     const auth = getAuth();
-    const [newuser, setnewUser] = useState(true);
-    useEffect(() => {
-        try {
-            setnewuser();
-        }
-        catch (e) {
-            console.log(e)
-        }
-    }, [])
-    async function setnewuser(){
-        const check = await checknewuser(auth.currentUser.uid);
-            if (check != true) {
-                setnewUser(false);
-            }
-            else setnewUser(true);
-    }
+
 
     return (
         <div>
             <Row className="mt-3">
-                {newuser && <DashboardCard title="Register Yourself" titleText="Registration Form Link &gt;" controlId="fedseform" />}
+                <DashboardCard title="Register Yourself" titleText="Registration Form Link &gt;" controlId="fedseform" />
                 <DashboardCard title="Fees Corner" titleText="Fill Fee Details &gt;" controlId="FeesDetails" />
                 <DashboardCard title="My Profile" titleText="Check Profile &gt;" controlId="MyProfile" />
                 

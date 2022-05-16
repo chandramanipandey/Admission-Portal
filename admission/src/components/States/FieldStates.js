@@ -73,9 +73,15 @@ export const FieldsProvider = (props) => {
     
     const [prn, setPrn] = useState("")
     const [collegeEmail, setCollegeEmail] = useState("")
-    const [department, setDepartment] = useState("Computer Science")
+    const [department, setDepartment] = useState("Computer")
     const [currentClass, setCurrentClass] = useState("FE")
 
+    const [SSCMarksheet, setSSCMarksheet] = useState(null)
+    const [HSCMarksheet, setHSCMarksheet] = useState(null)
+    const [CETMarksheet, setCETMarksheet] = useState(null)
+    const [JEEMainsMarksheet, setJEEMainsMarksheet] = useState(null)
+    const [JEEAdvMarksheet, setJEEAdvMarksheet] = useState(null)
+    
     //Student categories
     const [ financialYear, setFinancialYear ] = useState("")
     const [ open, setOpen ] = useState(null)
@@ -84,7 +90,6 @@ export const FieldsProvider = (props) => {
     const [ sc, setSc ] = useState(null)
     const [ st_nt, setSt_nt ] = useState(null)
     const [ issueDate, setIssueDate ] = useState("")
-
 
     return (
       <FieldsContext.Provider
@@ -157,6 +162,12 @@ export const FieldsProvider = (props) => {
           senderBankNameState: [senderBankName, setSenderBankName],
           senderBankIFSCState: [senderBankIFSC, setSenderBankIFSC],
 
+          SSCMarksheetState: [SSCMarksheet, setSSCMarksheet],
+          HSCMarksheetState: [HSCMarksheet, setHSCMarksheet],
+          CETMarksheetState: [CETMarksheet, setCETMarksheet],
+          JEEMainsMarksheetState: [JEEMainsMarksheet, setJEEMainsMarksheet],
+          JEEAdvMarksheetState: [JEEAdvMarksheet, setJEEAdvMarksheet],
+          
           //Student Categories
           financialYearState: [ financialYear, setFinancialYear ],
           openState: [ open, setOpen ],

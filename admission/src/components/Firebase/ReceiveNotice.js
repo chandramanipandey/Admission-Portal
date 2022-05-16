@@ -13,3 +13,22 @@ export async function receivenotice() {
         console.log(e);
     }
 }
+export async function studentreceivenotice(studentclass, department) {
+    try {
+
+        const dbRef = ref(getDatabase());
+        const data = await get(child(dbRef, `Notice/`))
+        const snapshot = data.val()
+        const studentnotices = [];
+        for (var key in snapshot) {
+            const notice = snapshot[key];
+            if (notice[studentclass] && notice['department'] === department) {
+                studentnotices[key] = notice;
+            }
+        }
+        return studentnotices;
+    }
+    catch (e) {
+        console.log(e);
+    }
+}
