@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from "react";
-
+import { useForm } from "react-hook-form";
 import { Button, Tab, Row, Col, Nav, Form } from "react-bootstrap";
-import TextField from "../RegistrationForms/Fields/TextField";
 import NumField from "../RegistrationForms/Fields/NumField";
-import YearField from "../RegistrationForms/Fields/YearField";
+import TextField from "../RegistrationForms/Fields/TextField";
+// import YearField from "../RegistrationForms/Fields/YearField";
 import NavigationBar from "../Dashboard/NavigationBar";
 import DateFieldInline from "../RegistrationForms/Fields/DateFieldInline";
 import { FieldsContext } from "../States/FieldStates";
@@ -12,6 +12,7 @@ import "../CSS/Forms.css";
 
 export default function FeeStructure() {
   const [disabled, setDisabled] = useState(true);
+  const { handleSubmit, reset } = useForm();
 
   const { 
     financialYearState,
@@ -24,13 +25,13 @@ export default function FeeStructure() {
   } = useContext(FieldsContext);
 
     //Student categories
-    const [ financialYear, setFinancialYear ] = financialYearState
-    const [ open, setOpen ] = openState
-    const [ oms, setOms ] = omsState
-    const [ obc_ebc, setObc_ebc ] = obc_ebcState
-    const [ sc, setSc ] = scState
-    const [ st_nt, setSt_nt ] = st_ntState
-    const [ issueDate, setIssueDate ] = issueDateState
+    const [ financialYear, setFinancialYear ] = financialYearState;
+    const [ open, setOpen ] = openState;
+    const [ oms, setOms ] = omsState;
+    const [ obc_ebc, setObc_ebc ] = obc_ebcState;
+    const [ sc, setSc ] = scState;
+    const [ st_nt, setSt_nt ] = st_ntState;
+    const [ issueDate, setIssueDate ] = issueDateState;
 
     const FormData = {
         financialYear: financialYear,
@@ -42,66 +43,104 @@ export default function FeeStructure() {
         issueDate: issueDate,
       }
 
+      function setAll(obj, val) {
+        Object.keys(obj).forEach(function(index) {
+          obj[index] = val
+        })};
 
   function handleDisable(event) {
     var id = event.target.id;
     if (id === "cancel") {
+      setAll(FormData, null);
+      setFinancialYear('');
+      setOpen('');
+      setOms('');
+      setObc_ebc('');
+      setSc('');
+      setSt_nt('');
+      setIssueDate('');
+
       setDisabled(true);
     } else if (id === "edit") {
       setDisabled(false);
     }
   };
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function onSubmit(data) {
+    var year = document.getElementById('financialYear').value;
+    setFinancialYear(year);
+    FormData.financialYear = year;
     console.log(FormData);
+    reset(FormData);
+    alert("success !")
+
   };
 
-  const FeeStructureForm = () => {
+  const FeeStructureForm = ({key}) => {
     return (
-      <div className="col-10">
-        <Form onSubmit={handleSubmit}>
-          <YearField title="FINANCIAL YEAR" controlId="financialYear" />
+      <div className="col-10" key={key}>
+        <Form onSubmit={handleSubmit(onSubmit)} >
+          {/* <YearField title="FINANCIAL YEAR" controlId="financialYear" /> */}
+          <Form.Group>
+        <Form.Row>
+          <Form.Label column sm={3}>
+            {"FINANCIAL YEAR"}
+          </Form.Label>
+          <Col sm={6}>
+            <Form.Control
+              placeholder="Enter Financial year : Eg. 2022"
+              defaultValue={financialYear === null ? '' : financialYear}
+              controlId="financialYear"
+              id="financialYear"
+            />
+          </Col>
+        </Form.Row>
+      </Form.Group>
           <NumField
             title="OPEN"
             placeholder="enter fees applicable for OPEN"
             controlId="open"
-            maxlength="7"
+            maxLength={6}
             isDisabled={disabled}
             size={6}
+            value={open === null ? '' : open}
           />
           <NumField
             title="OTHER THAN MAHARASHTRA"
             placeholder="enter fees applicable for OMS"
             controlId="oms"
-            maxlength="7"
+            maxlength={6}
             isDisabled={disabled}
             size={6}
+            value={oms === null ? '' : oms}
           />
           <NumField
             title="OBC/EBC"
             placeholder="enter fees applicable for OBC/EBC"
             controlId="obc_ebc"
-            maxlength="7"
+            maxlength={6}
             isDisabled={disabled}
             size={6}
+            value={obc_ebc === null ? '' : obc_ebc}
           />
           <NumField
             title="SCHEDULED CASTE"
             placeholder="enter fees applicable for SC"
             controlId="sc"
-            maxlength="7"
+            maxlength={6}
             isDisabled={disabled}
             size={6}
+            value={sc === null ? '' : sc}
           />
 
           <NumField
             title="ST/NT/VJ/SBC/TFWS"
             placeholder="enter fees applicable for ST/NT/VJ/SBC/TFWS"
-            controlId="st/nt"
-            maxlength="7"
+            controlId="st_nt"
+            maxlength={6}
             isDisabled={disabled}
             size={6}
+            value={st_nt === null ? '' : st_nt}
           />
           <DateFieldInline 
           title="ISSUE DATE" 
@@ -159,7 +198,7 @@ export default function FeeStructure() {
                   <Nav.Link eventKey="first">First Year</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="second">Direct Secon Year</Nav.Link>
+                  <Nav.Link eventKey="second">Direct Second Year</Nav.Link>
                 </Nav.Item>
               </Nav>
             </Col>
@@ -183,8 +222,7 @@ export default function FeeStructure() {
                         Edit
                       </Button>
                     </div>
-
-                    <FeeStructureForm />
+                    {FeeStructureForm({key:1})}
                   </div>
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
@@ -205,7 +243,7 @@ export default function FeeStructure() {
                         Edit
                       </Button>
                     </div>
-                    <FeeStructureForm />
+                    {FeeStructureForm({key:2})}
                   </div>
                 </Tab.Pane>
               </Tab.Content>

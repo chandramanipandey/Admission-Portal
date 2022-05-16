@@ -32,8 +32,11 @@ import ClassField from "./Fields/ClassField";
 import { useHistory } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { addroletofirebase } from "../Firebase/addroletofirebase";
+import FormFileInput from "react-bootstrap/esm/FormFileInput";
+import FileInput from "./Fields/FileInput";
 import { checknewuser } from "../Firebase/checknewstudent";
 import { Alert } from "react-bootstrap";
+import { addadmissiondocumentstofirebase } from "../Firebase/addDocumentstofirebase";
 
 export default function FEDSEForm() {
   const auth = getAuth();
@@ -247,8 +250,55 @@ export default function FEDSEForm() {
     }
   }
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
+    const sscdownloadlink = "Not_Uploaded";
+    const hscdownloadlink = "Not_Uploaded";
+    const cetdownloadlink = "Not_Uploaded";
+    const jeemaindownloadlink = "Not_Uploaded";
+    const jeeadvanceddownloadlink = "Not_Uploaded";
+    if (SSCMarksheet != null) {
+      const sscdownloadlink = await addadmissiondocumentstofirebase(
+        auth.currentUser.uid,
+        SSCMarksheet,
+        "SSC.jpg"
+      );
+    }
+
+    if (HSCMarksheet != null) {
+      const hscdownloadlink = await addadmissiondocumentstofirebase(
+        auth.currentUser.uid,
+        HSCMarksheet,
+        "HSC.jpg"
+      );
+    }
+    if (CETMarksheet != null) {
+      const cetdownloadlink = await addadmissiondocumentstofirebase(
+        auth.currentUser.uid,
+        CETMarksheet,
+        "CET.jpg"
+      );
+    }
+    if (JEEMainsMarksheet != null) {
+      const jeemaindownloadlink = await addadmissiondocumentstofirebase(
+        auth.currentUser.uid,
+        JEEMainsMarksheet,
+        "JEEMAIN.jpg"
+      );
+    }
+    if (JEEAdvMarksheet != null) {
+      const jeeadvanceddownloadlink = await addadmissiondocumentstofirebase(
+        auth.currentUser.uid,
+        JEEAdvMarksheetState,
+        "JEEADVANCED.jpg"
+      );
+    }
+    FeDseFormData["sscmarksheet"] = sscdownloadlink;
+    FeDseFormData["hscmarksheet"] = hscdownloadlink;
+    FeDseFormData["cetmarksheet"] = cetdownloadlink;
+    FeDseFormData["jeemainmarksheet"] = jeemaindownloadlink;
+    FeDseFormData["jeeadvancedmarksheet"] = jeeadvanceddownloadlink;
+
     adduserdata(FeDseFormData, auth.currentUser.uid, "Admission_Data");
     adduserdata(GenStudentData, auth.currentUser.uid, "User_Info");
     addroletofirebase(
@@ -257,7 +307,7 @@ export default function FEDSEForm() {
       "Student",
       GenStudentData["department"]
     );
-  };
+  }
 
   return (
     <div>
@@ -309,68 +359,16 @@ export default function FEDSEForm() {
               />
             </Col>
           </Row>
-          <Row>
-            <Col md>
-              <GenderField controlId="studentGender" />
-            </Col>
-            <Col md>
-              <YesNo
-                title="Phy. Handicapped"
-                name="handicappedRadio"
-                controlId="phyHandicapped"
-              />
-            </Col>
-          </Row>
-          <Category />
-          <Row>
-            <Col md>
-              <TextFieldCol
-                title="Religion"
-                placeholder="Enter your Religion"
-                controlId="religion"
-              />
-            </Col>
-            <Col md>
-              <TextFieldCol
-                title="Caste"
-                placeholder="Enter caste"
-                controlId="casteName"
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col md>
-              <YesNoCol
-                title="Pass from Maharashtra"
-                name="maharashtraPass"
-                controlId="maharashtraPass"
-              />
-            </Col>
-            <Col md>
-              <TextFieldCol
-                title="Nationality"
-                placeholder="Enter Nationality"
-                controlId="nationality"
-              />
-            </Col>
-          </Row>
-          <YesNo
-            title="Do you have MHTCET Score?"
-            name="mhtcet"
-            controlId="mhtcet"
-          />
-          <YesNo
-            title="Do you have JEE Mains Score?"
-            name="jeeMains"
-            controlId="jeeMains"
-          />
-          {hasGivenJEEMains == "true" && (
+          <Col md>
+            <GenderField controlId="studentGender" />
+          </Col>
+          <Col md>
             <YesNo
               title="Do you have JEE Advanced Score?"
               name="jeeAdvanced"
               controlId="jeeAdvanced"
             />
-          )}
+          </Col>
           <NumField
             title="Enter CET Merit number"
             maxlength="12"
@@ -557,6 +555,3 @@ export default function FEDSEForm() {
     </div>
   );
 }
-
-// nice
-// Thanks

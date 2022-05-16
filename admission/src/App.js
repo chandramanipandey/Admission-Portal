@@ -18,6 +18,7 @@ import AdminView from "./components/Dashboard/components/AdminView"
 import StudentView from "./components/Dashboard/components/StudentView"
 import Aboutus from "./components/Dashboard/Aboutus";
 import NoticeGeneration from "./components/Linked Pages/NoticeGeneration";
+import ManageUsers from "./components/Linked Pages/ManageUsers";
 import Page404 from "./components/Linked Pages/Page404";
 
 function App() {
@@ -43,9 +44,12 @@ function App() {
           <Route path="/StudentFees" component={StudentFees} account={true} />
           <Route path="/FeeStructure" component={FeeStructure} account={true} />
           <Route path="/GenerateNotice" component={NoticeGeneration} account={true} />
+          <Route path="/ManageUsers" component={ManageUsers} account={true} />
 
-          {/* <Route path='/404' component={Page404} />
-          <Redirect from='*' to='/404' /> */}
+          {/* <Route path='/404' component={AdminView} />
+          <Redirect from='*' to='/AdminView' />
+          <Route path='/404' component={StudentView} />
+          <Redirect from='*' to='/StudentView' /> */}
         </FieldsProvider>
 
         </Switch>

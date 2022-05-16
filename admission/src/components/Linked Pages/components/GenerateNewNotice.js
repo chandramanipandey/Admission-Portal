@@ -63,12 +63,12 @@ export default function GenerateNewNotice() {
   }
 
   function handleGenerate(e) {
-    // e.preventDefault();
+    e.preventDefault();
     const noticeData = {
-      FENotice,
-      SENotice,
-      TENotice,
-      BENotice,
+      FE,
+      SE,
+      TE,
+      BE,
       noticeTitle,
       noticeContent,
       department,

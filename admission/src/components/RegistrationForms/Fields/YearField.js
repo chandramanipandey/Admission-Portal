@@ -5,13 +5,10 @@ import YearPicker from "react-year-picker";
 import { FieldsContext } from "../../States/FieldStates";
 
 export default function YearField({ title, controlId, isDisabled }) {
-  const { yearOfLeavingState } = useContext(FieldsContext);
+  const { yearOfLeavingState, financialYearState } = useContext(FieldsContext);
 
   const [yearOfLeaving, setYearOfLeaving] = yearOfLeavingState;
-
-  function handleChange(date) {
-    setYearOfLeaving(date);
-  }
+  const [ financialYear, setFinancialYear ] = financialYearState;
 
   return (
     <div>
@@ -22,15 +19,15 @@ export default function YearField({ title, controlId, isDisabled }) {
         <Col sm={9}>
           {isDisabled ? (
             <YearPicker
-              selected={yearOfLeaving}
-              onChange={handleChange}
+              selected={controlId}
+              onChange={(e) => handleChange(e, controlId)}
               dateFormat="yyyy"
               disabled
             />
           ) : (
             <YearPicker
-              selected={yearOfLeaving}
-              onChange={handleChange}
+              selected={controlId}
+              onChange={(e) => handleChange(e, controlId)}
               dateFormat="yyyy"
             />
           )}
@@ -38,4 +35,17 @@ export default function YearField({ title, controlId, isDisabled }) {
       </Form.Group>
     </div>
   );
+
+  function handleChange(e, controlId) {
+    switch (controlId) {
+      case "yearOfLeaving":
+        setYearOfLeaving(e.target.value);
+        break
+        case "financialYear":
+          setFinancialYear(e.target.value);
+        break
+      default:
+        console.log("Does not match any case")
+    }
+  }
 }

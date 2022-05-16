@@ -13,13 +13,11 @@ export default function NumField({ title, maxlength, controlId, placeholder, isD
     senderAcNoState, 
     guardianMobileState, 
     studentMobileState,
-    financialYearState,
     openState,
     omsState,
     obc_ebcState,
     scState,
     st_ntState,
-    issueDateState,
   } = useContext(FieldsContext)
 
 
@@ -32,22 +30,18 @@ export default function NumField({ title, maxlength, controlId, placeholder, isD
   const [ studentMobile, setStudentMobile ] = studentMobileState
 
   //Student categories
-  const [ financialYear, setFinancialYear ] = financialYearState
   const [ open, setOpen ] = openState
   const [ oms, setOms ] = omsState
   const [ obc_ebc, setObc_ebc ] = obc_ebcState
   const [ sc, setSc ] = scState
   const [ st_nt, setSt_nt ] = st_ntState
-  const [ issueDate, setIssueDate ] = issueDateState
 
   const [ inputsValues, setInputsValues ] = useState({
-    financialYear:financialYear,
-    open:open,
-    oms:oms,
-    obc_ebc:obc_ebc,
-    sc:sc,
-    st_nt:st_nt,
-    issueDate:issueDate,
+    open:null,
+    oms:null,
+    obc_ebc:null,
+    sc:null,
+    st_nt:null,
   });
 
   
@@ -63,16 +57,15 @@ export default function NumField({ title, maxlength, controlId, placeholder, isD
               <Form.Control
               type="number"
               placeholder={placeholder}
-              maxlength={maxlength}
+              maxLength={2}
               onChange={(e) => handleChange(e, controlId)}
               disabled
-              defaultValue = {value}
             />
             ) : (
               <Form.Control
               type="number"
               placeholder={placeholder}
-              maxlength={maxlength}
+              maxLength={maxlength}
               onChange={(e) => handleChange(e, controlId)}
               defaultValue = {value}
             />
@@ -109,9 +102,6 @@ export default function NumField({ title, maxlength, controlId, placeholder, isD
       case "studentMobile":
         setStudentMobile(e.target.value)
         break
-      case "financialYear":
-        setFinancialYear(e.target.value)
-        break
       case "open":
         setOpen(e.target.value)
         break
@@ -124,11 +114,8 @@ export default function NumField({ title, maxlength, controlId, placeholder, isD
       case "sc":
         setSc(e.target.value)
         break
-      case "setSt_nt":
+      case "st_nt":
         setSt_nt(e.target.value)
-        break
-      case "setIssueDate":
-        setIssueDate(e.target.value)
         break
       default:
         console.log("Does not match any case")

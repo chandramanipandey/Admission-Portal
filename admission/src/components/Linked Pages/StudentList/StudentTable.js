@@ -7,15 +7,15 @@ export default function StudentList(props) {
 
   const history = useHistory();
   const [studentData, setStudentData] = useState([]);
-  const [isLoading, setIsLoadig] = useState(false);
+  const [isLoading, setIsLoadig] = useState(true);
 
-  console.log('first', props.studentData);
+  console.log('student', props.studentData);
+  console.log('admission', props.admissionData);
 
   useEffect(() => {
     setStudentData(props.studentData);
+    setIsLoadig(false)
   },[]);
-
-  setIsLoadig(true);
 
     function handleClick(prn) {
         history.push(`/StudentDetail/${prn}`);
@@ -23,7 +23,6 @@ export default function StudentList(props) {
 
     return (
     <>
-    {console.log('nice',isLoading)}
         {isLoading ? (
             "Loading")
             :
@@ -41,13 +40,11 @@ export default function StudentList(props) {
         </tr>
       </thead>
       <tbody>
-        {console.log('gg', studentData)}
             {Object.keys(studentData).map((key, value) => {
             var data = studentData[key];
             return(
           <tr key={data.prn} onClick={()=> handleClick(data.prn)} style={{cursor : "pointer"}}>
             <td>{data.prn}</td>
-            <td>{value}</td>
             <td>{data.collegeEmail}</td>
             <td>{data.studentName}</td>
             <td>{data.department}</td>
