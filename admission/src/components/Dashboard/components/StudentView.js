@@ -12,9 +12,10 @@ export default function StudentView() {
 	const history = useHistory();
 	const [userauth, setuserauth] = useState(undefined)
 	const [UserInfo, setUserInfo] = useState([]);
+	const [userName,setUserName] = useState('User')
 	useEffect(() => {
 		try {
-
+			receiveuserinfo();
 			auth.onAuthStateChanged((authobj) => {
 				if (authobj) {
 					setuserauth(authobj.uid)
@@ -24,7 +25,7 @@ export default function StudentView() {
 				}
 			}
 			);
-			receiveuserinfo();
+			
 		}
 		catch (e) {
 			console.log(e);
@@ -34,11 +35,11 @@ export default function StudentView() {
 		const response = await receivefromfirebase(auth.currentUser.uid, 'User_Info');
 		localStorage.setItem('User_Info', JSON.stringify(response));
 		setUserInfo(response);
+		setUserName(response['userName'])
 	}
 	return (
 		<div>
-			<NavigationBar userType="Student" userName={UserInfo['userName']} />
-
+			<NavigationBar userType="Student" userName={userName} />
 			<StudentDashboardPage />
 
 			<Footer />

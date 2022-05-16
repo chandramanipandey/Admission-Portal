@@ -12,8 +12,11 @@ export default function AdminView() {
 	const history = useHistory();
 	const [UserInfo, setUserInfo] = useState([]);
 	const [userauth, setuserauth] = useState(undefined)
+	const [userName,setUserName] = useState('User')
+
 	useEffect(() => {
 		try {
+			receiveuserinfo();
 
 			auth.onAuthStateChanged((authobj) => {
 				if (authobj) {
@@ -24,7 +27,6 @@ export default function AdminView() {
 				}
 			}
 			);
-			receiveuserinfo();
 		}
 		catch (e) {
 			console.log(e);
@@ -34,11 +36,12 @@ export default function AdminView() {
 		const response = await receiveusersfromfirebase(auth.currentUser.uid, 'User_Info');
 		localStorage.setItem('User_Info', JSON.stringify(response));;
 		setUserInfo(response);
+		setUserName(response['userName'])
 	}
 	return (
 		<div>
 
-			<NavigationBar userType="Admin" userName={UserInfo['userName']} />
+			<NavigationBar userType="Admin" userName={userName} />
 			<div className='mt-3'>
 				<AdminDashboardPage />
 			</div>
