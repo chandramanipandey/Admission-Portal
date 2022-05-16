@@ -77,6 +77,7 @@ export default function ViewAllNotices() {
 				</tbody>
 
 			</Table>
+			
 			<div className='my-3 py-3'></div>
 			<div className='my-3 py-3'></div>
 			

@@ -73,8 +73,23 @@ export const FieldsProvider = (props) => {
     
     const [prn, setPrn] = useState("")
     const [collegeEmail, setCollegeEmail] = useState("")
-    const [department, setDepartment] = useState("Computer Science")
+    const [department, setDepartment] = useState("Computer")
     const [currentClass, setCurrentClass] = useState("FE")
+
+    const [SSCMarksheet, setSSCMarksheet] = useState(null)
+    const [HSCMarksheet, setHSCMarksheet] = useState(null)
+    const [CETMarksheet, setCETMarksheet] = useState(null)
+    const [JEEMainsMarksheet, setJEEMainsMarksheet] = useState(null)
+    const [JEEAdvMarksheet, setJEEAdvMarksheet] = useState(null)
+    
+    //Student categories
+    const [ financialYear, setFinancialYear ] = useState("")
+    const [ open, setOpen ] = useState("")
+    const [ oms, setOms ] = useState("")
+    const [ obc_ebc, setObc_ebc ] = useState("")
+    const [ sc, setSc ] = useState("")
+    const [ st_nt, setSt_nt ] = useState("")
+    const [ issueDate, setIssueDate ] = useState("")
 
     return (
       <FieldsContext.Provider
@@ -146,6 +161,21 @@ export const FieldsProvider = (props) => {
           transactionReceiptState: [transactionReceipt, setTransactionReceipt],
           senderBankNameState: [senderBankName, setSenderBankName],
           senderBankIFSCState: [senderBankIFSC, setSenderBankIFSC],
+
+          SSCMarksheetState: [SSCMarksheet, setSSCMarksheet],
+          HSCMarksheetState: [HSCMarksheet, setHSCMarksheet],
+          CETMarksheetState: [CETMarksheet, setCETMarksheet],
+          JEEMainsMarksheetState: [JEEMainsMarksheet, setJEEMainsMarksheet],
+          JEEAdvMarksheetState: [JEEAdvMarksheet, setJEEAdvMarksheet],
+          
+          //Student Categories
+          financialYearState: [ financialYear, setFinancialYear ],
+          openState: [ open, setOpen ],
+          omsState: [ oms, setOms ],
+          obc_ebcState: [ obc_ebc, setObc_ebc ],
+          scState: [ sc, setSc ],
+          st_ntState: [ st_nt, setSt_nt ],
+          issueDateState: [ issueDate, setIssueDate ],
         }}
       >
         {props.children}

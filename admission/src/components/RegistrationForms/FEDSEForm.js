@@ -1,23 +1,37 @@
-import React from "react"
-import { useEffect } from "react"
-import { Form, Button, Col, Row } from "react-bootstrap"
-import TextField from "./Fields/TextField"
-import NumField from "./Fields/NumField"
-import NumFieldCol from "./Fields/NumFieldCol"
-import GenderField from "./Fields/GenderField"
-import DateField from "./Fields/DateField"
-import TextFieldInline from "./Fields/TextFieldInline"
-import TextFieldCol from "./Fields/TextFieldCol"
-import YesNo from "./Fields/YesNo"
-import YesNoCol from "./Fields/YesNoCol"
-import Category from "./Fields/Category"
-import EmailFieldInline from "./Fields/EmailFieldInline"
-import EmailFieldCol from "./Fields/EmailFieldCol"
-import YearField from "./Fields/YearField"
-import StudentTerms from "./StudentTerms"
-import RadioField from "./Fields/RadioField"
-import StudentUndertaking from "./StudentUndertaking"
-import ParentUndertaking from "./ParentUndertaking"
+import React from "react";
+import { useEffect } from "react";
+import { Form, Button, Col, Row } from "react-bootstrap";
+import TextField from "./Fields/TextField";
+import NumField from "./Fields/NumField";
+import NumFieldCol from "./Fields/NumFieldCol";
+import GenderField from "./Fields/GenderField";
+import DateField from "./Fields/DateField";
+import TextFieldInline from "./Fields/TextFieldInline";
+import TextFieldCol from "./Fields/TextFieldCol";
+import YesNo from "./Fields/YesNo";
+import YesNoCol from "./Fields/YesNoCol";
+import Category from "./Fields/Category";
+import EmailFieldInline from "./Fields/EmailFieldInline";
+import EmailFieldCol from "./Fields/EmailFieldCol";
+import YearField from "./Fields/YearField";
+import StudentTerms from "./StudentTerms";
+import RadioField from "./Fields/RadioField";
+import StudentUndertaking from "./StudentUndertaking";
+import ParentUndertaking from "./ParentUndertaking";
+
+import { createContext, useState, useContext } from "react";
+import { FieldsProvider, FieldsContext } from "../States/FieldStates";
+import "../CSS/Forms.css";
+import { adduserdata } from "../Firebase/addtofirebase";
+import { getAuth } from "firebase/auth";
+import NavigationBar from "../Dashboard/NavigationBar";
+import Department from "./Fields/DepartmentField";
+import ClassField from "./Fields/ClassField";
+import { useHistory } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { addroletofirebase } from "../Firebase/addroletofirebase";
+import FormFileInput from "react-bootstrap/esm/FormFileInput";
+import FileInput from "./Fields/FileInput";
 
 import { createContext, useState, useContext } from "react"
 import { FieldsProvider, FieldsContext } from "../States/FieldStates"
@@ -35,67 +49,132 @@ import { Alert } from "react-bootstrap"
 export default function FEDSEForm() {
   const auth = getAuth();
   const history = useHistory();
-  const [userauth, setuserauth] = useState(undefined)
-  const { motherNameState, studentNameState, candidateAdmissionState, permanentAddressState, guardianNameState, guardianAddressState, lastInstituteNameFEState, lastInstituteAddressFEState, lastClassState, fatherNameState, studentGenderState, permanentPinState, guardianPinState, studentMobileState, motherMobileState, fatherMobileState, dobState, placeOfBirthState, religionState, casteNameState, nationalityState, cityState, districtState, guardianCityState, guardianDistrictState, phyHandicappedState, hasPANState, hasGivenMHTCETState, CETScoreState, hasGivenJEEMainsState, JEEMainsScoreState, hasGivenJEEAdvancedState, JEEAdvancedScoreState, maharashtraPassState, cetMeritNoState, parentsAnnualIncomeState, aadharNoState, permanentEmailState, guardianEmailState, categoryState, yearOfLeavingState, prnState, collegeEmailState, departmentState, currentClassState } = useContext(FieldsContext)
+  const [userauth, setuserauth] = useState(undefined);
 
-  const [prn, setPrn] = prnState
-  const [collegeEmail, setCollegeEmail] = collegeEmailState
-  const [department, setDepartment] = departmentState
-  const [currentClass, setCurrentClass] = currentClassState
+  const {
+    motherNameState,
+    studentNameState,
+    candidateAdmissionState,
+    permanentAddressState,
+    guardianNameState,
+    guardianAddressState,
+    lastInstituteNameFEState,
+    lastInstituteAddressFEState,
+    lastClassState,
+    fatherNameState,
+    studentGenderState,
+    permanentPinState,
+    guardianPinState,
+    studentMobileState,
+    motherMobileState,
+    fatherMobileState,
+    dobState,
+    placeOfBirthState,
+    religionState,
+    casteNameState,
+    nationalityState,
+    cityState,
+    districtState,
+    guardianCityState,
+    guardianDistrictState,
+    phyHandicappedState,
+    hasPANState,
+    hasGivenMHTCETState,
+    CETScoreState,
+    hasGivenJEEMainsState,
+    JEEMainsScoreState,
+    hasGivenJEEAdvancedState,
+    JEEAdvancedScoreState,
+    maharashtraPassState,
+    cetMeritNoState,
+    parentsAnnualIncomeState,
+    aadharNoState,
+    permanentEmailState,
+    guardianEmailState,
+    categoryState,
+    yearOfLeavingState,
+    prnState,
+    collegeEmailState,
+    departmentState,
+    currentClassState,
+    SSCMarksheetState,
+    HSCMarksheetState,
+    CETMarksheetState,
+    JEEMainsMarksheetState,
+    JEEAdvMarksheetState,
+  } = useContext(FieldsContext);
 
-  const [placeOfBirth, setPlaceOfBirth] = placeOfBirthState
-  const [religion, setReligion] = religionState
-  const [casteName, setCasteName] = casteNameState
-  const [nationality, setNationality] = nationalityState
-  const [city, setCity] = cityState
-  const [district, setDistrict] = districtState
-  const [guardianCity, setGuardianCity] = guardianCityState
-  const [guardianDistrict, setGuardianDistrict] = guardianDistrictState
+  const [prn, setPrn] = prnState;
+  const [collegeEmail, setCollegeEmail] = collegeEmailState;
+  const [department, setDepartment] = departmentState;
+  const [currentClass, setCurrentClass] = currentClassState;
 
-  const [category, setCategory] = categoryState
+  const [placeOfBirth, setPlaceOfBirth] = placeOfBirthState;
+  const [religion, setReligion] = religionState;
+  const [casteName, setCasteName] = casteNameState;
+  const [nationality, setNationality] = nationalityState;
+  const [city, setCity] = cityState;
+  const [district, setDistrict] = districtState;
+  const [guardianCity, setGuardianCity] = guardianCityState;
+  const [guardianDistrict, setGuardianDistrict] = guardianDistrictState;
 
-  const [dob, setDob] = dobState
+  const [category, setCategory] = categoryState;
 
-  const [permanentEmail, setPermanentEmail] = permanentEmailState
-  const [guardianEmail, setGuardianEmail] = guardianEmailState
+  const [dob, setDob] = dobState;
 
-  const [studentGender, setStudentGender] = studentGenderState
+  const [permanentEmail, setPermanentEmail] = permanentEmailState;
+  const [guardianEmail, setGuardianEmail] = guardianEmailState;
 
-  const [cetMeritNo, setCetMeritNo] = cetMeritNoState
-  const [parentsAnnualIncome, setParentsAnnualIncome] = parentsAnnualIncomeState
-  const [aadharNo, setAadharNo] = aadharNoState
+  const [studentGender, setStudentGender] = studentGenderState;
 
-  const [permanentPin, setPermanentPin] = permanentPinState
-  const [guardianPin, setGuardianPin] = guardianPinState
-  const [studentMobile, setStudentMobile] = studentMobileState
-  const [motherMobile, setMotherMobile] = motherMobileState
-  const [fatherMobile, setFatherMobile] = fatherMobileState
+  const [cetMeritNo, setCetMeritNo] = cetMeritNoState;
+  const [parentsAnnualIncome, setParentsAnnualIncome] =
+    parentsAnnualIncomeState;
+  const [aadharNo, setAadharNo] = aadharNoState;
 
-  const [candidateAdmission, setCandidateAdmission] = candidateAdmissionState
+  const [permanentPin, setPermanentPin] = permanentPinState;
+  const [guardianPin, setGuardianPin] = guardianPinState;
+  const [studentMobile, setStudentMobile] = studentMobileState;
+  const [motherMobile, setMotherMobile] = motherMobileState;
+  const [fatherMobile, setFatherMobile] = fatherMobileState;
 
-  const [motherName, setMotherName] = motherNameState
-  const [studentName, setStudentName] = studentNameState
+  const [candidateAdmission, setCandidateAdmission] = candidateAdmissionState;
 
-  const [permanentAddress, setPermanentAddress] = permanentAddressState
-  const [guardianAddress, setGuardianAddress] = guardianAddressState
-  const [guardianName, setGuardianName] = guardianNameState
-  const [lastInstituteNameFE, setLastInstituteNameFE] = lastInstituteNameFEState
-  const [lastInstituteAddressFE, setLastInstituteAddressFE] = lastInstituteAddressFEState
-  const [lastClass, setLastClass] = lastClassState
-  const [fatherName, setFatherName] = fatherNameState
+  const [motherName, setMotherName] = motherNameState;
+  const [studentName, setStudentName] = studentNameState;
 
-  const [yearOfLeaving, setYearOfLeaving] = yearOfLeavingState
+  const [permanentAddress, setPermanentAddress] = permanentAddressState;
+  const [guardianAddress, setGuardianAddress] = guardianAddressState;
+  const [guardianName, setGuardianName] = guardianNameState;
+  const [lastInstituteNameFE, setLastInstituteNameFE] =
+    lastInstituteNameFEState;
+  const [lastInstituteAddressFE, setLastInstituteAddressFE] =
+    lastInstituteAddressFEState;
+  const [lastClass, setLastClass] = lastClassState;
+  const [fatherName, setFatherName] = fatherNameState;
 
-  const [phyHandicapped, setPhyHandicapped] = phyHandicappedState
-  const [maharashtraPass, setMaharashtraPass] = maharashtraPassState
-  const [hasPAN, setHasPAN] = hasPANState
-  const [hasGivenMHTCET, setHasGivenMHTCET] = hasGivenMHTCETState
-  const [CETScore, setCETScore] = CETScoreState
-  const [hasGivenJEEMains, setHasGivenJEEMains] = hasGivenJEEMainsState
-  const [JEEMainsScore, setJEEMainsScore] = JEEMainsScoreState
-  const [hasGivenJEEAdvanced, setHasGivenJEEAdvanced] = hasGivenJEEAdvancedState
-  const [JEEAdvancedScore, setJEEAdvancedScore] = JEEAdvancedScoreState
+  const [yearOfLeaving, setYearOfLeaving] = yearOfLeavingState;
+
+  const [phyHandicapped, setPhyHandicapped] = phyHandicappedState;
+  const [maharashtraPass, setMaharashtraPass] = maharashtraPassState;
+  const [hasPAN, setHasPAN] = hasPANState;
+  const [hasGivenMHTCET, setHasGivenMHTCET] = hasGivenMHTCETState;
+  const [CETScore, setCETScore] = CETScoreState;
+  const [hasGivenJEEMains, setHasGivenJEEMains] = hasGivenJEEMainsState;
+  const [JEEMainsScore, setJEEMainsScore] = JEEMainsScoreState;
+  const [hasGivenJEEAdvanced, setHasGivenJEEAdvanced] =
+    hasGivenJEEAdvancedState;
+  const [JEEAdvancedScore, setJEEAdvancedScore] = JEEAdvancedScoreState;
+
+  const [SSCMarksheet, setSSCMarksheet] = SSCMarksheetState;
+  const [HSCMarksheet, setHSCMarksheet] = HSCMarksheetState;
+  const [CETMarksheet, setCETMarksheet] = CETMarksheetState;
+  const [JEEMainsMarksheet, setJEEMainsMarksheet] = JEEMainsMarksheetState;
+  const [JEEAdvMarksheet, setJEEAdvMarksheet] = JEEAdvMarksheetState;
   const [newuser,setnewUser] = useState();
+
+  // console.log(SSCMarksheet);
+
   const FeDseFormData = {
     placeOfBirth: placeOfBirth,
     religion: religion,
@@ -139,8 +218,8 @@ export default function FEDSEForm() {
     prn: prn,
     collegeEmail: collegeEmail,
     department: department,
-    currentClass: currentClass
-  }
+    currentClass: currentClass,
+  };
 
   const GenStudentData = {
     userName: studentName,
@@ -150,15 +229,18 @@ export default function FEDSEForm() {
     dob: dob,
     department: department,
     currentClass: currentClass,
-    Role: 'Student'
-
-  }
+    Role: "Student",
+  };
   useEffect(() => {
     try {
-
       auth.onAuthStateChanged((authobj) => {
         if (authobj) {
-          setuserauth(authobj.uid)
+          setuserauth(authobj.uid);
+        } else {
+          history.push(
+            "/",
+            "You are not authorised to visit this website or you have recently logged out successfully, if you are an authorised user please login to continue"
+          );
         }
         else {
           history.push('/', "You are not authorised to visit this website or you have recently logged out successfully, if you are an authorised user please login to continue");
@@ -186,8 +268,13 @@ export default function FEDSEForm() {
     e.preventDefault();
     adduserdata(FeDseFormData, auth.currentUser.uid, "Admission_Data");
     adduserdata(GenStudentData, auth.currentUser.uid, "User_Info");
-    addroletofirebase(auth.currentUser.uid,auth.currentUser.email,'Student',GenStudentData['department']);
-  }
+    addroletofirebase(
+      auth.currentUser.uid,
+      auth.currentUser.email,
+      "Student",
+      GenStudentData["department"]
+    );
+  };
 
   return(<div>
     <NavigationBar />
@@ -204,16 +291,14 @@ export default function FEDSEForm() {
     {newuser==true?
 
       <Form onSubmit={handleSubmit}>
-
         {/* <FieldsProvider> */}
-
-        <RadioField title="Cadidate Admission"
+        <RadioField
+          title="Cadidate Admission"
           option1="First Year(F.E)"
           option2="Direct Second Year(D.S.E)"
           name="candidateAdmission"
           controlId="candidateAdmission"
         />
-
         <TextField
           title="Candidate Name"
           placeholder="Enter Full Name"
@@ -229,9 +314,6 @@ export default function FEDSEForm() {
           placeholder="Enter Full Name"
           controlId="fatherName"
         />
-
-
-
         <Row>
           <Col md>
             <DateField title="DOB" controlId="dob" />
@@ -244,7 +326,6 @@ export default function FEDSEForm() {
             />
           </Col>
         </Row>
-
         <Row>
           <Col md>
             <GenderField controlId="studentGender" />
@@ -257,9 +338,7 @@ export default function FEDSEForm() {
             />
           </Col>
         </Row>
-
         <Category />
-
         <Row>
           <Col md>
             <TextFieldCol
@@ -276,8 +355,6 @@ export default function FEDSEForm() {
             />
           </Col>
         </Row>
-
-
         <Row>
           <Col md>
             <YesNoCol
@@ -294,61 +371,47 @@ export default function FEDSEForm() {
             />
           </Col>
         </Row>
-
         <YesNo
           title="Do you have MHTCET Score?"
           name="mhtcet"
           controlId="mhtcet"
         />
-
         <YesNo
           title="Do you have JEE Mains Score?"
           name="jeeMains"
           controlId="jeeMains"
         />
-
-        {hasGivenJEEMains == "true" &&
+        {hasGivenJEEMains == "true" && (
           <YesNo
             title="Do you have JEE Advanced Score?"
             name="jeeAdvanced"
             controlId="jeeAdvanced"
-          />}
-
-
+          />
+        )}
         <NumField
           title="Enter CET Merit number"
           maxlength="12"
           controlId="cetMeritNo"
           placeholder="CET Merit Number (12 digit)"
         />
-
-
         <NumField
           title="Aadhar Card number"
           controlId="aadharNo"
           placeholder="Enter 12 digit Aadhar No"
           maxlength="12"
         />
-
-        <YesNo
-          title="Do you have PAN Card?"
-          name="hasPAN"
-          controlId="hasPAN"
-        />
-
+        <YesNo title="Do you have PAN Card?" name="hasPAN" controlId="hasPAN" />
         <NumField
           title="Parents Annual Income(Rs)"
           controlId="parentsAnnualIncome"
           placeholder="Enter in Rs"
           maxlength="15"
         />
-
         <TextFieldInline
           title="Permanent Address"
           placeholder="Permanent Address here"
           controlId="permanentAddress"
         />
-
         <Row>
           <Col md>
             <TextFieldCol
@@ -377,13 +440,11 @@ export default function FEDSEForm() {
             <EmailFieldCol controlId="permanentEmail" />
           </Col>
         </Row>
-
         <TextFieldInline
           title="Local Guardian Name"
           placeholder="Enter Name of the Guardian"
           controlId="guardianName"
         />
-
         <TextFieldInline
           title="Guardian's Address"
           placeholder="Enter Address here"
@@ -405,7 +466,6 @@ export default function FEDSEForm() {
             />
           </Col>
         </Row>
-
         <Row>
           <Col md>
             <TextFieldCol
@@ -418,21 +478,18 @@ export default function FEDSEForm() {
             <EmailFieldCol controlId="guardianEmail" />
           </Col>
         </Row>
-
         <NumField
           title="Guardian's Mobile No"
           placeholder="Enter 10 digit Mobile No"
           maxlength="10"
           controlId="guardianMobile"
         />
-
         <NumField
           title="Student's Mobile No"
           placeholder="Enter 10 digit Mobile No"
           maxlength="10"
           controlId="studentMobile"
         />
-
         <Row>
           <Col>
             <NumFieldCol
@@ -451,7 +508,6 @@ export default function FEDSEForm() {
             />
           </Col>
         </Row>
-
         <TextFieldInline
           title="Name of last institute attended"
           placeholder="Enter Last Institude name"
@@ -467,36 +523,41 @@ export default function FEDSEForm() {
           placeholder="Last Class"
           controlId="lastClass"
         />
-
         <YearField title="Year of Leaving" controlId="yearofLeavingFE" />
         {/* 4 Fields */}
-
         <TextField
           title="Permanent Registration Number (PRN)"
           placeholder="Enter PRN"
           maxlength="9"
           controlId="prn"
         />
-
         <EmailFieldInline title="College Email" controlId="collegeEmail" />
-
         <Department />
-
         <ClassField title="Current Class" />
-
-
         {/* </FieldsProvider> */}
-
-
         {/* Detailed Marks */}
-
+        {/* SSC HSC CETMarksheet JEEMarksheet */}
+        <FileInput title="SSC Marksheet" controlId="SSCMarksheetFile" />
+        <FileInput title="HSC Marksheet" controlId="HSCMarksheetFile" />
+        <FileInput title="CET Marksheet" controlId="CETMarksheetFile" />
+        {hasGivenJEEMains == "true" && (
+          <FileInput
+            title="JEE Mains Marksheet"
+            controlId="JEEMainsMarksheetFile"
+          />
+        )}
+        {hasGivenJEEAdvanced == "true" && (
+          <FileInput
+            title="JEE Advanced Marksheet"
+            controlId="JEEAdvMarksheetFile"
+          />
+        )}
         <StudentTerms />
-
         <StudentUndertaking />
-
         <ParentUndertaking />
-
-        <Button variant="primary" type="submit" >Submit</Button>{' '}
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>{" "}
         <br></br>
         <br></br>
       </Form>

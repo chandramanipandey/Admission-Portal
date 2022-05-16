@@ -64,8 +64,13 @@ export default function GenerateNewNotice() {
 	}
 
 	function handleGenerate(e) {
+<<<<<<< HEAD
 		e.preventDefault();
 		const noticeData = {FE, SE, TE, BE,noticeTitle, noticeContent, department}
+=======
+		// e.preventDefault();
+		const noticeData = {FENotice, SENotice, TENotice, BENotice,noticeTitle, noticeContent, department}
+>>>>>>> e01b8fea1f8e49264e8ee3c34c70d242f14e4fce
 
 		admingeneratenotice(auth.currentUser.uid, noticeData)
 		console.log("Generated")

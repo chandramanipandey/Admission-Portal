@@ -1,93 +1,140 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import { Button, Tab, Row, Col, Nav, Form } from "react-bootstrap";
 import TextField from "../RegistrationForms/Fields/TextField";
 import NumField from "../RegistrationForms/Fields/NumField";
-import DateField from "../RegistrationForms/Fields/DateField";
 import YearField from "../RegistrationForms/Fields/YearField";
 import NavigationBar from "../Dashboard/NavigationBar";
 import DateFieldInline from "../RegistrationForms/Fields/DateFieldInline";
+import { FieldsContext } from "../States/FieldStates";
+
 import "../CSS/Forms.css";
 
-
 export default function FeeStructure() {
+  const [disabled, setDisabled] = useState(true);
 
-    const [disabled, setDisabled] = useState(false)
+  const { 
+    financialYearState,
+    openState,
+    omsState,
+    obc_ebcState,
+    scState,
+    st_ntState,
+    issueDateState,
+  } = useContext(FieldsContext);
 
-    const FeeStructureForm = () => {
-        return (
-          <div>
-            <Form onSubmit={handleSubmit}>
-                <YearField
-                title="Financial Year"
-                controlId="financialYear"
-                />
-              <NumField
-                title="OPEN"
-                placeholder="enter fees applicable for OPEN"
-                controlId="open"
-                maxlength="7"
-                isDisabled={disabled}
-                size={6}
-              />
-              <NumField
-                title="OTHER THAN MAHARASHTRA"
-                placeholder="enter fees applicable for OMS"
-                controlId="oms"
-                maxlength="7"
-                isDisabled={disabled}
-                size={6}
-              />
-              <NumField
-                title="OBC/EBC"
-                placeholder="enter fees applicable for OBC/EBC"
-                controlId="obc/ebc"
-                maxlength="7"
-                isDisabled={disabled}
-                size={6}
-              />
-              <NumField
-                title="SCHEDULED CASTE"
-                placeholder="enter fees applicable for SC"
-                controlId="sc"
-                maxlength="7"
-                isDisabled={disabled}
-                size={6}
-              />
-      
-              <NumField
-                title="ST/NT/VJ/SBC/TFWS"
-                placeholder="enter fees applicable for ST/NT/VJ/SBC/TFWS"
-                controlId="st/nt"
-                maxlength="7"
-                isDisabled={disabled}
-                size={6}
-              />
-              <DateFieldInline 
-              title="ISSUE DATE" 
-              controlId="issueDate"
-              size={6}
-              />
+    //Student categories
+    const [ financialYear, setFinancialYear ] = financialYearState
+    const [ open, setOpen ] = openState
+    const [ oms, setOms ] = omsState
+    const [ obc_ebc, setObc_ebc ] = obc_ebcState
+    const [ sc, setSc ] = scState
+    const [ st_nt, setSt_nt ] = st_ntState
+    const [ issueDate, setIssueDate ] = issueDateState
 
-              <div className="d-flex">
-                <Button variant="primary" type="submit">
-                  Submit
-                </Button>
-                <Button className="mx-3" variant="secondary" type="button">
-                  Cancel
-                </Button>
-              </div>
-              <div className="pb-3"></div>
-            </Form>
+    const FormData = {
+        financialYear: financialYear,
+        open: open,
+        oms: oms,
+        obc_ebc: obc_ebc,
+        sc: sc,
+        st_nt: st_nt,
+        issueDate: issueDate,
+      }
+
+
+  function handleDisable(event) {
+    var id = event.target.id;
+    if (id === "cancel") {
+      setDisabled(true);
+    } else if (id === "edit") {
+      setDisabled(false);
+    }
+  };
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    console.log(FormData);
+  };
+
+  const FeeStructureForm = () => {
+    return (
+      <div className="col-10">
+        <Form onSubmit={handleSubmit}>
+          <YearField title="FINANCIAL YEAR" controlId="financialYear" />
+          <NumField
+            title="OPEN"
+            placeholder="enter fees applicable for OPEN"
+            controlId="open"
+            maxlength="7"
+            isDisabled={disabled}
+            size={6}
+          />
+          <NumField
+            title="OTHER THAN MAHARASHTRA"
+            placeholder="enter fees applicable for OMS"
+            controlId="oms"
+            maxlength="7"
+            isDisabled={disabled}
+            size={6}
+          />
+          <NumField
+            title="OBC/EBC"
+            placeholder="enter fees applicable for OBC/EBC"
+            controlId="obc_ebc"
+            maxlength="7"
+            isDisabled={disabled}
+            size={6}
+          />
+          <NumField
+            title="SCHEDULED CASTE"
+            placeholder="enter fees applicable for SC"
+            controlId="sc"
+            maxlength="7"
+            isDisabled={disabled}
+            size={6}
+          />
+
+          <NumField
+            title="ST/NT/VJ/SBC/TFWS"
+            placeholder="enter fees applicable for ST/NT/VJ/SBC/TFWS"
+            controlId="st/nt"
+            maxlength="7"
+            isDisabled={disabled}
+            size={6}
+          />
+          <DateFieldInline 
+          title="ISSUE DATE" 
+          controlId="issueDate" 
+          size={6}
+          isDisabled={disabled}
+          />
+
+          <div className="d-flex">
+            {disabled ? (
+              <Button variant="primary" type="submit" disabled>
+                Submit
+              </Button>
+            ) : (
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            )}
+            <Button
+              className="mx-3"
+              variant="secondary"
+              type="button"
+              id="cancel"
+              onClick={(event) => handleDisable(event)}
+            >
+              Cancel
+            </Button>
           </div>
-        );
-      };
-
-      async function handleSubmit(e) {
-        e.preventDefault();
-        console.log(e);
-        alert(e)
-      };
+          <div className="pb-3"></div>
+        </Form>
+      </div>
+    );
+  };
 
   return (
     <>
@@ -119,18 +166,45 @@ export default function FeeStructure() {
             <Col sm={9} style={{ width: "60%", marginLeft: "auto" }}>
               <Tab.Content>
                 <Tab.Pane eventKey="first">
-                  <div className="first_year">
-                    <h3 className="mb-5 font-weight-bold text-muted">
-                      Create First Year Fee Structure
-                    </h3>
+                  <div className="first_year row d-flex">
+                    <div className="col-10">
+                      <h3 className="mb-5 font-weight-bold text-muted">
+                        Create First Year Fee Structure
+                      </h3>
+                    </div>
+                    <div className="col-2 ml-auto">
+                      <Button
+                        className="mx-3 ml-auto"
+                        variant="primary"
+                        type="button"
+                        id="edit"
+                        onClick={(event) => handleDisable(event)}
+                      >
+                        Edit
+                      </Button>
+                    </div>
+
                     <FeeStructureForm />
                   </div>
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
-                  <div className="dse">
-                    <h3 className="mb-5 font-weight-bold text-muted">
-                      Create Direct Second Year Fee Structure
-                    </h3>
+                  <div className="dse row d-flex">
+                    <div className="col-10">
+                      <h3 className="mb-5 font-weight-bold text-muted">
+                        Create Direct Second Year Fee Structure
+                      </h3>
+                    </div>
+                    <div className="col-2 ml-auto">
+                      <Button
+                        className="mx-3 ml-auto"
+                        variant="primary"
+                        type="button"
+                        id="edit"
+                        onClick={(event) => handleDisable(event)}
+                      >
+                        Edit
+                      </Button>
+                    </div>
                     <FeeStructureForm />
                   </div>
                 </Tab.Pane>
