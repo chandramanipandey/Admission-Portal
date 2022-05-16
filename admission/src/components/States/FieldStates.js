@@ -84,11 +84,11 @@ export const FieldsProvider = (props) => {
     
     //Student categories
     const [ financialYear, setFinancialYear ] = useState("")
-    const [ open, setOpen ] = useState("")
-    const [ oms, setOms ] = useState("")
-    const [ obc_ebc, setObc_ebc ] = useState("")
-    const [ sc, setSc ] = useState("")
-    const [ st_nt, setSt_nt ] = useState("")
+    const [ open, setOpen ] = useState(null)
+    const [ oms, setOms ] = useState(null)
+    const [ obc_ebc, setObc_ebc ] = useState(null)
+    const [ sc, setSc ] = useState(null)
+    const [ st_nt, setSt_nt ] = useState(null)
     const [ issueDate, setIssueDate ] = useState("")
 
     return (

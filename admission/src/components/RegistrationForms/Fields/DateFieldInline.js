@@ -4,9 +4,10 @@ import { useState, useContext } from "react"
 import { FieldsContext } from "../../States/FieldStates"
 
 export default function DateFieldInline({title, controlId, size, isDisabled}) {
-	const { transactionDateState } = useContext(FieldsContext)
+	const { transactionDateState, issueDateState } = useContext(FieldsContext)
 
-	const [transactionDate, setTransactionDate] = transactionDateState
+	const [transactionDate, setTransactionDate] = transactionDateState;
+	const [issueDate, setIssueDate] = issueDateState;
 
 	return (
     <div>
@@ -38,7 +39,10 @@ export default function DateFieldInline({title, controlId, size, isDisabled}) {
     switch (controlId) {
       case "transactionDate":
 				setTransactionDate(e.target.value)
-				console.log(transactionDate)
+				break
+      case "issueDate":
+				setIssueDate(e.target.value)
+				console.log(issueDate)
 				break
       default:
         console.log("No DateField Match")
