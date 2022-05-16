@@ -38,7 +38,7 @@ export default function StudentFees() {
 
   async function fetchStudentFeesList() {
     let response = await receiveallpendingpaymentsfromfirebase();
-    console.log(response);
+
     const displayData = [];
 
     for (var key in response) {
@@ -62,6 +62,7 @@ export default function StudentFees() {
     setDisplayDataAll(displayData);
     console.log(displayData);
   }
+
   return loading ? (
     "Loading Page"
   ) : (
