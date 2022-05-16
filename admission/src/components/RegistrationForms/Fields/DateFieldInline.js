@@ -3,7 +3,7 @@ import { Col, Form } from "react-bootstrap"
 import { useState, useContext } from "react"
 import { FieldsContext } from "../../States/FieldStates"
 
-export default function DateFieldInline({title, controlId, size}) {
+export default function DateFieldInline({title, controlId, size, isDisabled}) {
 	const { transactionDateState } = useContext(FieldsContext)
 
 	const [transactionDate, setTransactionDate] = transactionDateState
@@ -16,10 +16,18 @@ export default function DateFieldInline({title, controlId, size}) {
             {title}
           </Form.Label>
           <Col sm={size? size : 9}>
-            <Form.Control
+            {isDisabled ? (
+              <Form.Control
+              type="date"
+              onChange={(e) => handleChange(e, controlId)}
+              disabled
+            />
+            ) : (
+              <Form.Control
               type="date"
               onChange={(e) => handleChange(e, controlId)}
             />
+            )}
           </Col>
         </Form.Row>
       </Form.Group>

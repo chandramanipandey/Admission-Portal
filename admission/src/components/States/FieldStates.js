@@ -81,6 +81,15 @@ export const FieldsProvider = (props) => {
     const [CETMarksheet, setCETMarksheet] = useState(null)
     const [JEEMainsMarksheet, setJEEMainsMarksheet] = useState(null)
     const [JEEAdvMarksheet, setJEEAdvMarksheet] = useState(null)
+    
+    //Student categories
+    const [ financialYear, setFinancialYear ] = useState("")
+    const [ open, setOpen ] = useState("")
+    const [ oms, setOms ] = useState("")
+    const [ obc_ebc, setObc_ebc ] = useState("")
+    const [ sc, setSc ] = useState("")
+    const [ st_nt, setSt_nt ] = useState("")
+    const [ issueDate, setIssueDate ] = useState("")
 
     return (
       <FieldsContext.Provider
@@ -159,6 +168,14 @@ export const FieldsProvider = (props) => {
           JEEMainsMarksheetState: [JEEMainsMarksheet, setJEEMainsMarksheet],
           JEEAdvMarksheetState: [JEEAdvMarksheet, setJEEAdvMarksheet],
           
+          //Student Categories
+          financialYearState: [ financialYear, setFinancialYear ],
+          openState: [ open, setOpen ],
+          omsState: [ oms, setOms ],
+          obc_ebcState: [ obc_ebc, setObc_ebc ],
+          scState: [ sc, setSc ],
+          st_ntState: [ st_nt, setSt_nt ],
+          issueDateState: [ issueDate, setIssueDate ],
         }}
       >
         {props.children}
