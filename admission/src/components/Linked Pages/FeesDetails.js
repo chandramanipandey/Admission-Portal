@@ -173,6 +173,7 @@ export default function FeesDetails() {
 
         <div className="pb-3"></div>
       </Form>
+      {acceptedfeesdata != null ?<>
       <div style={{ paddingTop: '40px' }} className="row align-items-md-stretch w-100">
         <div className="col-md">
           <div style={{}} className=" p-5 text-white bg-dark rounded-3">
@@ -190,7 +191,6 @@ export default function FeesDetails() {
 
           </tr>
         </thead>
-        {acceptedfeesdata != null ?
           <tbody>
             <tr>
               <td>{acceptedfeesdata.transactionid}</td>
@@ -198,9 +198,10 @@ export default function FeesDetails() {
               <td>{acceptedfeesdata.Acceptedby}</td>
             </tr>
           </tbody>
-          : null}
+          
       </Table>
-      <div style={{ paddingBottom: '100px' }}></div>
+      <div style={{ paddingBottom: '100px' }}></div></>
+      : null}
     </>
 
   );
