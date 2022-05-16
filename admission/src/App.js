@@ -44,8 +44,10 @@ function App() {
           <Route path="/FeeStructure" component={FeeStructure} account={true} />
           <Route path="/GenerateNotice" component={NoticeGeneration} account={true} />
 
-          {/* <Route path='/404' component={Page404} />
-          <Redirect from='*' to='/404' /> */}
+          {/* <Route path='/404' component={AdminView} />
+          <Redirect from='*' to='/AdminView' />
+          <Route path='/404' component={StudentView} />
+          <Redirect from='*' to='/StudentView' /> */}
         </FieldsProvider>
 
         </Switch>

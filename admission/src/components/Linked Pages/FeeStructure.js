@@ -1,9 +1,8 @@
 import { useState, useEffect, useContext } from "react";
-
+import { useForm } from "react-hook-form";
 import { Button, Tab, Row, Col, Nav, Form } from "react-bootstrap";
-import TextField from "../RegistrationForms/Fields/TextField";
 import NumField from "../RegistrationForms/Fields/NumField";
-import YearField from "../RegistrationForms/Fields/YearField";
+// import YearField from "../RegistrationForms/Fields/YearField";
 import NavigationBar from "../Dashboard/NavigationBar";
 import DateFieldInline from "../RegistrationForms/Fields/DateFieldInline";
 import { FieldsContext } from "../States/FieldStates";
@@ -12,6 +11,7 @@ import "../CSS/Forms.css";
 
 export default function FeeStructure() {
   const [disabled, setDisabled] = useState(true);
+  const { handleSubmit, reset } = useForm();
 
   const { 
     financialYearState,
@@ -24,13 +24,13 @@ export default function FeeStructure() {
   } = useContext(FieldsContext);
 
     //Student categories
-    const [ financialYear, setFinancialYear ] = financialYearState
-    const [ open, setOpen ] = openState
-    const [ oms, setOms ] = omsState
-    const [ obc_ebc, setObc_ebc ] = obc_ebcState
-    const [ sc, setSc ] = scState
-    const [ st_nt, setSt_nt ] = st_ntState
-    const [ issueDate, setIssueDate ] = issueDateState
+    const [ financialYear, setFinancialYear ] = financialYearState;
+    const [ open, setOpen ] = openState;
+    const [ oms, setOms ] = omsState;
+    const [ obc_ebc, setObc_ebc ] = obc_ebcState;
+    const [ sc, setSc ] = scState;
+    const [ st_nt, setSt_nt ] = st_ntState;
+    const [ issueDate, setIssueDate ] = issueDateState;
 
     const FormData = {
         financialYear: financialYear,
@@ -42,66 +42,90 @@ export default function FeeStructure() {
         issueDate: issueDate,
       }
 
+      function setAll(obj, val) {
+        Object.keys(obj).forEach(function(index) {
+          obj[index] = val
+        })};
 
   function handleDisable(event) {
     var id = event.target.id;
     if (id === "cancel") {
+      setAll(FormData, null);
+      reset();
+      console.log("nn", FormData);
       setDisabled(true);
     } else if (id === "edit") {
       setDisabled(false);
     }
   };
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function onSubmit(data) {
     console.log(FormData);
+    reset(FormData);
+    alert("success !")
+
   };
+
+  useEffect(() => {
+    reset(financialYear,
+      open,
+      oms,
+      obc_ebc,
+      sc,
+      st_nt,
+      issueDate,);
+}, [openState]);
 
   const FeeStructureForm = () => {
     return (
       <div className="col-10">
-        <Form onSubmit={handleSubmit}>
-          <YearField title="FINANCIAL YEAR" controlId="financialYear" />
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          {/* <YearField title="FINANCIAL YEAR" controlId="financialYear" /> */}
           <NumField
             title="OPEN"
             placeholder="enter fees applicable for OPEN"
             controlId="open"
-            maxlength="7"
+            maxLength={6}
             isDisabled={disabled}
             size={6}
+            value={open != null ? open : null}
           />
           <NumField
             title="OTHER THAN MAHARASHTRA"
             placeholder="enter fees applicable for OMS"
             controlId="oms"
-            maxlength="7"
+            maxlength={6}
             isDisabled={disabled}
             size={6}
+            value={oms != null ? oms : null}
           />
           <NumField
             title="OBC/EBC"
             placeholder="enter fees applicable for OBC/EBC"
             controlId="obc_ebc"
-            maxlength="7"
+            maxlength={6}
             isDisabled={disabled}
             size={6}
+            value={obc_ebc != null ? obc_ebc : null}
           />
           <NumField
             title="SCHEDULED CASTE"
             placeholder="enter fees applicable for SC"
             controlId="sc"
-            maxlength="7"
+            maxlength={6}
             isDisabled={disabled}
             size={6}
+            value={sc != null ? sc : null}
           />
 
           <NumField
             title="ST/NT/VJ/SBC/TFWS"
             placeholder="enter fees applicable for ST/NT/VJ/SBC/TFWS"
-            controlId="st/nt"
-            maxlength="7"
+            controlId="st_nt"
+            maxlength={6}
             isDisabled={disabled}
             size={6}
+            value={st_nt != null ? st_nt : null}
           />
           <DateFieldInline 
           title="ISSUE DATE" 
@@ -183,8 +207,7 @@ export default function FeeStructure() {
                         Edit
                       </Button>
                     </div>
-
-                    <FeeStructureForm />
+                    {FeeStructureForm()}
                   </div>
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
@@ -205,7 +228,7 @@ export default function FeeStructure() {
                         Edit
                       </Button>
                     </div>
-                    <FeeStructureForm />
+                    {FeeStructureForm()}
                   </div>
                 </Tab.Pane>
               </Tab.Content>
