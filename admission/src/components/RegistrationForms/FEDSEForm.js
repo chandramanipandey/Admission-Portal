@@ -34,6 +34,7 @@ import FormFileInput from "react-bootstrap/esm/FormFileInput";
 import FileInput from "./Fields/FileInput";
 import { checknewuser } from "../Firebase/checknewstudent"
 import { Alert } from "react-bootstrap"
+import { addadmissiondocumentstofirebase } from "../Firebase/addDocumentstofirebase";
 
 
 export default function FEDSEForm() {
@@ -161,7 +162,7 @@ export default function FEDSEForm() {
   const [CETMarksheet, setCETMarksheet] = CETMarksheetState;
   const [JEEMainsMarksheet, setJEEMainsMarksheet] = JEEMainsMarksheetState;
   const [JEEAdvMarksheet, setJEEAdvMarksheet] = JEEAdvMarksheetState;
-  const [newuser,setnewUser] = useState();
+  const [newuser, setnewUser] = useState();
 
   // console.log(SSCMarksheet);
 
@@ -232,7 +233,7 @@ export default function FEDSEForm() {
             "You are not authorised to visit this website or you have recently logged out successfully, if you are an authorised user please login to continue"
           );
         }
-       
+
       }
       );
       setnewuserfunction();
@@ -242,18 +243,59 @@ export default function FEDSEForm() {
     }
   }, [])
   async function setnewuserfunction() {
-		try{	
-        const newusercheck = await checknewuser(auth.currentUser.uid)
-        console.log(newusercheck)
-				setnewUser(newusercheck);
-		}
-		catch(e){
-			console.log(e);
-		}
-	}
+    try {
+      const newusercheck = await checknewuser(auth.currentUser.uid)
+      console.log(newusercheck)
+      setnewUser(newusercheck);
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
+    if (SSCMarksheet != null) {
+      const sscdownloadlink = await addadmissiondocumentstofirebase(auth.currentUser.uid, SSCMarksheet, 'SSC.jpg');
+
+    }
+    else {
+      const sscdownloadlink = 'Not_Uploaded'
+    }
+    if (HSCMarksheet != null) {
+      const hscdownloadlink = await addadmissiondocumentstofirebase(auth.currentUser.uid, HSCMarksheet, 'HSC.jpg');
+
+    }
+    else {
+      const hscdownloadlink = 'Not_Uploaded'
+    }
+    if (CETMarksheet != null) {
+      const cetdownloadlink = await addadmissiondocumentstofirebase(auth.currentUser.uid, CETMarksheet, 'CET.jpg');
+
+    }
+    else {
+      const cetdownloadlink = 'Not_Uploaded'
+    }
+    if (JEEMainsMarksheet != null) {
+      const jeemaindownloadlink = await addadmissiondocumentstofirebase(auth.currentUser.uid, JEEMainsMarksheet, 'JEEMAIN.jpg');
+
+    }
+    else {
+      const jeemaindownloadlink = 'Not_Uploaded'
+    }
+    if (JEEAdvMarksheet != null) {
+      const jeeadvanceddownloadlink = await addadmissiondocumentstofirebase(auth.currentUser.uid, JEEAdvMarksheetState, 'JEEADVANCED.jpg');
+
+    }
+    else {
+      const jeeadvanceddownloadlink = 'Not_Uploaded'
+    }
+    FeDseFormData['sscmarksheet'] = sscdownloadlink;
+    FeDseFormData['hscmarksheet'] = hscdownloadlink;
+    FeDseFormData['cetmarksheet'] = cetdownloadlink;
+    FeDseFormData['jeemainmarksheet'] = jeemaindownloadlink;
+    FeDseFormData['jeeadvancedmarksheet'] = jeeadvanceddownloadlink;
+
     adduserdata(FeDseFormData, auth.currentUser.uid, "Admission_Data");
     adduserdata(GenStudentData, auth.currentUser.uid, "User_Info");
     addroletofirebase(
@@ -264,19 +306,19 @@ export default function FEDSEForm() {
     );
   };
 
-  return(<div>
+  return (<div>
     <NavigationBar />
     <div className="row align-items-md-stretch w-100 mt-3">
-        <div className="col-md">
-          <div className="h-100 p-5 text-white bg-dark rounded-3">
-            <h1>FE / DSE Registration Form</h1>
-            <p>Register Yourself</p>
-          </div>
+      <div className="col-md">
+        <div className="h-100 p-5 text-white bg-dark rounded-3">
+          <h1>FE / DSE Registration Form</h1>
+          <p>Register Yourself</p>
         </div>
       </div>
+    </div>
 
-      <hr />
-    {newuser==true?
+    <hr />
+    {newuser == true ?
 
       <Form onSubmit={handleSubmit}>
         {/* <FieldsProvider> */}
@@ -549,10 +591,10 @@ export default function FEDSEForm() {
         <br></br>
         <br></br>
       </Form>
-    :<Alert variant="success" style={{ width: '100%' }}>You are already registered on this platform if you want to edit your form, Please contact Admin</Alert>}
-    </div>
+      : <Alert variant="success" style={{ width: '100%' }}>You are already registered on this platform if you want to edit your form, Please contact Admin</Alert>}
+  </div>
   )
-  
+
 }
 
 // nice
