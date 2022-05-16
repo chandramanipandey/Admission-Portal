@@ -21,7 +21,7 @@ export async function manualsignUpUser(email,password,User_Info){
 //Don't Change key value
 // User_Info{
 //     userName:,
-//     CollegeEmail:,
+//     collegeEmail:,
 //     userMobile:,
 //     designation:,
 //     department:,
@@ -32,7 +32,7 @@ export async function manualsignUpUser(email,password,User_Info){
 // function call example
 // await manualsignUpUser("bvcoelcomp@gmail.com","123456",{
 //     userName:'Admin Computer',
-//     CollegeEmail:'bvcoelcomp@gmail.com',
+//     collegeEmail:'bvcoelcomp@gmail.com',
 //     userMobile:'8888999977',
 //     designation:'Administration',
 //     department:'Computer Department',

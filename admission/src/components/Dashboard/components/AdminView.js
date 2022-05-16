@@ -6,9 +6,11 @@ import NavigationBar from "../NavigationBar"
 import { AdminDashboardPage, StudentDashboardPage } from "../DashboardPage"
 import Footer from '../Footer'
 import { onAuthStateChanged } from 'firebase/auth'
+import { receiveusersfromfirebase } from '../../Firebase/receiveuserdata'
 export default function AdminView() {
 	const auth = getAuth();
 	const history = useHistory();
+	const [UserInfo, setUserInfo] = useState([]);
 	const [userauth, setuserauth] = useState(undefined)
 	useEffect(() => {
 		try {
@@ -22,15 +24,21 @@ export default function AdminView() {
 				}
 			}
 			);
+			receiveuserinfo();
 		}
 		catch (e) {
 			console.log(e);
 		}
 	}, [])
+	async function receiveuserinfo() {
+		const response = await receiveusersfromfirebase(auth.currentUser.uid, 'User_Info');
+		localStorage.setItem('User_Info', JSON.stringify(response));;
+		setUserInfo(response);
+	}
 	return (
 		<div>
 
-			<NavigationBar userType="Admin" userName="User Name" />
+			<NavigationBar userType="Admin" userName={UserInfo['userName']} />
 			<div className='mt-3'>
 				<AdminDashboardPage />
 			</div>

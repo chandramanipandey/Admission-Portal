@@ -32,20 +32,10 @@ import { onAuthStateChanged } from "firebase/auth";
 import { addroletofirebase } from "../Firebase/addroletofirebase";
 import FormFileInput from "react-bootstrap/esm/FormFileInput";
 import FileInput from "./Fields/FileInput";
-
-import { createContext, useState, useContext } from "react"
-import { FieldsProvider, FieldsContext } from "../States/FieldStates"
-import "../CSS/Forms.css"
-import { adduserdata } from "../Firebase/addtofirebase"
-import { getAuth } from "firebase/auth"
-import NavigationBar from "../Dashboard/NavigationBar"
-import Department from "./Fields/DepartmentField"
-import ClassField from "./Fields/ClassField"
-import { useHistory } from "react-router-dom"
-import { onAuthStateChanged } from "firebase/auth"
-import { addroletofirebase } from "../Firebase/addroletofirebase"
 import { checknewuser } from "../Firebase/checknewstudent"
 import { Alert } from "react-bootstrap"
+
+
 export default function FEDSEForm() {
   const auth = getAuth();
   const history = useHistory();
@@ -242,9 +232,7 @@ export default function FEDSEForm() {
             "You are not authorised to visit this website or you have recently logged out successfully, if you are an authorised user please login to continue"
           );
         }
-        else {
-          history.push('/', "You are not authorised to visit this website or you have recently logged out successfully, if you are an authorised user please login to continue");
-        }
+       
       }
       );
       setnewuserfunction();

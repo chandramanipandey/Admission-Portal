@@ -6,10 +6,12 @@ import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { getAuth } from 'firebase/auth'
 import { onAuthStateChanged } from 'firebase/auth'
+import { receivefromfirebase } from '../../Firebase/receivefromfirebase'
 export default function StudentView() {
 	const auth = getAuth();
 	const history = useHistory();
 	const [userauth, setuserauth] = useState(undefined)
+	const [UserInfo, setUserInfo] = useState([]);
 	useEffect(() => {
 		try {
 
@@ -22,14 +24,20 @@ export default function StudentView() {
 				}
 			}
 			);
+			receiveuserinfo();
 		}
 		catch (e) {
 			console.log(e);
 		}
 	}, [])
+	async function receiveuserinfo() {
+		const response = await receivefromfirebase(auth.currentUser.uid, 'User_Info');
+		localStorage.setItem('User_Info', JSON.stringify(response));
+		setUserInfo(response);
+	}
 	return (
 		<div>
-			<NavigationBar userType="Student" userName="User Name" />
+			<NavigationBar userType="Student" userName={UserInfo['userName']} />
 
 			<StudentDashboardPage />
 
