@@ -3,6 +3,7 @@ import { Form, Row, Col, Button } from "react-bootstrap";
 import { admingeneratenotice } from "../../Firebase/GenerateNotice";
 import { getAuth } from "firebase/auth";
 import { useHistory } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function GenerateNewNotice() {
   const auth = getAuth();
@@ -20,13 +21,33 @@ export default function GenerateNewNotice() {
 
   // useEffect(() => {
   //   try {
-  //     setuserauth(auth.currentUser.uid)
+  //     setuserauth(auth.currentUser.uid);
+  //   } catch (e) {
+  //     console.log("Generate Notice error");
+  //     history.push(
+  //       "/",
+  //       "You are not authorised to visit this website, if you are an authorised user please login to continue"
+  //     );
   //   }
-  //   catch (e) {
-  //     console.log('Generate Notice error')
-  //     history.push('/', "You are not authorised to visit this website, if you are an authorised user please login to continue");
-  //   }
-  // }, [auth])
+  // }, [auth]);
+
+  useEffect(() => {
+    try {
+      auth.onAuthStateChanged((authobj) => {
+        if (authobj) {
+          setuserauth(authobj.uid);
+        } else {
+          history.push(
+            "/",
+            "You are not authorised to visit this website or you have recently logged out successfully, if you are an authorised user please login to continue"
+          );
+        }
+      });
+      // setnewuserfunction();
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
 
   function handleChange(e, controlId) {
     switch (controlId) {

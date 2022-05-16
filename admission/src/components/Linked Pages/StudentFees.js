@@ -5,9 +5,10 @@ import { receiveallpendingpaymentsfromfirebase } from "../Firebase/receiveallpen
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { getAuth } from "firebase/auth";
-import { Button, Table, Form } from "react-bootstrap";
+import { Button, Table, Form, Modal } from "react-bootstrap";
 import { onAuthStateChanged } from "firebase/auth";
 import { acceptpendingpayments } from "../Firebase/AcceptPendingPayments";
+
 export default function StudentFees() {
   const [loading, setLoading] = useState(false);
   const [displayDataAll, setDisplayDataAll] = useState([]);
@@ -17,6 +18,7 @@ export default function StudentFees() {
   const [isApproved, setIsApproved] = useState(false);
   const userInfo = JSON.parse(localStorage.getItem("User_Info"));
   const userName = userInfo["userName"];
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     try {
@@ -90,6 +92,7 @@ export default function StudentFees() {
             <th>Bank IFSC</th>
             <th>Transaction Date</th>
             <th>Transaction ID</th>
+            <th>Receipt</th>
             <th>Receipt Approved</th>
           </tr>
         </thead>
@@ -103,6 +106,14 @@ export default function StudentFees() {
               acceptpendingpayments(e, userName);
               // UID
               // isApproved
+            }
+
+            function handleReceipt(e, transactionId) {
+              setShow(true);
+            }
+
+            function handleClose() {
+              setShow(false);
             }
 
             return (
@@ -120,6 +131,15 @@ export default function StudentFees() {
                   <td>{data.transactionId}</td>
                   <td>
                     <button
+                      className="btn btn-sm btn-primary"
+                      onClick={(e) => handleReceipt(e, data.Receipt)}
+                    >
+                      View Receipt
+                    </button>
+                  </td>
+
+                  <td>
+                    <button
                       className={
                         !isApproved
                           ? "btn btn-sm btn-success"
@@ -130,6 +150,20 @@ export default function StudentFees() {
                       {!isApproved ? "Approve" : "Approved"}
                     </button>
                   </td>
+
+                  <Modal size="lg" show={show}>
+                    <Modal.Header closeButton onClick={handleClose}>
+                      <Modal.Title>Receipt</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="text-center">
+                      <img src={data.Receipt} width="700px" />
+                    </Modal.Body>
+                    <Modal.Footer className="text-center">
+                      <Button variant="secondary" onClick={handleClose}>
+                        Close
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
                 </tr>
               </tbody>
             );

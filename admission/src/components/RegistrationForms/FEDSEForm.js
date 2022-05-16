@@ -32,8 +32,6 @@ import ClassField from "./Fields/ClassField";
 import { useHistory } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { addroletofirebase } from "../Firebase/addroletofirebase";
-import FormFileInput from "react-bootstrap/esm/FormFileInput";
-import FileInput from "./Fields/FileInput";
 import { checknewuser } from "../Firebase/checknewstudent";
 import { Alert } from "react-bootstrap";
 import { addadmissiondocumentstofirebase } from "../Firebase/addDocumentstofirebase";
