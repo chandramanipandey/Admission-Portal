@@ -17,11 +17,14 @@ import { getAuth } from "firebase/auth";
 import { addpaymentreceipt } from "../Firebase/addtransactionsliptofirebase";
 import { Link, useHistory } from 'react-router-dom';
 import { onAuthStateChanged } from "firebase/auth";
+import { Table } from "react-bootstrap";
+import { receivependingfeesstatus } from "../Firebase/ReceivePendingFeesStatus";
 
 export default function FeesDetails() {
   const auth = getAuth();
   const history = useHistory();
   const [userauth, setuserauth] = useState(undefined)
+  const [acceptedfeesdata, setacceptedfeesdata] = useState(null);
   const {
     senderBankNameState,
     senderAcNameState,
@@ -63,11 +66,16 @@ export default function FeesDetails() {
         }
       }
       );
+      receiveacceptedfeesstatus();
     }
     catch (e) {
       console.log(e);
     }
   }, [])
+  async function receiveacceptedfeesstatus() {
+    const response = await receivependingfeesstatus(auth.currentUser.uid);
+    setacceptedfeesdata(response);
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -76,11 +84,11 @@ export default function FeesDetails() {
       TransactionData.transactionReceipt,
       TransactionData
     );
-    TransactionData.Receipt = receiptlink['downloadlink'];
-    TransactionData.Timestamp = receiptlink['Timestamp'];
+    TransactionData.Receipt = receiptlink[0];
+    TransactionData.Timestamp = receiptlink[1];
 
     delete TransactionData.transactionReceipt;
-    
+
     await adduserdata(
       TransactionData,
       auth.currentUser.uid,
@@ -165,6 +173,34 @@ export default function FeesDetails() {
 
         <div className="pb-3"></div>
       </Form>
+      <div style={{ paddingTop: '40px' }} className="row align-items-md-stretch w-100">
+        <div className="col-md">
+          <div style={{}} className=" p-5 text-white bg-dark rounded-3">
+            <h1>Accepted Fees Details</h1>
+          </div>
+        </div>
+      </div>
+      <Table className="project-list-table table-nowrap align-middle table-hover responsive-sm">
+        <thead>
+          <tr>
+            {/* UID TransactionID */}
+            <th>Transaction ID</th>
+            <th>Status</th>
+            <th>Accepted By</th>
+
+          </tr>
+        </thead>
+        {acceptedfeesdata != null ?
+          <tbody>
+            <tr>
+              <td>{acceptedfeesdata.transactionid}</td>
+              <td>{acceptedfeesdata.status}</td>
+              <td>{acceptedfeesdata.Acceptedby}</td>
+            </tr>
+          </tbody>
+          : null}
+      </Table>
+      <div style={{ paddingBottom: '100px' }}></div>
     </>
 
   );
