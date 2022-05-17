@@ -9,12 +9,13 @@ import DateFieldInline from "../RegistrationForms/Fields/DateFieldInline";
 import { FieldsContext } from "../States/FieldStates";
 
 import "../CSS/Forms.css";
+import { addfeestructure } from "../Firebase/AddFeeStructure";
 
 export default function FeeStructure() {
   const [disabled, setDisabled] = useState(true);
   const { handleSubmit, reset } = useForm();
-
-  const { 
+  const [studentclass, setstudentclass] = useState();
+  const {
     financialYearState,
     openState,
     omsState,
@@ -24,29 +25,30 @@ export default function FeeStructure() {
     issueDateState,
   } = useContext(FieldsContext);
 
-    //Student categories
-    const [ financialYear, setFinancialYear ] = financialYearState;
-    const [ open, setOpen ] = openState;
-    const [ oms, setOms ] = omsState;
-    const [ obc_ebc, setObc_ebc ] = obc_ebcState;
-    const [ sc, setSc ] = scState;
-    const [ st_nt, setSt_nt ] = st_ntState;
-    const [ issueDate, setIssueDate ] = issueDateState;
+  //Student categories
+  const [financialYear, setFinancialYear] = financialYearState;
+  const [open, setOpen] = openState;
+  const [oms, setOms] = omsState;
+  const [obc_ebc, setObc_ebc] = obc_ebcState;
+  const [sc, setSc] = scState;
+  const [st_nt, setSt_nt] = st_ntState;
+  const [issueDate, setIssueDate] = issueDateState;
 
-    const FormData = {
-        financialYear: financialYear,
-        open: open,
-        oms: oms,
-        obc_ebc: obc_ebc,
-        sc: sc,
-        st_nt: st_nt,
-        issueDate: issueDate,
-      }
+  const FormData = {
+    financialYear: financialYear,
+    open: open,
+    oms: oms,
+    obc_ebc: obc_ebc,
+    sc: sc,
+    st_nt: st_nt,
+    issueDate: issueDate,
+  }
 
-      function setAll(obj, val) {
-        Object.keys(obj).forEach(function(index) {
-          obj[index] = val
-        })};
+  function setAll(obj, val) {
+    Object.keys(obj).forEach(function (index) {
+      obj[index] = val
+    })
+  };
 
   function handleDisable(event) {
     var id = event.target.id;
@@ -70,32 +72,31 @@ export default function FeeStructure() {
     var year = document.getElementById('financialYear').value;
     setFinancialYear(year);
     FormData.financialYear = year;
-    console.log(FormData);
+    await addfeestructure(year, studentclass, FormData)
     reset(FormData);
-    alert("success !")
 
   };
 
-  const FeeStructureForm = ({key}) => {
+  const FeeStructureForm = ({ key }) => {
     return (
       <div className="col-10" key={key}>
         <Form onSubmit={handleSubmit(onSubmit)} >
           {/* <YearField title="FINANCIAL YEAR" controlId="financialYear" /> */}
           <Form.Group>
-        <Form.Row>
-          <Form.Label column sm={3}>
-            {"FINANCIAL YEAR"}
-          </Form.Label>
-          <Col sm={6}>
-            <Form.Control
-              placeholder="Enter Financial year : Eg. 2022"
-              defaultValue={financialYear === null ? '' : financialYear}
-              controlId="financialYear"
-              id="financialYear"
-            />
-          </Col>
-        </Form.Row>
-      </Form.Group>
+            <Form.Row>
+              <Form.Label column sm={3}>
+                {"FINANCIAL YEAR"}
+              </Form.Label>
+              <Col sm={6}>
+                <Form.Control
+                  placeholder="Enter Financial year : Eg. 2022"
+                  defaultValue={financialYear === null ? '' : financialYear}
+                  controlId="financialYear"
+                  id="financialYear"
+                />
+              </Col>
+            </Form.Row>
+          </Form.Group>
           <NumField
             title="OPEN"
             placeholder="enter fees applicable for OPEN"
@@ -142,11 +143,11 @@ export default function FeeStructure() {
             size={6}
             value={st_nt === null ? '' : st_nt}
           />
-          <DateFieldInline 
-          title="ISSUE DATE" 
-          controlId="issueDate" 
-          size={6}
-          isDisabled={disabled}
+          <DateFieldInline
+            title="ISSUE DATE"
+            controlId="issueDate"
+            size={6}
+            isDisabled={disabled}
           />
 
           <div className="d-flex">
@@ -198,7 +199,7 @@ export default function FeeStructure() {
                   <Nav.Link eventKey="first">First Year</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="second">Direct Secon Year</Nav.Link>
+                  <Nav.Link eventKey="second">Direct Second Year</Nav.Link>
                 </Nav.Item>
               </Nav>
             </Col>
@@ -217,12 +218,12 @@ export default function FeeStructure() {
                         variant="primary"
                         type="button"
                         id="edit"
-                        onClick={(event) => handleDisable(event)}
+                        onClick={(event) => { handleDisable(event); setstudentclass('FE') }}
                       >
                         Edit
                       </Button>
                     </div>
-                    {FeeStructureForm({key:1})}
+                    {FeeStructureForm({ key: 'FE' })}
                   </div>
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
@@ -238,12 +239,12 @@ export default function FeeStructure() {
                         variant="primary"
                         type="button"
                         id="edit"
-                        onClick={(event) => handleDisable(event)}
+                        onClick={(event) => { handleDisable(event); setstudentclass('DSE') }}
                       >
                         Edit
                       </Button>
                     </div>
-                    {FeeStructureForm({key:2})}
+                    {FeeStructureForm({ key: 'DSE' })}
                   </div>
                 </Tab.Pane>
               </Tab.Content>

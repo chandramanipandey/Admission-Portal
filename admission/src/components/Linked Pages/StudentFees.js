@@ -1,132 +1,175 @@
-import React from 'react'
-import Footer from '../Dashboard/Footer'
-import NavigationBar from '../Dashboard/NavigationBar'
-import { receiveallpendingpaymentsfromfirebase } from '../Firebase/receiveallpendingpayments'
-import { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import { getAuth } from 'firebase/auth'
-import { Button, Table, Form } from 'react-bootstrap'
-import { onAuthStateChanged } from 'firebase/auth'
+import React from "react";
+import Footer from "../Dashboard/Footer";
+import NavigationBar from "../Dashboard/NavigationBar";
+import { receiveallpendingpaymentsfromfirebase } from "../Firebase/receiveallpendingpayments";
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { getAuth } from "firebase/auth";
+import { Button, Table, Form, Modal } from "react-bootstrap";
+import { onAuthStateChanged } from "firebase/auth";
+import { acceptpendingpayments } from "../Firebase/AcceptPendingPayments";
+
 export default function StudentFees() {
-	const [loading, setLoading] = useState(true)
-	const [displayDataAll, setDisplayDataAll] = useState([])
-	const auth = getAuth();
-	const history = useHistory();
-	const [userauth, setuserauth] = useState(undefined)
-	const [isApproved, setIsApproved] = useState(true)
-	
-	useEffect(() => {
-		try {
+  const [loading, setLoading] = useState(false);
+  const [displayDataAll, setDisplayDataAll] = useState([]);
+  const auth = getAuth();
+  const history = useHistory();
+  const [userauth, setuserauth] = useState(undefined);
+  const [isApproved, setIsApproved] = useState(false);
+  const userInfo = JSON.parse(localStorage.getItem("User_Info"));
+  const userName = userInfo["userName"];
+  const [show, setShow] = useState(false);
 
-			auth.onAuthStateChanged((authobj) => {
-				if (authobj) {
-					setuserauth(authobj.uid)
-				}
-				else {
-					history.push('/', "You are not authorised to visit this website or you have recently logged out successfully, if you are an authorised user please login to continue");
-				}
-			}
-			);
-			fetchStudentFeesList();
-		}
-		catch (e) {
-			console.log(e);
-		}
-	}, [])
+  useEffect(() => {
+    try {
+      auth.onAuthStateChanged((authobj) => {
+        if (authobj) {
+          setuserauth(authobj.uid);
+        } else {
+          history.push(
+            "/",
+            "You are not authorised to visit this website or you have recently logged out successfully, if you are an authorised user please login to continue"
+          );
+        }
+      });
+      fetchStudentFeesList();
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
 
+  async function fetchStudentFeesList() {
+    let response = await receiveallpendingpaymentsfromfirebase();
+    const displayData = [];
 
-	async function fetchStudentFeesList() {
-		let response = await receiveallpendingpaymentsfromfirebase()
-		console.log(response)
-		const displayData = []
+    for (var key in response) {
+      const data = response[key];
+      const userdata = data["userdata"];
+      const PendingFeesData = data["PendingFeesData"];
 
-		for (var key in response) {
-			const data = response[key];
-			const userdata = data['userdata']
-			const PendingFeesData = data['PendingFeesData']
+      var userdataD = [];
+      userdataD["key"] = key;
 
-			var userdataD = []
+      for (var key2 in userdata) {
+        userdataD[key2] = userdata[key2];
+      }
 
-			for (var key2 in userdata) {
-				userdataD[key2] = userdata[key2]
-			}
+      for (var key3 in PendingFeesData) {
+        userdataD[key3] = PendingFeesData[key3];
+      }
 
-			for (var key3 in PendingFeesData) {
-				userdataD[key3] = PendingFeesData[key3]
-			}
+      displayData[key] = userdataD;
+    }
 
-			displayData[key] = userdataD;
+    setDisplayDataAll(displayData);
+  }
+  return loading ? (
+    "Loading Page"
+  ) : (
+    <div>
+      <NavigationBar userType="Admin" />
 
-		}
+      <div className="row align-items-md-stretch w-100 mb-3">
+        <div className="col-md">
+          <div className="h-100 p-5 text-white bg-dark rounded-3">
+            <h1>Students Fees</h1>
+          </div>
+        </div>
+      </div>
 
-		setDisplayDataAll(displayData)
-		console.log(displayData);
-	}
-	return loading ? "Loading Page" : (
-		<div>
-			<NavigationBar userType="Admin" />
+      {/* PendingFeesData userdata */}
+      <Table className="project-list-table table-nowrap align-middle table-hover responsive-sm">
+        <thead>
+          <tr>
+            {/* UID TransactionID */}
+            <th>PRN</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Class</th>
+            <th>Account Name</th>
+            <th>Account Number</th>
+            <th>Bank Name</th>
+            <th>Bank IFSC</th>
+            <th>Transaction Date</th>
+            <th>Transaction ID</th>
+            <th>Receipt</th>
+            <th>Receipt Approved</th>
+          </tr>
+        </thead>
 
-			<div className="row align-items-md-stretch w-100 mb-3">
-				<div className="col-md">
-					<div className="h-100 p-5 text-white bg-dark rounded-3">
-						<h1>Students Fees</h1>
-					</div>
-				</div>
-			</div>
+        {!loading &&
+          Object.keys(displayDataAll).map((key, value) => {
+            var data = displayDataAll[key];
 
-			{/* PendingFeesData userdata */}
-			<Table className="project-list-table table-nowrap align-middle table-hover responsive-sm">
-				<thead>
-					<tr>
-						{/* UID TransactionID */}
-						<th>PRN</th>
-						<th>Name</th>
-						<th>Department</th>
-						<th>Class</th>
-						<th>Account Name</th>
-						<th>Account Number</th>
-						<th>Bank Name</th>
-						<th>Bank IFSC</th>
-						<th>Transaction Date</th>
-						<th>Transaction ID</th>
-						<th>Receipt Approved</th>
-					</tr>
-				</thead>
+            function handleApprove(e) {
+              setIsApproved(!isApproved);
+              acceptpendingpayments(e, userName);
+              // UID
+              // isApproved
+            }
 
-				{!loading && Object.keys(displayDataAll).map((key, value) => {
-					var data = displayDataAll[key];
-					console.log(data)
+            function handleReceipt(e, transactionId) {
+              setShow(true);
+            }
 
-					function handleApprove() {
-						setIsApproved(!isApproved)
-						console.log(data.transactionId)
-						// UID
-						// isApproved	
-					}
+            function handleClose() {
+              setShow(false);
+            }
 
-					return (
-						<tbody>
-							<tr>
-								<td>{data.prn}</td>
-								<td>{data.userName}</td>
-								<td>{data.department}</td>
-								<td>{data.currentClass}</td>
-								<td>{data.senderAcName}</td>
-								<td>{data.senderAcNo}</td>
-								<td>{data.senderBankName}</td>
-								<td>{data.senderBankIFSC}</td>
-								<td>{data.transactionDate}</td>
-								<td>{data.transactionId}</td>
-								<td><button className={!isApproved ? 'btn btn-sm btn-success' : 'btn btn-sm btn-secondary'} onClick={handleApprove}>{!isApproved ? "Approve" : "Approved"}</button></td>
+            return (
+              <tbody>
+                <tr>
+                  <td>{data.prn}</td>
+                  <td>{data.userName}</td>
+                  <td>{data.department}</td>
+                  <td>{data.currentClass}</td>
+                  <td>{data.senderAcName}</td>
+                  <td>{data.senderAcNo}</td>
+                  <td>{data.senderBankName}</td>
+                  <td>{data.senderBankIFSC}</td>
+                  <td>{data.transactionDate}</td>
+                  <td>{data.transactionId}</td>
+                  <td>
+                    <button
+                      className="btn btn-sm btn-primary"
+                      onClick={(e) => handleReceipt(e, data.Receipt)}
+                    >
+                      View Receipt
+                    </button>
+                  </td>
 
-							</tr>
-						</tbody>
-					)
-				})}
-			</Table>
-			{console.log(isApproved)}
-			<Footer />
+                  <td>
+                    <button
+                      className={
+                        !isApproved
+                          ? "btn btn-sm btn-success"
+                          : "btn btn-sm btn-secondary"
+                      }
+                      onClick={() => handleApprove(data)}
+                    >
+                      {!isApproved ? "Approve" : "Approved"}
+                    </button>
+                  </td>
 
-		</div>
-	)
+                  <Modal size="lg" show={show}>
+                    <Modal.Header closeButton onClick={handleClose}>
+                      <Modal.Title>Receipt</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="text-center">
+                      <img src={data.Receipt} width="700px" />
+                    </Modal.Body>
+                    <Modal.Footer className="text-center">
+                      <Button variant="secondary" onClick={handleClose}>
+                        Close
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                </tr>
+              </tbody>
+            );
+          })}
+      </Table>
+      <Footer />
+    </div>
+  );
 }
