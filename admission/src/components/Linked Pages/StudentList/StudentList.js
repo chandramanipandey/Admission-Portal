@@ -335,11 +335,11 @@ export default function StudentList() {
                       >
                         <td>{data.prn}</td>
                         <td>{data.collegeEmail}</td>
-                        <td>{data.studentName}</td>
+                        <td>{data.userName}</td>
                         <td>{data.department}</td>
-                        <td>{data.class}</td>
+                        <td>{data.currentClass}</td>
                         <td>{data.dob}</td>
-                        <td>{data.studentMobile}</td>
+                        <td>{data.userMobile}</td>
                       </tr>
                     );
                   })}
