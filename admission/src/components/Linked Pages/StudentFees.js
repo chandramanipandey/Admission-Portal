@@ -8,6 +8,7 @@ import { getAuth } from "firebase/auth";
 import { Button, Table, Form, Modal } from "react-bootstrap";
 import { onAuthStateChanged } from "firebase/auth";
 import { acceptpendingpayments } from "../Firebase/AcceptPendingPayments";
+import dummyimage from '../Assets/logo1.jpg'
 
 export default function StudentFees() {
   const [loading, setLoading] = useState(false);
@@ -19,6 +20,7 @@ export default function StudentFees() {
   const userInfo = JSON.parse(localStorage.getItem("User_Info"));
   const userName = userInfo["userName"];
   const [show, setShow] = useState(false);
+  const [image,setImage] = useState(dummyimage);
 
   useEffect(() => {
     try {
@@ -110,6 +112,7 @@ export default function StudentFees() {
 
             function handleReceipt(e, transactionId) {
               setShow(true);
+              setImage(transactionId);
             }
 
             function handleClose() {
@@ -156,7 +159,8 @@ export default function StudentFees() {
                       <Modal.Title>Receipt</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="text-center">
-                      <img src={data.Receipt} width="700px" />
+                      {console.log('Hi there',data.Receipt)}
+                      <img src={image} width="700px" />
                     </Modal.Body>
                     <Modal.Footer className="text-center">
                       <Button variant="secondary" onClick={handleClose}>
