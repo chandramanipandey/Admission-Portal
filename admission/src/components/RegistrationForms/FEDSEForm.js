@@ -250,13 +250,13 @@ export default function FEDSEForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const sscdownloadlink = "Not_Uploaded";
-    const hscdownloadlink = "Not_Uploaded";
-    const cetdownloadlink = "Not_Uploaded";
-    const jeemaindownloadlink = "Not_Uploaded";
-    const jeeadvanceddownloadlink = "Not_Uploaded";
+    var sscdownloadlink = "Not_Uploaded";
+    var hscdownloadlink = "Not_Uploaded";
+   var cetdownloadlink = "Not_Uploaded";
+    var jeemaindownloadlink = "Not_Uploaded";
+    var jeeadvanceddownloadlink = "Not_Uploaded";
     if (SSCMarksheet != null) {
-      const sscdownloadlink = await addadmissiondocumentstofirebase(
+sscdownloadlink = await addadmissiondocumentstofirebase(
         auth.currentUser.uid,
         SSCMarksheet,
         "SSC.jpg"
@@ -264,28 +264,28 @@ export default function FEDSEForm() {
     }
 
     if (HSCMarksheet != null) {
-      const hscdownloadlink = await addadmissiondocumentstofirebase(
+ hscdownloadlink = await addadmissiondocumentstofirebase(
         auth.currentUser.uid,
         HSCMarksheet,
         "HSC.jpg"
       );
     }
     if (CETMarksheet != null) {
-      const cetdownloadlink = await addadmissiondocumentstofirebase(
+cetdownloadlink = await addadmissiondocumentstofirebase(
         auth.currentUser.uid,
         CETMarksheet,
         "CET.jpg"
       );
     }
     if (JEEMainsMarksheet != null) {
-      const jeemaindownloadlink = await addadmissiondocumentstofirebase(
+jeemaindownloadlink = await addadmissiondocumentstofirebase(
         auth.currentUser.uid,
         JEEMainsMarksheet,
         "JEEMAIN.jpg"
       );
     }
     if (JEEAdvMarksheet != null) {
-      const jeeadvanceddownloadlink = await addadmissiondocumentstofirebase(
+  jeeadvanceddownloadlink = await addadmissiondocumentstofirebase(
         auth.currentUser.uid,
         JEEAdvMarksheetState,
         "JEEADVANCED.jpg"
@@ -296,6 +296,7 @@ export default function FEDSEForm() {
     FeDseFormData["cetmarksheet"] = cetdownloadlink;
     FeDseFormData["jeemainmarksheet"] = jeemaindownloadlink;
     FeDseFormData["jeeadvancedmarksheet"] = jeeadvanceddownloadlink;
+    console.log(sscdownloadlink,hscdownloadlink,cetdownloadlink,jeemaindownloadlink,jeeadvanceddownloadlink);
 
     adduserdata(FeDseFormData, auth.currentUser.uid, "Admission_Data");
     adduserdata(GenStudentData, auth.currentUser.uid, "User_Info");
