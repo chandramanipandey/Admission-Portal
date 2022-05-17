@@ -27,10 +27,15 @@ export default function NavigationBar({ userType, userName }) {
   const auth = getAuth();
   const userRole = null;
   const [studentNotice, setStudentNotice] = useState([]);
+  var currentClass;
+  var department;
 
   const localUserInfo = JSON.parse(localStorage.getItem("User_Info"));
-  const currentClass = localUserInfo["currentClass"];
-  const department = localUserInfo["department"];
+  if (localUserInfo != null) {
+    currentClass = localUserInfo["currentClass"];
+    department = localUserInfo["department"];
+  }
+
   const noticeData = [];
 
   async function fetchStudentNotice() {
@@ -123,11 +128,6 @@ export default function NavigationBar({ userType, userName }) {
                 </Dropdown.Item>
               );
             })}
-            {/* <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">
-              Another actionactionactionaction
-            </Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
           </Dropdown.Menu>
         </Dropdown>
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
