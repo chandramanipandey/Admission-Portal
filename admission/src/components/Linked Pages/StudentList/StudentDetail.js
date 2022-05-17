@@ -9,6 +9,7 @@ export default function StudentDetail(props) {
   const auth = getAuth();
   const history = useHistory();
   const [userauth, setuserauth] = useState(undefined)
+  const [userAdmissionData,setuserAdmissionData] = useState(props.location.state.data);
   useEffect(() => {
     try {
 
@@ -31,15 +32,18 @@ export default function StudentDetail(props) {
   return (
     <>
       <NavigationBar userType="Admin" userName="User Name" />
+      {/* {console.log('studentdetail page',)} */}
       <div className="row align-items-md-stretch w-100">
         <div className="col-md">
           <div className="h-100 p-5 text-white bg-dark rounded-3">
             <h1>Students List</h1>
+
           </div>
         </div>
       </div>
       <div>
         <h2>prn : {prn}</h2>
+        <h2>prn : {userAdmissionData.aadharNo}</h2>
       </div>
     </>
   )
