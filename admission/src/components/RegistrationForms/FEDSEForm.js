@@ -361,6 +361,16 @@ export default function FEDSEForm() {
           <Col md>
             <GenderField controlId="studentGender" />
           </Col>
+          <YesNo
+            title="Do you have MHTCET Score?"
+            name="mhtcet"
+            controlId="mhtcet"
+          />
+          <YesNo
+            title="Do you have JEE Mains Score?"
+            name="jeeMains"
+            controlId="jeeMains"
+          />
           <Col md>
             <YesNo
               title="Do you have JEE Advanced Score?"
