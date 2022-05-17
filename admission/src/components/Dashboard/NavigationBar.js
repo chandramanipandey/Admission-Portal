@@ -113,7 +113,7 @@ export default function NavigationBar({ userType, userName }) {
           {/* <Nav.Link onClick={() => handleClick("home")}>Home</Nav.Link> */}
         </Nav>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Dropdown>
+        {role && role[0] != "Admin" ? (<Dropdown>
           <Dropdown.Toggle variant="success">
             <span className="mr-2">View Notices</span>
             <i class="fa-regular fa-bell"></i>
@@ -129,7 +129,7 @@ export default function NavigationBar({ userType, userName }) {
               );
             })}
           </Dropdown.Menu>
-        </Dropdown>
+        </Dropdown>):null}
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
             <Nav.Link>
