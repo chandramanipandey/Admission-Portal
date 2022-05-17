@@ -296,15 +296,16 @@ export default function FEDSEForm() {
     FeDseFormData["cetmarksheet"] = cetdownloadlink;
     FeDseFormData["jeemainmarksheet"] = jeemaindownloadlink;
     FeDseFormData["jeeadvancedmarksheet"] = jeeadvanceddownloadlink;
+    console.log(sscdownloadlink,hscdownloadlink,cetdownloadlink,jeemaindownloadlink,jeeadvanceddownloadlink);
 
-    adduserdata(FeDseFormData, auth.currentUser.uid, "Admission_Data");
-    adduserdata(GenStudentData, auth.currentUser.uid, "User_Info");
-    addroletofirebase(
-      auth.currentUser.uid,
-      auth.currentUser.email,
-      "Student",
-      GenStudentData["department"]
-    );
+    // adduserdata(FeDseFormData, auth.currentUser.uid, "Admission_Data");
+    // adduserdata(GenStudentData, auth.currentUser.uid, "User_Info");
+    // addroletofirebase(
+    //   auth.currentUser.uid,
+    //   auth.currentUser.email,
+    //   "Student",
+    //   GenStudentData["department"]
+    // );
   }
 
   return (
