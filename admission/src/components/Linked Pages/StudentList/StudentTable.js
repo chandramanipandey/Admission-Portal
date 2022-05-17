@@ -7,7 +7,7 @@ export default function StudentList(props) {
 
   const history = useHistory();
   const [studentData, setStudentData] = useState([]);
-  const [isLoading, setIsLoadig] = useState(true);
+  const [isLoading, setIsLoadig] = useState(false);
 
   console.log('student', props.studentData);
   console.log('admission', props.admissionData);
@@ -15,7 +15,7 @@ export default function StudentList(props) {
   useEffect(() => {
     setStudentData(props.studentData);
     setIsLoadig(false)
-  },[]);
+  },[isLoading]);
 
     function handleClick(prn) {
         history.push(`/StudentDetail/${prn}`);
