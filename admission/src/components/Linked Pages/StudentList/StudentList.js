@@ -33,14 +33,17 @@ export default function StudentList() {
       for (var key2 in userInfo) {
         studentD[key2] = userInfo[key2];
       }
+      studentD['key'] = key;
       displayData1[key] = studentD;
+
 
       for (var key3 in admissionInfo) {
         admissiondata[key3] = admissionInfo[key3];
       }
+      admissionInfo['key'] = key;
       displayData2[key] = admissiondata;
 
-      console.log(studentD, admissiondata);
+      
     }
 
     // displayData1[key] = {'userInfo': userInfo, 'admissionInfo': admissionInfo };
@@ -53,7 +56,6 @@ export default function StudentList() {
     setTimeout(() => {
       fetchData();
       setLoading(false);
-      console.log("dtaa", studentList);
     }, 2000);
   }, []);
 
@@ -286,8 +288,8 @@ export default function StudentList() {
       setStudentData(data[3]?.finalYear);
     }
   }
-  function handleClick(prn) {
-    history.push(`/StudentDetail/${prn}`);
+  function handleClick(key,data) {
+    history.push(`/StudentDetail/${key}`,{data,key});
   }
 
   return (
@@ -329,17 +331,17 @@ export default function StudentList() {
                     var data = studentList[key];
                     return (
                       <tr
-                        key={data.prn}
-                        onClick={() => handleClick(data.prn)}
+                        key={data.key}
+                        onClick={() => handleClick(data.key,admissionData[data.key])}
                         style={{ cursor: "pointer" }}
                       >
                         <td>{data.prn}</td>
                         <td>{data.collegeEmail}</td>
-                        <td>{data.studentName}</td>
+                        <td>{data.userName}</td>
                         <td>{data.department}</td>
-                        <td>{data.class}</td>
+                        <td>{data.currentClass}</td>
                         <td>{data.dob}</td>
-                        <td>{data.studentMobile}</td>
+                        <td>{data.userMobile}</td>
                       </tr>
                     );
                   })}
