@@ -328,7 +328,7 @@ export default function StudentDetail(props) {
 
       <Modal size="lg" show={show}>
         <Modal.Header closeButton onClick={handleClose}>
-          <Modal.Title>Receipt</Modal.Title>
+          <Modal.Title>Marksheet</Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center">
           <img src={marksheetImage} width="700px" />
