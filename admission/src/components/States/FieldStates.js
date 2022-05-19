@@ -81,6 +81,7 @@ export const FieldsProvider = (props) => {
     const [CETMarksheet, setCETMarksheet] = useState(null)
     const [JEEMainsMarksheet, setJEEMainsMarksheet] = useState(null)
     const [JEEAdvMarksheet, setJEEAdvMarksheet] = useState(null)
+    const [studentImage, setstudentImage] = useState(null)
     
     //Student categories
     const [ financialYear, setFinancialYear ] = useState("")
@@ -142,7 +143,7 @@ export const FieldsProvider = (props) => {
           JEEMainsScoreState: [JEEMainsScore, setJEEMainsScore] ,
           hasGivenJEEAdvancedState: [hasGivenJEEAdvanced, setHasGivenJEEAdvanced] ,
           JEEAdvancedScoreState: [JEEAdvancedScore, setJEEAdvancedScore],
-
+          StudentPhotoState: [studentImage, setstudentImage],
           cetMeritNoState: [cetMeritNo, setCetMeritNo],
           parentsAnnualIncomeState: [parentsAnnualIncome, setParentsAnnualIncome],
           aadharNoState: [aadharNo, setAadharNo],

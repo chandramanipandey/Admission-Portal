@@ -15,9 +15,12 @@ export default function StudentDetail(props) {
   const history = useHistory();
   const { prn } = useParams();
   const [userauth, setuserauth] = useState(undefined);
+  const [userImage,setuserImage] = useState(avatar);
+  
   const [userAdmissionData, setuserAdmissionData] = useState(
     props.location.state.data
   );
+
 
   const [marksheetImage, setMarksheetImage] = useState();
   const [show, setShow] = useState(false);
@@ -41,6 +44,11 @@ export default function StudentDetail(props) {
             "/",
             "You are not authorised to visit this website or you have recently logged out successfully, if you are an authorised user please login to continue"
           );
+        }
+        if(userAdmissionData.studentImage!="Not_Uploaded"){
+         if(userAdmissionData.studentImage!=undefined){
+           setuserImage(userAdmissionData.studentImage)
+         }
         }
       });
     } catch (e) {
@@ -67,7 +75,7 @@ export default function StudentDetail(props) {
             <div className="panel">
               <div className="user-heading round">
                 <a href="#">
-                  <img src={avatar} alt="" />
+                  <img src={userImage} alt="" />
                 </a>
                 <h1>{userAdmissionData.studentName}</h1>
                 <h3>{userAdmissionData.department}</h3>

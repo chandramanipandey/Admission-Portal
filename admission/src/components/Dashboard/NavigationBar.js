@@ -30,11 +30,11 @@ export default function NavigationBar({ userType, userName }) {
   var currentClass;
   var department;
 
-  // const localUserInfo = JSON.parse(localStorage.getItem("User_Info"));
-  // if (localUserInfo != null) {
-  //   currentClass = localUserInfo["currentClass"];
-  //   department = localUserInfo["department"];
-  // }
+  const localUserInfo = JSON.parse(localStorage.getItem("User_Info"));
+  if (localUserInfo != null) {
+    currentClass = localUserInfo["currentClass"];
+    department = localUserInfo["department"];
+  }
 
   const noticeData = [];
 

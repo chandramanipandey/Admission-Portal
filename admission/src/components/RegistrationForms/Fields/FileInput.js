@@ -10,6 +10,7 @@ export default function FileInput({ title, controlId }) {
     CETMarksheetState,
     JEEMainsMarksheetState,
     JEEAdvMarksheetState,
+    StudentPhotoState,
   } = useContext(FieldsContext);
 
   const [transactionReceipt, setTransactionReceipt] = transactionReceiptState;
@@ -18,6 +19,7 @@ export default function FileInput({ title, controlId }) {
   const [CETMarksheet, setCETMarksheet] = CETMarksheetState;
   const [JEEMainsMarksheet, setJEEMainsMarksheet] = JEEMainsMarksheetState;
   const [JEEAdvMarksheet, setJEEAdvMarksheet] = JEEAdvMarksheetState;
+  const [studentImage, setstudentImage] = StudentPhotoState;
 
   return (
     <>
@@ -60,6 +62,10 @@ export default function FileInput({ title, controlId }) {
       case "JEEAdvMarksheetFile":
         setJEEAdvMarksheet(e.target.files[0]);
         console.log(JEEAdvMarksheet);
+        break;
+      case "StudentImageFile":
+        setstudentImage(e.target.files[0]);
+        console.log(studentImage);
         break;
       default:
         console.log("Does not match any file upload");
