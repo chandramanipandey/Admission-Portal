@@ -4,7 +4,8 @@ import { useHistory } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import NavigationBar from "../../Dashboard/NavigationBar";
 import { onAuthStateChanged } from "firebase/auth";
-import { Tabs, Tab, ListGroup, Card } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
+import { Tabs, Tab, ListGroup, Card, Button } from "react-bootstrap";
 
 import "../../CSS/StudentDetail.css";
 import avatar from "../../Assets/avatar.png";
@@ -14,9 +15,25 @@ export default function StudentDetail(props) {
   const history = useHistory();
   const { prn } = useParams();
   const [userauth, setuserauth] = useState(undefined);
+  const [userImage,setuserImage] = useState(avatar);
+  
   const [userAdmissionData, setuserAdmissionData] = useState(
     props.location.state.data
   );
+
+
+  const [marksheetImage, setMarksheetImage] = useState();
+  const [show, setShow] = useState(false);
+
+  function handleViewMarksheet(studentMarksheet) {
+    setMarksheetImage(studentMarksheet);
+    setShow(true);
+  }
+
+  function handleClose() {
+    setShow(false);
+  }
+
   useEffect(() => {
     try {
       auth.onAuthStateChanged((authobj) => {
@@ -27,6 +44,11 @@ export default function StudentDetail(props) {
             "/",
             "You are not authorised to visit this website or you have recently logged out successfully, if you are an authorised user please login to continue"
           );
+        }
+        if(userAdmissionData.studentImage!="Not_Uploaded"){
+         if(userAdmissionData.studentImage!=undefined){
+           setuserImage(userAdmissionData.studentImage)
+         }
         }
       });
     } catch (e) {
@@ -46,16 +68,13 @@ export default function StudentDetail(props) {
       </div>
 
       {/* ---------------------------------------------------------------------------------------------------------------------------- */}
-      <div className="container">
+      <div className="container-fluid">
         <div className="row">
           <div className="profile-nav col-md-3">
             <div className="panel">
               <div className="user-heading round">
                 <a href="#">
-                  <img
-                    src={avatar}
-                    alt=""
-                  />
+                  <img src={userImage} alt="" />
                 </a>
                 <h1>{userAdmissionData.studentName}</h1>
                 <h3>{userAdmissionData.department}</h3>
@@ -88,7 +107,7 @@ export default function StudentDetail(props) {
           </div>
           <div className="profile-info col-md-9">
             <Card className="canvas">
-              <div className="bio-graph-heading">graphs</div>
+              {/* <div className="bio-graph-heading">graphs</div> */}
               <div className="panel-body bio-graph-info">
                 <h1 className="dark font-weight-bold mt-2">General Details</h1>
                 <hr class="style1"></hr>
@@ -129,8 +148,7 @@ export default function StudentDetail(props) {
                       <span>Mobile </span>: {userAdmissionData.studentMobile}
                     </p>
                   </div>
-                  
-                  
+
                   <div className="bio-row">
                     <p>
                       <span>Phone </span>: 88 (02) 123456
@@ -188,12 +206,14 @@ export default function StudentDetail(props) {
                             </h5>
                           </div>
                         </div>
-                        <br/>
+                        <br />
                         <div className="d-flex row">
                           <div className="col-4">
                             <p>Handicapped ?</p>
                             <h6 className="font-weight-bold">
-                              {userAdmissionData.phyHandicapped === false ? 'No' : 'Yes'}
+                              {userAdmissionData.phyHandicapped === false
+                                ? "No"
+                                : "Yes"}
                             </h6>
                           </div>
                           <div className="col-4">
@@ -216,18 +236,85 @@ export default function StudentDetail(props) {
                 <div className="col-md-6">
                   <div className="card">
                     <div className="card-body d-flex row">
-                        <h4 className="dark font-weight-bold text-muted">
-                          Parents Details
+                      <h4 className="dark font-weight-bold text-muted">
+                        Parents Details
                         <hr class="style1"></hr>
-                        </h4>
+                      </h4>
                       <div className="bio-desk">
-                        <p><b>Father Name :</b>{userAdmissionData.fatherName}</p>
-                        <p><b>Phone : </b>{userAdmissionData.fatherMobile}</p>
-                        <p><b>Mother Name : </b>{userAdmissionData.motherName}</p>
-                        <p><b>Phone : </b>{userAdmissionData.motherMobile}</p>
+                        <p>
+                          <b>Father Name :</b>
+                          {userAdmissionData.fatherName}
+                        </p>
+                        <p>
+                          <b>Phone : </b>
+                          {userAdmissionData.fatherMobile}
+                        </p>
+                        <p>
+                          <b>Mother Name : </b>
+                          {userAdmissionData.motherName}
+                        </p>
+                        <p>
+                          <b>Phone : </b>
+                          {userAdmissionData.motherMobile}
+                        </p>
                       </div>
                       <div className="bio-desk">
-                        <p><b>Anual Income : </b>{userAdmissionData.parentsAnnualIncome}</p>
+                        <p>
+                          <b>Anual Income : </b>
+                          {userAdmissionData.parentsAnnualIncome}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-12">
+                  <div className="card">
+                    <div className="card-body">
+                      <div className="bio-card dark font-weight-bold">
+                        <h4 className="dark font-weight-bold">Marksheets</h4>
+                        <hr class="style1"></hr>
+                        <p>
+                          SSC Marksheet :{" "}
+                          <button
+                            className="btn btn-sm btn-primary"
+                            onClick={(e) =>
+                              handleViewMarksheet(
+                                userAdmissionData.sscmarksheet
+                              )
+                            }
+                            // onClick={
+                            //   "https://firebasestorage.googleapis.com/v0/b/college-manageme…SSC.jpg?alt=media&token=97e3ab5a-64c7-4d4d-9e5b-591b8dd5f802"
+                            // }
+                          >
+                            VIEW
+                          </button>
+                        </p>
+                        <p>
+                          HSC Marksheet :{" "}
+                          <button
+                            className="btn btn-sm btn-primary"
+                            onClick={(e) =>
+                              handleViewMarksheet(
+                                userAdmissionData.hscmarksheet
+                              )
+                            }
+                          >
+                            VIEW
+                          </button>
+                        </p>
+                        <p>
+                          CET Marksheet :{" "}
+                          <button
+                            className="btn btn-sm btn-primary"
+                            onClick={(e) =>
+                              handleViewMarksheet(
+                                userAdmissionData.cetmarksheet
+                              )
+                            }
+                          >
+                            VIEW
+                          </button>
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -237,6 +324,20 @@ export default function StudentDetail(props) {
           </div>
         </div>
       </div>
+
+      <Modal size="lg" show={show}>
+        <Modal.Header closeButton onClick={handleClose}>
+          <Modal.Title>Receipt</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="text-center">
+          <img src={marksheetImage} width="700px" />
+        </Modal.Body>
+        <Modal.Footer className="text-center">
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

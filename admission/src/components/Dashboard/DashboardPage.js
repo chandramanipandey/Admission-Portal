@@ -22,18 +22,19 @@ export function AdminDashboardPage() {
           titleText="Check Approved / Pending Fees &gt;"
           controlId="StudentFees"
         />
-        <DashboardCard
+        {/* <DashboardCard
           title="Fees Tracking"
           titleText="Track Fees &gt;"
           controlId="fedseform"
-        />
-      </Row>
-      <Row className="mt-3">
-        <DashboardCard
+        /> */}
+           <DashboardCard
           title="Notice Generation"
           titleText="Generate Notice &gt;"
           controlId="GenerateNotice"
         />
+      </Row>
+      <Row className="mt-3">
+     
         <DashboardCard
           title="Fee Structure"
           titleText="Manage Fee Structure &gt;"

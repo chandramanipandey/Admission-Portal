@@ -6,6 +6,7 @@ import chandramanipandey from '../Assets/chandramani.jpg'
 import harshitpanse from '../Assets/harshit.jpg'
 import priyanshusingh from '../Assets/priyanshu.jpg'
 import shubhambhavsar from '../Assets/shubham.jpg'
+import avinash from '../Assets/Avinash.jpg'
 import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { getAuth } from 'firebase/auth'
@@ -65,7 +66,7 @@ export default function Aboutus() {
           <div class="card text-white border-dark bg-dark mb-3">
             <img src={udaychandrakantpatkar} alt="logo" style={{ width: '100%' }} />
             <div class="container">
-              <h2 style={{ fontFamily: 'Cambria' }}>Prof. Uday Chandrakant Patkar</h2>
+              <h2 style={{ fontFamily: 'Cambria' }}>Dr. Uday Chandrakant Patkar</h2>
               <p class="title">Mentor</p>
               <p>Computer Engineering </p>
               <p><i>Uday.patkar@bharatividyapeeth.edu</i></p>
@@ -74,6 +75,19 @@ export default function Aboutus() {
           </div>
         </div>
 
+        
+        <div class="column">
+          <div class="card text-white border-dark bg-dark mb-3">
+            <img src={avinash} alt="logo" style={{ width: '100%' }} />
+            <div class="container">
+              <h2 style={{ fontFamily: 'Cambria' }}>Prof. Avinash Murlidhar Ingole</h2>
+              <p class="title">Mentor</p>
+              <p>Computer Engineering </p>
+              <p><i>avinash.ingole@bharatividyapeeth.edu</i></p>
+              <p ><a href='https://outlook.live.com/mail/0/deeplink/compose?to=avinash.ingole@bharatividyapeeth.edu'><button class="button text-dark bg-white">Contact</button></a></p>
+            </div>
+          </div>
+        </div>
 
         <div class="column">
           <div class="card text-white border-dark bg-dark mb-3">

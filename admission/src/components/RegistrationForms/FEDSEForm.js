@@ -35,6 +35,7 @@ import { addroletofirebase } from "../Firebase/addroletofirebase";
 import { checknewuser } from "../Firebase/checknewstudent";
 import { Alert } from "react-bootstrap";
 import { addadmissiondocumentstofirebase } from "../Firebase/addDocumentstofirebase";
+import { updatePhoto } from "../Firebase/updatestudentPhoto";
 
 export default function FEDSEForm() {
   const auth = getAuth();
@@ -92,6 +93,7 @@ export default function FEDSEForm() {
     CETMarksheetState,
     JEEMainsMarksheetState,
     JEEAdvMarksheetState,
+    StudentPhotoState,
   } = useContext(FieldsContext);
 
   const [prn, setPrn] = prnState;
@@ -161,6 +163,7 @@ export default function FEDSEForm() {
   const [CETMarksheet, setCETMarksheet] = CETMarksheetState;
   const [JEEMainsMarksheet, setJEEMainsMarksheet] = JEEMainsMarksheetState;
   const [JEEAdvMarksheet, setJEEAdvMarksheet] = JEEAdvMarksheetState;
+  const [studentImage, setstudentImage] = StudentPhotoState;
   const [newuser, setnewUser] = useState();
 
   // console.log(SSCMarksheet);
@@ -252,11 +255,20 @@ export default function FEDSEForm() {
     e.preventDefault();
     var sscdownloadlink = "Not_Uploaded";
     var hscdownloadlink = "Not_Uploaded";
-   var cetdownloadlink = "Not_Uploaded";
+    var cetdownloadlink = "Not_Uploaded";
     var jeemaindownloadlink = "Not_Uploaded";
     var jeeadvanceddownloadlink = "Not_Uploaded";
+    var studentImagedownloadlink = "Not_Uploaded";
+    
+    if (studentImage != null) {
+      studentImagedownloadlink = await addadmissiondocumentstofirebase(
+        auth.currentUser.uid,
+        studentImage,
+        "STUDENTIMAGE.jpg"
+      );
+    }
     if (SSCMarksheet != null) {
-sscdownloadlink = await addadmissiondocumentstofirebase(
+      sscdownloadlink = await addadmissiondocumentstofirebase(
         auth.currentUser.uid,
         SSCMarksheet,
         "SSC.jpg"
@@ -264,43 +276,46 @@ sscdownloadlink = await addadmissiondocumentstofirebase(
     }
 
     if (HSCMarksheet != null) {
- hscdownloadlink = await addadmissiondocumentstofirebase(
+      hscdownloadlink = await addadmissiondocumentstofirebase(
         auth.currentUser.uid,
         HSCMarksheet,
         "HSC.jpg"
       );
     }
     if (CETMarksheet != null) {
-cetdownloadlink = await addadmissiondocumentstofirebase(
+      cetdownloadlink = await addadmissiondocumentstofirebase(
         auth.currentUser.uid,
         CETMarksheet,
         "CET.jpg"
       );
     }
     if (JEEMainsMarksheet != null) {
-jeemaindownloadlink = await addadmissiondocumentstofirebase(
+      jeemaindownloadlink = await addadmissiondocumentstofirebase(
         auth.currentUser.uid,
         JEEMainsMarksheet,
         "JEEMAIN.jpg"
       );
     }
     if (JEEAdvMarksheet != null) {
-  jeeadvanceddownloadlink = await addadmissiondocumentstofirebase(
+      jeeadvanceddownloadlink = await addadmissiondocumentstofirebase(
         auth.currentUser.uid,
-        JEEAdvMarksheetState,
+        JEEAdvMarksheet,
         "JEEADVANCED.jpg"
       );
+     
+     
     }
     FeDseFormData["sscmarksheet"] = sscdownloadlink;
     FeDseFormData["hscmarksheet"] = hscdownloadlink;
     FeDseFormData["cetmarksheet"] = cetdownloadlink;
     FeDseFormData["jeemainmarksheet"] = jeemaindownloadlink;
     FeDseFormData["jeeadvancedmarksheet"] = jeeadvanceddownloadlink;
-    console.log(sscdownloadlink,hscdownloadlink,cetdownloadlink,jeemaindownloadlink,jeeadvanceddownloadlink);
-
-    adduserdata(FeDseFormData, auth.currentUser.uid, "Admission_Data");
-    adduserdata(GenStudentData, auth.currentUser.uid, "User_Info");
-    addroletofirebase(
+    FeDseFormData["studentImage"] = studentImagedownloadlink;
+    GenStudentData["studentImage"] = studentImagedownloadlink;
+    const photouploadresponse = await updatePhoto(studentName, studentImagedownloadlink);
+    const admissiondataresponse = await adduserdata(FeDseFormData, auth.currentUser.uid, "Admission_Data");
+    const genuserdataresponse = await adduserdata(GenStudentData, auth.currentUser.uid, "User_Info");
+    const addroleresponse = await addroletofirebase(
       auth.currentUser.uid,
       auth.currentUser.email,
       "Student",
@@ -531,6 +546,7 @@ jeemaindownloadlink = await addadmissiondocumentstofirebase(
           {/* </FieldsProvider> */}
           {/* Detailed Marks */}
           {/* SSC HSC CETMarksheet JEEMarksheet */}
+          <FileInput title="Student Image" controlId="StudentImageFile" />
           <FileInput title="SSC Marksheet" controlId="SSCMarksheetFile" />
           <FileInput title="HSC Marksheet" controlId="HSCMarksheetFile" />
           <FileInput title="CET Marksheet" controlId="CETMarksheetFile" />
