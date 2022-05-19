@@ -37,11 +37,10 @@ export default function StudentDetail(props) {
   return (
     <>
       <NavigationBar userType="Admin" userName="User Name" />
-      {/* {console.log('studentdetail page',)} */}
       <div className="row align-items-md-stretch w-100">
         <div className="col-md">
           <div className="h-100 p-5 text-white bg-dark rounded-3">
-            <h1>Students List</h1>
+            <h1>Student Details</h1>
           </div>
         </div>
       </div>
