@@ -57,9 +57,10 @@ export default function Auth(params) {
             setLoading(true);
             const emailcheck = emailRef.current.value;
             const checkemailbvpedu = emailcheck.split("-");
-            if (checkemailbvpedu[1] !== "bvcoel@bvp.edu.in") {
-                console.log(checkemailbvpedu[1], emailcheck);
-                throw "Please Register on Portal using official Email ID only i.e example-bvcoel@bvp.edu.in ";
+            const checkemailfaculty = emailcheck.split("@")
+            if (checkemailbvpedu[1] !== "bvcoel@bvp.edu.in"&&checkemailfaculty[1]!=="bharatividyapeeth.edu") {
+                console.log(emailcheck);
+                throw "Please Register on Portal using official Email ID only i.e example-bvcoel@bvp.edu.in or example@bharatividyapeeth.edu ";
             }
             await createUserWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value);
             verifyEmail();
@@ -89,9 +90,10 @@ export default function Auth(params) {
             setLoading(true);
             const emailcheck = loginemailRef.current.value;
             const checkemailbvpedu = emailcheck.split("-");
+            const checkemailfaculty = emailcheck.split("@");
             const allrole = await getallrole();
-            if (checkemailbvpedu[1] !== "bvcoel@bvp.edu.in" && !allrole.includes(emailcheck)) {
-                throw "Since you are not using official college email id for example: example-bvcoel@bvp.edu.in ";
+            if ((checkemailbvpedu[1] !== "bvcoel@bvp.edu.in"&&checkemailfaculty[1]!=="bharatividyapeeth.edu") && !allrole.includes(emailcheck)) {
+                throw "Since you are not using official college email id for example: example-bvcoel@bvp.edu.in or example@bharatividyapeeth.edu ";
             }
 
             await signInWithEmailAndPassword(auth, loginemailRef.current.value, loginpasswordRef.current.value);
